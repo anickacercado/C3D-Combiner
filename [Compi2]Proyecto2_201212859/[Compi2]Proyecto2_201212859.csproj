@@ -33,6 +33,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FastColoredTextBox, Version=2.11.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\FastColoredTextBox.dll</HintPath>
+    </Reference>
+    <Reference Include="Irony, Version=1.0.0.0, Culture=neutral, PublicKeyToken=ca48ace7223ead47, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\Irony.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,14 +54,38 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Formularios\Form1.cs">
+    <Compile Include="Constante.cs" />
+    <Compile Include="Formularios\controlTabIDE.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Formularios\CrearCarpeta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formularios\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="Formularios\CrearCarpeta.Designer.cs">
+      <DependentUpon>CrearCarpeta.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\IronyFCTB.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\Principal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\Principal.Designer.cs">
+      <DependentUpon>Principal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\tabIDE.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="memoria.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SBScriptGrammar.cs" />
+    <EmbeddedResource Include="Formularios\CrearCarpeta.resx">
+      <DependentUpon>CrearCarpeta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\Principal.resx">
+      <DependentUpon>Principal.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -62,6 +94,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -75,6 +108,39 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\3.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\4.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\5.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\6.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\7.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\8.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\9.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\10.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="imagenes\11.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

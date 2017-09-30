@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace _Compi2_Proyecto2_201212859
+namespace _Compi2_Proyecto2_201212859.Formularios
 {
-    public partial class Form1 : Form
+    public partial class CrearCarpeta : Form
     {
-        public Form1()
+        public CrearCarpeta()
         {
             InitializeComponent();
         }
