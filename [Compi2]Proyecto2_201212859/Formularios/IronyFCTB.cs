@@ -25,8 +25,14 @@ namespace FastColoredTextBoxNS
     /// <see cref="http://irony.codeplex.com/"/>
     public class IronyFCTB : FastColoredTextBox
     {
-        public event EventHandler<StyleNeededEventArgs> StyleNeeded;
 
+        Style purpleStyle = new TextStyle(Brushes.Purple, Brushes.White, FontStyle.Regular);
+        Style orangeStyle = new TextStyle(Brushes.Orange, Brushes.White, FontStyle.Regular);
+        Style grayStyle = new TextStyle(Brushes.Gray, Brushes.White, FontStyle.Regular);
+
+
+
+        public event EventHandler<StyleNeededEventArgs> StyleNeeded;
         protected Parser parser;
         public Style WavyStyle = new WavyLineStyle(255, Color.Red);
 
@@ -154,18 +160,41 @@ namespace FastColoredTextBoxNS
 
                 switch (t.Terminal.GetType().Name)
                 {
-                    case "KeyTerm":
-                        if ((t.Terminal.Flags & TermFlags.IsKeyword) != 0) //keywords are highlighted only
+                        case "KeyTerm":
+                            if ((t.Terminal.Flags & TermFlags.IsKeyword) != 0) //keywords are highlighted only
                             GetTokenRange(t).SetStyle(SyntaxHighlighter.KeywordStyle);
-                        break;
-                    case "NumberLiteral":
-                        GetTokenRange(t).SetStyle(SyntaxHighlighter.NumberStyle);
-                        break;
-                    case "StringLiteral":
-                        GetTokenRange(t).SetStyle(SyntaxHighlighter.StringStyle);
-                        break;
-                    case "CommentTerminal":
-                        GetTokenRange(t).SetStyle(SyntaxHighlighter.CommentStyle);
+                            break;
+                        case "CommentTerminal":
+                            GetTokenRange(t).SetStyle(grayStyle);
+                            break;
+                    default:
+                        switch (t.Terminal.Name)
+                        {
+                            case "er_cadena":
+                                GetTokenRange(t).SetStyle(orangeStyle);
+                                break;
+                            case "er_caracter":
+                                GetTokenRange(t).SetStyle(orangeStyle);
+                                break;
+                            case "er_entero":
+                                GetTokenRange(t).SetStyle(purpleStyle);
+                                break;
+                            case "er_decimal":
+                                GetTokenRange(t).SetStyle(purpleStyle);
+                                break;
+                            case "er_visibilidad":
+                                GetTokenRange(t).SetStyle(SyntaxHighlighter.KeywordStyle);
+                                break;
+                            case "er_tipo":
+                                GetTokenRange(t).SetStyle(SyntaxHighlighter.KeywordStyle);
+                                break;
+                            case "er_importar":
+                                GetTokenRange(t).SetStyle(SyntaxHighlighter.KeywordStyle);
+                                break;
+                            case "er_booleano":
+                                GetTokenRange(t).SetStyle(SyntaxHighlighter.KeywordStyle);
+                                break;
+                        }
                         break;
                 }
             }

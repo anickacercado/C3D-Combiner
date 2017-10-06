@@ -1,6 +1,6 @@
 ﻿namespace _Compi2_Proyecto2_201212859
 {
-    partial class Form1
+    partial class principal
     {
         /// <summary>
         /// Variable del diseñador necesaria.
@@ -40,6 +40,15 @@
             this.tab1 = new System.Windows.Forms.TabPage();
             this.txtConsola = new System.Windows.Forms.TextBox();
             this.tab2 = new System.Windows.Forms.TabPage();
+            tablaErrores = new System.Windows.Forms.DataGridView();
+            this.tabSim = new System.Windows.Forms.TabPage();
+            this.tablaSimbolos = new System.Windows.Forms.DataGridView();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipoTS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ambito = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.posicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tamanio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab3 = new System.Windows.Forms.TabPage();
             this.txtProcesoOptimizacion = new System.Windows.Forms.TextBox();
             this.tab4 = new System.Windows.Forms.TabPage();
@@ -51,6 +60,7 @@
             this.panel12 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.ControlEditor = new _Compi2_Proyecto2_201212859.Formularios.controlTabIDE();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -68,6 +78,10 @@
             this.iniciarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compartirClaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tablaDeSimbolosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.erroresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gramaticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel6 = new System.Windows.Forms.Panel();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel10 = new System.Windows.Forms.Panel();
@@ -85,28 +99,18 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.crearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crearCarpetaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.tablaErrores = new System.Windows.Forms.DataGridView();
             this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columna = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.reportesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.ControlEditor = new _Compi2_Proyecto2_201212859.Formularios.controlTabIDE();
-            this.tablaDeSimbolosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.erroresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.gramaticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tabSim = new System.Windows.Forms.TabPage();
-            this.tablaSimbolos = new System.Windows.Forms.DataGridView();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipoTS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ambito = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.posicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tamanio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ruta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             this.tab0.SuspendLayout();
             this.tab1.SuspendLayout();
             this.tab2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(tablaErrores)).BeginInit();
+            this.tabSim.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaSimbolos)).BeginInit();
             this.tab3.SuspendLayout();
             this.tab4.SuspendLayout();
             this.tab5.SuspendLayout();
@@ -117,9 +121,6 @@
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tablaErrores)).BeginInit();
-            this.tabSim.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tablaSimbolos)).BeginInit();
             this.SuspendLayout();
             // 
             // panel2
@@ -173,7 +174,7 @@
             // 
             // tab2
             // 
-            this.tab2.Controls.Add(this.tablaErrores);
+            this.tab2.Controls.Add(tablaErrores);
             this.tab2.Location = new System.Drawing.Point(4, 22);
             this.tab2.Name = "tab2";
             this.tab2.Padding = new System.Windows.Forms.Padding(3);
@@ -181,6 +182,138 @@
             this.tab2.TabIndex = 1;
             this.tab2.Text = "ERRORES";
             this.tab2.UseVisualStyleBackColor = true;
+            // 
+            // tablaErrores
+            // 
+            tablaErrores.AllowUserToAddRows = false;
+            tablaErrores.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            tablaErrores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            tablaErrores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            tablaErrores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Linea,
+            this.columna,
+            this.tipo,
+            this.descripcion,
+            this.ruta});
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            tablaErrores.DefaultCellStyle = dataGridViewCellStyle2;
+            tablaErrores.Dock = System.Windows.Forms.DockStyle.Fill;
+            tablaErrores.Location = new System.Drawing.Point(3, 3);
+            tablaErrores.Name = "tablaErrores";
+            tablaErrores.ReadOnly = true;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            tablaErrores.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            tablaErrores.Size = new System.Drawing.Size(981, 150);
+            tablaErrores.TabIndex = 0;
+            // 
+            // tabSim
+            // 
+            this.tabSim.Controls.Add(this.tablaSimbolos);
+            this.tabSim.Location = new System.Drawing.Point(4, 22);
+            this.tabSim.Name = "tabSim";
+            this.tabSim.Padding = new System.Windows.Forms.Padding(3);
+            this.tabSim.Size = new System.Drawing.Size(987, 156);
+            this.tabSim.TabIndex = 5;
+            this.tabSim.Text = "TABLA DE SIMBOLOS";
+            this.tabSim.UseVisualStyleBackColor = true;
+            // 
+            // tablaSimbolos
+            // 
+            this.tablaSimbolos.AllowUserToAddRows = false;
+            this.tablaSimbolos.AllowUserToDeleteRows = false;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tablaSimbolos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            this.tablaSimbolos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tablaSimbolos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.nombre,
+            this.tipoTS,
+            this.rol,
+            this.ambito,
+            this.posicion,
+            this.tamanio});
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.tablaSimbolos.DefaultCellStyle = dataGridViewCellStyle5;
+            this.tablaSimbolos.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tablaSimbolos.Location = new System.Drawing.Point(3, 3);
+            this.tablaSimbolos.Name = "tablaSimbolos";
+            this.tablaSimbolos.ReadOnly = true;
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.tablaSimbolos.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            this.tablaSimbolos.Size = new System.Drawing.Size(981, 150);
+            this.tablaSimbolos.TabIndex = 1;
+            // 
+            // nombre
+            // 
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // tipoTS
+            // 
+            this.tipoTS.HeaderText = "Tipo";
+            this.tipoTS.Name = "tipoTS";
+            this.tipoTS.ReadOnly = true;
+            // 
+            // rol
+            // 
+            this.rol.HeaderText = "Rol";
+            this.rol.Name = "rol";
+            this.rol.ReadOnly = true;
+            // 
+            // ambito
+            // 
+            this.ambito.HeaderText = "Ambito";
+            this.ambito.Name = "ambito";
+            this.ambito.ReadOnly = true;
+            // 
+            // posicion
+            // 
+            this.posicion.HeaderText = "Posicion";
+            this.posicion.Name = "posicion";
+            this.posicion.ReadOnly = true;
+            // 
+            // tamanio
+            // 
+            this.tamanio.HeaderText = "Tamaño";
+            this.tamanio.Name = "tamanio";
+            this.tamanio.ReadOnly = true;
             // 
             // tab3
             // 
@@ -298,6 +431,15 @@
             this.panel4.Size = new System.Drawing.Size(537, 315);
             this.panel4.TabIndex = 3;
             // 
+            // ControlEditor
+            // 
+            this.ControlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ControlEditor.Location = new System.Drawing.Point(0, 0);
+            this.ControlEditor.Name = "ControlEditor";
+            this.ControlEditor.SelectedIndex = 0;
+            this.ControlEditor.Size = new System.Drawing.Size(537, 315);
+            this.ControlEditor.TabIndex = 0;
+            // 
             // panel5
             // 
             this.panel5.AutoSize = true;
@@ -398,6 +540,7 @@
             this.compilarToolStripMenuItem.Name = "compilarToolStripMenuItem";
             this.compilarToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.compilarToolStripMenuItem.Text = "Compilar";
+            this.compilarToolStripMenuItem.Click += new System.EventHandler(this.compilarToolStripMenuItem_Click);
             // 
             // uMToolStripMenuItem
             // 
@@ -432,6 +575,34 @@
             this.cerrarSesiónToolStripMenuItem.Name = "cerrarSesiónToolStripMenuItem";
             this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.cerrarSesiónToolStripMenuItem.Text = "Cerrar Sesión";
+            // 
+            // reportesToolStripMenuItem
+            // 
+            this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tablaDeSimbolosToolStripMenuItem,
+            this.erroresToolStripMenuItem,
+            this.gramaticasToolStripMenuItem});
+            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
+            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
+            this.reportesToolStripMenuItem.Text = "Reportes";
+            // 
+            // tablaDeSimbolosToolStripMenuItem
+            // 
+            this.tablaDeSimbolosToolStripMenuItem.Name = "tablaDeSimbolosToolStripMenuItem";
+            this.tablaDeSimbolosToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.tablaDeSimbolosToolStripMenuItem.Text = "Tabla de Simbolos";
+            // 
+            // erroresToolStripMenuItem
+            // 
+            this.erroresToolStripMenuItem.Name = "erroresToolStripMenuItem";
+            this.erroresToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.erroresToolStripMenuItem.Text = "Errores";
+            // 
+            // gramaticasToolStripMenuItem
+            // 
+            this.gramaticasToolStripMenuItem.Name = "gramaticasToolStripMenuItem";
+            this.gramaticasToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
+            this.gramaticasToolStripMenuItem.Text = "Gramaticas";
             // 
             // panel6
             // 
@@ -599,47 +770,6 @@
             this.crearCarpetaToolStripMenuItem1.Text = "Crear Carpeta";
             this.crearCarpetaToolStripMenuItem1.Click += new System.EventHandler(this.crearCarpetaToolStripMenuItem1_Click);
             // 
-            // tablaErrores
-            // 
-            this.tablaErrores.AllowUserToAddRows = false;
-            this.tablaErrores.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tablaErrores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            this.tablaErrores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tablaErrores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Linea,
-            this.columna,
-            this.tipo,
-            this.descripcion});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.tablaErrores.DefaultCellStyle = dataGridViewCellStyle2;
-            this.tablaErrores.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablaErrores.Location = new System.Drawing.Point(3, 3);
-            this.tablaErrores.Name = "tablaErrores";
-            this.tablaErrores.ReadOnly = true;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tablaErrores.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.tablaErrores.Size = new System.Drawing.Size(981, 150);
-            this.tablaErrores.TabIndex = 0;
-            // 
             // Linea
             // 
             this.Linea.HeaderText = "Linea";
@@ -668,134 +798,13 @@
             this.descripcion.ReadOnly = true;
             this.descripcion.Width = 88;
             // 
-            // reportesToolStripMenuItem
+            // ruta
             // 
-            this.reportesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tablaDeSimbolosToolStripMenuItem,
-            this.erroresToolStripMenuItem,
-            this.gramaticasToolStripMenuItem});
-            this.reportesToolStripMenuItem.Name = "reportesToolStripMenuItem";
-            this.reportesToolStripMenuItem.Size = new System.Drawing.Size(65, 20);
-            this.reportesToolStripMenuItem.Text = "Reportes";
+            this.ruta.HeaderText = "Ruta";
+            this.ruta.Name = "ruta";
+            this.ruta.ReadOnly = true;
             // 
-            // ControlEditor
-            // 
-            this.ControlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ControlEditor.Location = new System.Drawing.Point(0, 0);
-            this.ControlEditor.Name = "ControlEditor";
-            this.ControlEditor.SelectedIndex = 0;
-            this.ControlEditor.Size = new System.Drawing.Size(537, 315);
-            this.ControlEditor.TabIndex = 0;
-            // 
-            // tablaDeSimbolosToolStripMenuItem
-            // 
-            this.tablaDeSimbolosToolStripMenuItem.Name = "tablaDeSimbolosToolStripMenuItem";
-            this.tablaDeSimbolosToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.tablaDeSimbolosToolStripMenuItem.Text = "Tabla de Simbolos";
-            // 
-            // erroresToolStripMenuItem
-            // 
-            this.erroresToolStripMenuItem.Name = "erroresToolStripMenuItem";
-            this.erroresToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.erroresToolStripMenuItem.Text = "Errores";
-            // 
-            // gramaticasToolStripMenuItem
-            // 
-            this.gramaticasToolStripMenuItem.Name = "gramaticasToolStripMenuItem";
-            this.gramaticasToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
-            this.gramaticasToolStripMenuItem.Text = "Gramaticas";
-            // 
-            // tabSim
-            // 
-            this.tabSim.Controls.Add(this.tablaSimbolos);
-            this.tabSim.Location = new System.Drawing.Point(4, 22);
-            this.tabSim.Name = "tabSim";
-            this.tabSim.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSim.Size = new System.Drawing.Size(987, 156);
-            this.tabSim.TabIndex = 5;
-            this.tabSim.Text = "TABLA DE SIMBOLOS";
-            this.tabSim.UseVisualStyleBackColor = true;
-            // 
-            // tablaSimbolos
-            // 
-            this.tablaSimbolos.AllowUserToAddRows = false;
-            this.tablaSimbolos.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tablaSimbolos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
-            this.tablaSimbolos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tablaSimbolos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.nombre,
-            this.tipoTS,
-            this.rol,
-            this.ambito,
-            this.posicion,
-            this.tamanio});
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.tablaSimbolos.DefaultCellStyle = dataGridViewCellStyle5;
-            this.tablaSimbolos.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablaSimbolos.Location = new System.Drawing.Point(3, 3);
-            this.tablaSimbolos.Name = "tablaSimbolos";
-            this.tablaSimbolos.ReadOnly = true;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.tablaSimbolos.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.tablaSimbolos.Size = new System.Drawing.Size(981, 150);
-            this.tablaSimbolos.TabIndex = 1;
-            // 
-            // nombre
-            // 
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            // 
-            // tipoTS
-            // 
-            this.tipoTS.HeaderText = "Tipo";
-            this.tipoTS.Name = "tipoTS";
-            this.tipoTS.ReadOnly = true;
-            // 
-            // rol
-            // 
-            this.rol.HeaderText = "Rol";
-            this.rol.Name = "rol";
-            this.rol.ReadOnly = true;
-            // 
-            // ambito
-            // 
-            this.ambito.HeaderText = "Ambito";
-            this.ambito.Name = "ambito";
-            this.ambito.ReadOnly = true;
-            // 
-            // posicion
-            // 
-            this.posicion.HeaderText = "Posicion";
-            this.posicion.Name = "posicion";
-            this.posicion.ReadOnly = true;
-            // 
-            // tamanio
-            // 
-            this.tamanio.HeaderText = "Tamaño";
-            this.tamanio.Name = "tamanio";
-            this.tamanio.ReadOnly = true;
-            // 
-            // Form1
+            // principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -807,13 +816,16 @@
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "principal";
             this.Text = "C3D-COMBINER";
             this.panel2.ResumeLayout(false);
             this.tab0.ResumeLayout(false);
             this.tab1.ResumeLayout(false);
             this.tab1.PerformLayout();
             this.tab2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(tablaErrores)).EndInit();
+            this.tabSim.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tablaSimbolos)).EndInit();
             this.tab3.ResumeLayout(false);
             this.tab3.PerformLayout();
             this.tab4.ResumeLayout(false);
@@ -831,9 +843,6 @@
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tablaErrores)).EndInit();
-            this.tabSim.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tablaSimbolos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -891,11 +900,6 @@
         private System.Windows.Forms.ToolStripMenuItem crearCarpetaToolStripMenuItem1;
         private Formularios.controlTabIDE ControlEditor;
         private System.Windows.Forms.ToolStripMenuItem cerrarArchivoToolStripMenuItem;
-        private System.Windows.Forms.DataGridView tablaErrores;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Linea;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columna;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tipo;
-        private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
         private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem;
         private System.Windows.Forms.TabPage tabSim;
         private System.Windows.Forms.DataGridView tablaSimbolos;
@@ -908,6 +912,12 @@
         private System.Windows.Forms.ToolStripMenuItem tablaDeSimbolosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem erroresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gramaticasToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Linea;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columna;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tipo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ruta;
+        public static System.Windows.Forms.DataGridView tablaErrores;
     }
 }
 

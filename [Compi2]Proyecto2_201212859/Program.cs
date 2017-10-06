@@ -16,7 +16,7 @@ namespace _Compi2_Proyecto2_201212859
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new principal());
         }
     }
 }

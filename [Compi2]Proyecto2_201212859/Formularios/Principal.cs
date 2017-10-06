@@ -12,10 +12,10 @@ using System.Windows.Forms;
 
 namespace _Compi2_Proyecto2_201212859
 {
-    public partial class Form1 : Form
+    public partial class principal : Form
     {
         MenuItem myMenuItem = new MenuItem("Show Me");
-        public Form1()
+        public principal()
         {
             InitializeComponent();
             tablaErrores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -122,6 +122,21 @@ namespace _Compi2_Proyecto2_201212859
         private void cerrarArchivoToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ControlEditor.borrarTab();
+        }
+
+        public void limpiarTablaError() {
+            tablaErrores.Rows.Clear();
+            tablaErrores.Refresh();
+        }
+
+        public static void insertarError(string linea, string columna, string tipo, string descripcion, string ruta) {
+            tablaErrores.Rows.Insert(0,linea,columna,tipo,descripcion,ruta);
+        }
+
+        private void compilarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            limpiarTablaError();
+            ControlEditor.analizar();
         }
     }
 }

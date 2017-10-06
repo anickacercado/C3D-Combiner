@@ -8,12 +8,17 @@ using System.Windows.Forms;
 
 namespace _Compi2_Proyecto2_201212859.Formularios
 {
-    class controlTabIDE: TabControl
+    class controlTabIDE : TabControl
     {
         int contador = 1;
 
-        //evento para cerrar las pestañas
-
+        public void analizar() {
+            tabIDE tabAux = (tabIDE)this.SelectedTab;
+            if (tabAux != null)
+            {
+                tabAux.analizar();
+            }
+        }
 
         public void agregarNewTab()
         {
@@ -40,10 +45,10 @@ namespace _Compi2_Proyecto2_201212859.Formularios
 
         public void guardarTab()
         {
-            tabIDE TTaux = (tabIDE)this.SelectedTab;
-            if (TTaux != null)
+            tabIDE tabAux = (tabIDE)this.SelectedTab;
+            if (tabAux != null)
             {
-                TTaux.guardarArchivo();
+                tabAux.guardarArchivo();
                 this.Refresh();
                 this.Update();
             }
@@ -51,10 +56,10 @@ namespace _Compi2_Proyecto2_201212859.Formularios
 
         public void guardarComoTab()
         {
-            tabIDE TTaux = (tabIDE)this.SelectedTab;
-            if (TTaux != null)
+            tabIDE tabAux = (tabIDE)this.SelectedTab;
+            if (tabAux != null)
             {
-                TTaux.guardarComoArchivo();
+                tabAux.guardarComoArchivo();
                 this.Refresh();
                 this.Update();
             }
@@ -62,10 +67,28 @@ namespace _Compi2_Proyecto2_201212859.Formularios
 
         public void borrarTab()
         {
-            tabIDE TTaux = (tabIDE)this.SelectedTab;
-            if (TTaux != null)
+            tabIDE tabAux = (tabIDE)this.SelectedTab;
+            if (tabAux != null)
             {
-                this.TabPages.Remove(TTaux);
+                if (tabAux.esModificado())
+                {
+                    switch (MessageBox.Show("Desea guardar el archivo", "Guardar archivo", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Asterisk))
+                    {
+                        case DialogResult.Yes:
+                            guardarTab();
+                            this.TabPages.Remove(tabAux);
+                            break;
+                        case DialogResult.No:
+                            this.TabPages.Remove(tabAux);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+                else
+                {
+                    this.TabPages.Remove(tabAux);
+                }
             }
         }
     }

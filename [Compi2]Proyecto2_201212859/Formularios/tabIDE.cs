@@ -7,6 +7,9 @@ using System.Windows.Forms;
 using Irony.Parsing;
 using FastColoredTextBoxNS;
 using System.Drawing;
+using _Compi2_Proyecto2_201212859.OLC;
+
+
 
 namespace _Compi2_Proyecto2_201212859.Formularios
 {
@@ -18,9 +21,10 @@ namespace _Compi2_Proyecto2_201212859.Formularios
         bool modificado;
         string ruta;
 
-        SBScriptGrammar Gramatica;
+        gramaticaOLC Gramatica;
         LanguageData language;
         Parser parser;
+
 
         public tabIDE(String nombre, String texto, String ruta)
         {
@@ -30,50 +34,40 @@ namespace _Compi2_Proyecto2_201212859.Formularios
         }
 
 
-        public void Analizar()
+        public void analizar()
         {
             if (guardarArchivo())
             {
-                /*Para Analizar
-                TBContenido.Text
-                ruta*/
+                string entrada = TBContenido.Text;
+                analizarOLC aOLC = new analizarOLC();
+                aOLC.analizar(entrada, ruta);             
             }
         }
 
         private void initComponent(String texto)
         {
-            //iniciamos la bandera para saber si ha sido guardado los datos
             this.modificado = false;
 
-            //Inicializamos la gramatica y su lenguage para tener el parse
-            Gramatica = new SBScriptGrammar();
+            Gramatica = new gramaticaOLC();
             language = new LanguageData(Gramatica);
             parser = new Parser(language);
 
-            //creamos el textbox
             TBContenido = new IronyFCTB();
             TBContenido.Grammar = Gramatica;
 
-
             TBContenido.Multiline = true;
             TBContenido.Text = texto;
-            //TBContenido.ScrollBars = RichTextBoxScrollBars.Both;
-
             TBContenido.WordWrap = false;
             TBContenido.Dock = DockStyle.Fill;
 
-            //configuramos el label
             panel = new Label();
             panel.Dock = DockStyle.Bottom;
             panel.Text = "Linea: 1, Columna: 1";
             panel.TextAlign = ContentAlignment.MiddleRight;
 
-
-            //agregamos los eventos
             TBContenido.TextChanged += TBContenido_TextChanged;
             TBContenido.SelectionChanged += TBContenido_SelectionChanged;
 
-            //agregamos los elementos
             this.Controls.Add(TBContenido);
             this.Controls.Add(panel);
 

@@ -4,7 +4,7 @@ C:\Users\anick\Documents\Visual Studio 2015\Projects\[Compi2]Proyecto2_201212859
 C:\Users\anick\Documents\Visual Studio 2015\Projects\[Compi2]Proyecto2_201212859\C3D-Combiner\[Compi2]Proyecto2_201212859\bin\Debug\[Compi2]Proyecto2_201212859.pdb
 C:\Users\anick\Documents\Visual Studio 2015\Projects\[Compi2]Proyecto2_201212859\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\[Compi2]Proyecto2_201212859.csprojResolveAssemblyReference.cache
 C:\Users\anick\Documents\Visual Studio 2015\Projects\[Compi2]Proyecto2_201212859\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\_Compi2_Proyecto2_201212859.Formularios.CrearCarpeta.resources
-C:\Users\anick\Documents\Visual Studio 2015\Projects\[Compi2]Proyecto2_201212859\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\_Compi2_Proyecto2_201212859.Form1.resources
+C:\Users\anick\Documents\Visual Studio 2015\Projects\[Compi2]Proyecto2_201212859\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\_Compi2_Proyecto2_201212859.principal.resources
 C:\Users\anick\Documents\Visual Studio 2015\Projects\[Compi2]Proyecto2_201212859\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\_Compi2_Proyecto2_201212859.Properties.Resources.resources
 C:\Users\anick\Documents\Visual Studio 2015\Projects\[Compi2]Proyecto2_201212859\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\[Compi2]Proyecto2_201212859.csproj.GenerateResource.Cache
 C:\Users\anick\Documents\Visual Studio 2015\Projects\[Compi2]Proyecto2_201212859\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\[Compi2]Proyecto2_201212859.exe
