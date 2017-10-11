@@ -8,8 +8,7 @@ using Irony.Parsing;
 using FastColoredTextBoxNS;
 using System.Drawing;
 using _Compi2_Proyecto2_201212859.OLC;
-
-
+using _Compi2_Proyecto2_201212859.TREE;
 
 namespace _Compi2_Proyecto2_201212859.Formularios
 {
@@ -21,7 +20,8 @@ namespace _Compi2_Proyecto2_201212859.Formularios
         bool modificado;
         string ruta;
 
-        gramaticaOLC Gramatica;
+        //gramaticaOLC Gramatica;
+        gramaticaTREE Gramatica;
         LanguageData language;
         Parser parser;
 
@@ -39,8 +39,11 @@ namespace _Compi2_Proyecto2_201212859.Formularios
             if (guardarArchivo())
             {
                 string entrada = TBContenido.Text;
-                analizarOLC aOLC = new analizarOLC();
-                aOLC.analizar(entrada, ruta);             
+                //analizarOLC aOLC = new analizarOLC();
+                //aOLC.analizar(entrada, ruta);  
+
+                analizarTREE aTREE = new analizarTREE();
+                aTREE.analizar(entrada, ruta);
             }
         }
 
@@ -48,7 +51,8 @@ namespace _Compi2_Proyecto2_201212859.Formularios
         {
             this.modificado = false;
 
-            Gramatica = new gramaticaOLC();
+            //Gramatica = new gramaticaOLC();
+            Gramatica = new gramaticaTREE();
             language = new LanguageData(Gramatica);
             parser = new Parser(language);
 

@@ -179,9 +179,9 @@ namespace _Compi2_Proyecto2_201212859.OLC
                 | er_tipo + er_id + t_igual + E                                                                                        /*Declarar Variable*/
 
                 | er_tipo + er_id + LISTA_DIMENSION                                                                                    /*Declarar Arreglos*/
-                | er_tipo + er_id + LISTA_DIMENSION + t_igual + t_llave_abre + LISTA_ARREGLO + t_llave_cierra                          /*Declarar e Asignar Arreglos*/
+                | er_tipo + er_id + LISTA_DIMENSION + t_igual + t_llave_abre + LISTA_E + t_llave_cierra                                /*Declarar e Asignar Arreglos*/
                 | er_visibilidad + er_tipo + er_id + LISTA_DIMENSION                                                                   /*Declarar Arreglos*/
-                | er_visibilidad + er_tipo + er_id + LISTA_DIMENSION + t_igual + t_llave_abre + LISTA_ARREGLO + t_llave_cierra         /*Declarar e Asignar Arreglos*/
+                | er_visibilidad + er_tipo + er_id + LISTA_DIMENSION + t_igual + t_llave_abre + LISTA_E + t_llave_cierra               /*Declarar e Asignar Arreglos*/
 
                 | er_visibilidad + er_tipo + er_id                                                                                     /*Declarar Variable*/
                 | er_visibilidad + er_tipo + er_id + t_igual + E                                                                       /*Declarar e Asignar Variable*/     
@@ -194,24 +194,11 @@ namespace _Compi2_Proyecto2_201212859.OLC
                      | TIPO_RETORNO + er_id + t_par_abre + LISTA_PARAMETRO + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
                      | TIPO_RETORNO + er_id + t_par_abre + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
 
-                     /*Metodos propias de la clase*/
-                     | er_visibilidad + er_id + t_par_abre + LISTA_PARAMETRO + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
-                     | er_visibilidad + er_id + t_par_abre + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
-                     | er_id + t_par_abre + LISTA_PARAMETRO + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
-                     | er_id + t_par_abre + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
-
-
                      /*Funciones heredaras*/
                      | t_sobrescribir + er_visibilidad + TIPO_RETORNO + er_id + t_par_abre + LISTA_PARAMETRO + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
                      | t_sobrescribir + er_visibilidad + TIPO_RETORNO + er_id + t_par_abre + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
                      | t_sobrescribir + TIPO_RETORNO + er_id + t_par_abre + LISTA_PARAMETRO + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
                      | t_sobrescribir + TIPO_RETORNO + er_id + t_par_abre + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
-
-                     /*Metodos heredaras*/
-                     | t_sobrescribir + er_visibilidad  + er_id + t_par_abre + LISTA_PARAMETRO + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
-                     | t_sobrescribir + er_visibilidad  + er_id + t_par_abre + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
-                     | t_sobrescribir + er_id + t_par_abre + LISTA_PARAMETRO + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
-                     | t_sobrescribir + er_id + t_par_abre + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
 
                      /*Metodo constructor*/
                      | er_visibilidad + er_id + t_par_abre + LISTA_PARAMETRO + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
@@ -253,7 +240,7 @@ namespace _Compi2_Proyecto2_201212859.OLC
                   er_id + er_id                                                                                     /*Declarar Objetos*/
                 
                 | er_id + er_id + LISTA_DIMENSION                                                                   /*Declarar Arreglos de Objetos*/
-                | er_id + er_id + LISTA_DIMENSION + t_igual + t_llave_abre + LISTA_ARREGLO + t_llave_cierra         /*Declarar e Asignar Arreglos de Objetos*/
+                | er_id + er_id + LISTA_DIMENSION + t_igual + t_llave_abre + LISTA_E + t_llave_cierra               /*Declarar e Asignar Arreglos de Objetos*/
                 
                 | er_id + t_igual + t_new + er_id + t_par_abre + t_par_cierra                                       /*Instanciar Objetos*/
                 | er_id + t_igual + t_new + er_id + t_par_abre + LISTA_E + t_par_cierra                             /*Instanciar Objetos*/
@@ -299,9 +286,6 @@ namespace _Compi2_Proyecto2_201212859.OLC
                                       ;
 
             DIMENSION.Rule = t_cor_abre + E + t_cor_cierra;
-
-            ARREGLO.Rule = t_llave_abre + LISTA_E + t_llave_cierra;
-            
             
             /*Parametros y tipos*/
             PARAMETRO.Rule = er_tipo + er_id
@@ -336,9 +320,6 @@ namespace _Compi2_Proyecto2_201212859.OLC
             LISTA_DIMENSION.Rule = MakePlusRule(LISTA_DIMENSION, DIMENSION)
                 ;
 
-            LISTA_ARREGLO.Rule = MakePlusRule(LISTA_ARREGLO, t_coma, ARREGLO)
-                ;
-
             LISTA_E.Rule = MakePlusRule(LISTA_E, t_coma, E)
                 ;
 
@@ -348,8 +329,6 @@ namespace _Compi2_Proyecto2_201212859.OLC
                 | E + t_por + E
                 | E + t_div + E
                 | E + t_potencia + E
-                | E + t_aumento + E
-                | E + t_decremento + E
                 | E + t_igualacion + E
                 | E + t_diferente + E
                 | E + t_menor + E
@@ -359,7 +338,7 @@ namespace _Compi2_Proyecto2_201212859.OLC
                 | E + t_or + E
                 | E + t_xor + E
                 | E + t_and + E
-                | E + t_not + E
+                | t_not + E
                 | t_menos + E
                 | er_entero
                 | er_decimal
@@ -367,13 +346,15 @@ namespace _Compi2_Proyecto2_201212859.OLC
                 | er_cadena
                 | er_booleano
                 | F
-                | t_par_abre + E + t_par_cierra    
-                ;
+                | t_par_abre + E + t_par_cierra  
+                | t_llave_abre + LISTA_E + t_llave_cierra;
+            ;
 
             /*Llamada metodo - id*/
             F.Rule =
                   er_id                                                 /*id*/
-                | t_este + t_punto + er_id                              /*Este*/
+              //| t_este + t_punto + er_id                              /*Este*/
+                | t_este                                                /*Este Métodos Arreglos*/
                 | er_id + t_par_abre + t_par_cierra                     /*Metodo sin parametros*/
                 | er_id + t_par_abre + LISTA_E + t_par_cierra           /*Metodo con parametros*/
                 | er_id + LISTA_DIMENSION                               /*Arreglo*/
@@ -390,10 +371,26 @@ namespace _Compi2_Proyecto2_201212859.OLC
             RegisterOperators(6, Associativity.Left, "+", "-");
             RegisterOperators(7, Associativity.Left, "*", "/");
             RegisterOperators(8, Associativity.Left, "^");
-            RegisterOperators(8, Associativity.Left, "++", "--");
+
 
             MarkPunctuation(";", ",", ".");
             Root = INICIO;
         }
     }
 }
+
+
+///*Metodos heredaras*/
+//| t_sobrescribir + er_visibilidad  + er_id + t_par_abre + LISTA_PARAMETRO + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
+//| t_sobrescribir + er_visibilidad  + er_id + t_par_abre + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
+//| t_sobrescribir + er_id + t_par_abre + LISTA_PARAMETRO + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
+//| t_sobrescribir + er_id + t_par_abre + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
+
+/*Metodos propias de la clase*/
+//| er_visibilidad + er_id + t_par_abre + LISTA_PARAMETRO + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
+//| er_visibilidad + er_id + t_par_abre + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
+//| er_id + t_par_abre + LISTA_PARAMETRO + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
+//| er_id + t_par_abre + t_par_cierra + t_llave_abre + LISTA_SENTENCIAS_LOCALES + t_llave_cierra
+
+//| E + t_aumento + E
+//| E + t_decremento + E
