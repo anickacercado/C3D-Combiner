@@ -23,7 +23,7 @@ namespace _Compi2_Proyecto2_201212859.Formularios
         public void agregarNewTab()
         {
             String nombre = "New " + contador.ToString();
-            tabIDE tab = new tabIDE(nombre, "", "");
+            tabIDE tab = new tabIDE(nombre, "", "",0);
             this.TabPages.Add(tab);
             contador++;
         }
@@ -31,14 +31,16 @@ namespace _Compi2_Proyecto2_201212859.Formularios
         public void abrirTab()
         {
             OpenFileDialog abrir = new OpenFileDialog();
-            //abrir.Filter = Constante.DialogFilter;
+            int tipo;
+            abrir.Filter = "Archivo OLC|*.olc|Archivo TREE|*.tree";
             abrir.Title = "Abrir";
             abrir.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
             abrir.ShowDialog();
 
             if (abrir.FileName != "")
             {
-                tabIDE aux = new tabIDE(abrir.SafeFileName, File.ReadAllText(abrir.FileName), abrir.FileName);
+                tipo = abrir.FilterIndex;
+                tabIDE aux = new tabIDE(abrir.SafeFileName, File.ReadAllText(abrir.FileName), abrir.FileName, tipo);
                 this.TabPages.Add(aux);
             }
         }

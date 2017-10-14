@@ -41,6 +41,11 @@
             this.txtConsola = new System.Windows.Forms.TextBox();
             this.tab2 = new System.Windows.Forms.TabPage();
             tablaErrores = new System.Windows.Forms.DataGridView();
+            this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columna = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ruta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabSim = new System.Windows.Forms.TabPage();
             this.tablaSimbolos = new System.Windows.Forms.DataGridView();
             this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -99,11 +104,6 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.crearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crearCarpetaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columna = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ruta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             this.tab0.SuspendLayout();
             this.tab1.SuspendLayout();
@@ -224,6 +224,40 @@
             tablaErrores.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             tablaErrores.Size = new System.Drawing.Size(981, 150);
             tablaErrores.TabIndex = 0;
+            // 
+            // Linea
+            // 
+            this.Linea.HeaderText = "Linea";
+            this.Linea.Name = "Linea";
+            this.Linea.ReadOnly = true;
+            this.Linea.Width = 58;
+            // 
+            // columna
+            // 
+            this.columna.HeaderText = "Columna";
+            this.columna.Name = "columna";
+            this.columna.ReadOnly = true;
+            this.columna.Width = 73;
+            // 
+            // tipo
+            // 
+            this.tipo.HeaderText = "Tipo";
+            this.tipo.Name = "tipo";
+            this.tipo.ReadOnly = true;
+            this.tipo.Width = 53;
+            // 
+            // descripcion
+            // 
+            this.descripcion.HeaderText = "Descripcion";
+            this.descripcion.Name = "descripcion";
+            this.descripcion.ReadOnly = true;
+            this.descripcion.Width = 88;
+            // 
+            // ruta
+            // 
+            this.ruta.HeaderText = "Ruta";
+            this.ruta.Name = "ruta";
+            this.ruta.ReadOnly = true;
             // 
             // tabSim
             // 
@@ -770,40 +804,6 @@
             this.crearCarpetaToolStripMenuItem1.Text = "Crear Carpeta";
             this.crearCarpetaToolStripMenuItem1.Click += new System.EventHandler(this.crearCarpetaToolStripMenuItem1_Click);
             // 
-            // Linea
-            // 
-            this.Linea.HeaderText = "Linea";
-            this.Linea.Name = "Linea";
-            this.Linea.ReadOnly = true;
-            this.Linea.Width = 58;
-            // 
-            // columna
-            // 
-            this.columna.HeaderText = "Columna";
-            this.columna.Name = "columna";
-            this.columna.ReadOnly = true;
-            this.columna.Width = 73;
-            // 
-            // tipo
-            // 
-            this.tipo.HeaderText = "Tipo";
-            this.tipo.Name = "tipo";
-            this.tipo.ReadOnly = true;
-            this.tipo.Width = 53;
-            // 
-            // descripcion
-            // 
-            this.descripcion.HeaderText = "Descripcion";
-            this.descripcion.Name = "descripcion";
-            this.descripcion.ReadOnly = true;
-            this.descripcion.Width = 88;
-            // 
-            // ruta
-            // 
-            this.ruta.HeaderText = "Ruta";
-            this.ruta.Name = "ruta";
-            this.ruta.ReadOnly = true;
-            // 
             // principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -818,6 +818,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "principal";
             this.Text = "C3D-COMBINER";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.panel2.ResumeLayout(false);
             this.tab0.ResumeLayout(false);
             this.tab1.ResumeLayout(false);

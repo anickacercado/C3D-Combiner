@@ -19,17 +19,19 @@ namespace _Compi2_Proyecto2_201212859.Formularios
         Label panel;
         bool modificado;
         string ruta;
+        int tipo;
 
-        //gramaticaOLC Gramatica;
-        gramaticaTREE Gramatica;
+        gramaticaOLC gramatica_olc;
+        gramaticaTREE gramatica_tree;
         LanguageData language;
         Parser parser;
 
 
-        public tabIDE(String nombre, String texto, String ruta)
+        public tabIDE(String nombre, String texto, String ruta, int tipo)
         {
             this.Text = nombre;
             this.ruta = ruta;
+            this.tipo = tipo;
             initComponent(texto);
         }
 
@@ -39,11 +41,16 @@ namespace _Compi2_Proyecto2_201212859.Formularios
             if (guardarArchivo())
             {
                 string entrada = TBContenido.Text;
-                //analizarOLC aOLC = new analizarOLC();
-                //aOLC.analizar(entrada, ruta);  
-
-                analizarTREE aTREE = new analizarTREE();
-                aTREE.analizar(entrada, ruta);
+                if (this.tipo == 1)
+                {
+                    analizarOLC aOLC = new analizarOLC();
+                    aOLC.analizar(entrada, ruta);
+                }
+                else if (this.tipo == 2)
+                {
+                    analizarTREE aTREE = new analizarTREE();
+                    aTREE.analizar(entrada, ruta);
+                }
             }
         }
 
@@ -51,14 +58,23 @@ namespace _Compi2_Proyecto2_201212859.Formularios
         {
             this.modificado = false;
 
-            //Gramatica = new gramaticaOLC();
-            Gramatica = new gramaticaTREE();
-            language = new LanguageData(Gramatica);
-            parser = new Parser(language);
-
             TBContenido = new IronyFCTB();
-            TBContenido.Grammar = Gramatica;
+            if (this.tipo == 0 || this.tipo == 1)
+            {
+                gramatica_olc = new gramaticaOLC();
+                language = new LanguageData(gramatica_olc);
+                parser = new Parser(language);
+                TBContenido.Grammar = gramatica_olc;
 
+            }
+            else if (this.tipo == 2)
+            {
+                gramatica_tree = new gramaticaTREE();
+                language = new LanguageData(gramatica_tree);
+                parser = new Parser(language);
+                TBContenido.Grammar = gramatica_tree;
+            }
+ 
             TBContenido.Multiline = true;
             TBContenido.Text = texto;
             TBContenido.WordWrap = false;
@@ -74,7 +90,6 @@ namespace _Compi2_Proyecto2_201212859.Formularios
 
             this.Controls.Add(TBContenido);
             this.Controls.Add(panel);
-
         }
 
         private void TBContenido_SelectionChanged(object sender, EventArgs e)
@@ -99,7 +114,7 @@ namespace _Compi2_Proyecto2_201212859.Formularios
             {
                 SaveFileDialog guardar = new SaveFileDialog();
 
-                //guardar.Filter = Constante.DialogFilter;
+                guardar.Filter ="Archivo OLC|*.olc|Archivo TREE|*.tree";
                 guardar.Title = "Guardar Archivo";
                 guardar.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
@@ -108,8 +123,10 @@ namespace _Compi2_Proyecto2_201212859.Formularios
                     System.IO.FileStream fs = (System.IO.FileStream)guardar.OpenFile();
                     fs.Close();
                     System.IO.File.WriteAllText(guardar.FileName, this.TBContenido.Text);
-                    ruta = guardar.FileName;
-                    modificado = false;
+
+                    this.tipo = guardar.FilterIndex;
+                    this.ruta = guardar.FileName;
+                    this.modificado = false;
                     this.Text = System.IO.Path.GetFileName(ruta);
                     estado = true;
                 }
@@ -117,7 +134,7 @@ namespace _Compi2_Proyecto2_201212859.Formularios
             else
             {
                 System.IO.File.WriteAllText(this.ruta, this.TBContenido.Text);
-                modificado = false;
+                this.modificado = false;
                 this.Text = System.IO.Path.GetFileName(ruta);
                 estado = true;
             }
@@ -128,7 +145,7 @@ namespace _Compi2_Proyecto2_201212859.Formularios
         {
             SaveFileDialog guardar = new SaveFileDialog();
 
-            //guardar.Filter = Constante.DialogFilter;
+            guardar.Filter = "Archivo OLC|*.olc|Archivo TREE|*.tree";
             guardar.Title = "Guardar Archivo";
             guardar.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
 
@@ -138,10 +155,11 @@ namespace _Compi2_Proyecto2_201212859.Formularios
                 System.IO.FileStream fs = (System.IO.FileStream)guardar.OpenFile();
                 fs.Close();
                 System.IO.File.WriteAllText(guardar.FileName, this.TBContenido.Text);
-                ruta = guardar.FileName;
-
-                modificado = false;
+                this.tipo = guardar.FilterIndex;
+                this.ruta = guardar.FileName;
+                this.modificado = false;
                 this.Text = System.IO.Path.GetFileName(ruta);
+                initComponent(this.Text);
             }
         }
     }

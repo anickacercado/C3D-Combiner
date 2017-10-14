@@ -194,6 +194,12 @@ namespace FastColoredTextBoxNS
                             case "er_booleano":
                                 GetTokenRange(t).SetStyle(SyntaxHighlighter.KeywordStyle);
                                 break;
+                            case "numero":
+                                GetTokenRange(t).SetStyle(purpleStyle);
+                                break;
+                            case "er_casteo":
+                                GetTokenRange(t).SetStyle(SyntaxHighlighter.KeywordStyle);
+                                break;
                         }
                         break;
                 }
