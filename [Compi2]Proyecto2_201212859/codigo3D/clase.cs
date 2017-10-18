@@ -18,6 +18,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             this.nombre = nombre;
             this.imports = imports;
             this.ambito = ambito;
+            this.herencia = herencia;
         }
     }
 }
