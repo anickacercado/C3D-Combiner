@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="FastColoredTextBox, Version=2.11.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -41,6 +44,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>bin\Debug\Irony.dll</HintPath>
     </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -54,18 +58,34 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constante.cs" />
+    <Compile Include="codigo3D\cadena3D.cs" />
+    <Compile Include="codigo3D\ambito.cs" />
+    <Compile Include="codigo3D\clase.cs" />
+    <Compile Include="codigo3D\expresion.cs" />
+    <Compile Include="codigo3D\simbolo.cs" />
+    <Compile Include="Formularios\compartirClase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\compartirClase.Designer.cs">
+      <DependentUpon>compartirClase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\controlTabIDE.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Formularios\CrearCarpeta.cs">
+    <Compile Include="Formularios\crearCarpeta.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Formularios\CrearCarpeta.Designer.cs">
-      <DependentUpon>CrearCarpeta.cs</DependentUpon>
+    <Compile Include="Formularios\crearCarpeta.Designer.cs">
+      <DependentUpon>crearCarpeta.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\IronyFCTB.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Formularios\login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\login.Designer.cs">
+      <DependentUpon>login.cs</DependentUpon>
     </Compile>
     <Compile Include="Formularios\Principal.cs">
       <SubType>Form</SubType>
@@ -73,23 +93,38 @@
     <Compile Include="Formularios\Principal.Designer.cs">
       <DependentUpon>Principal.cs</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\reporteGramatica.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Formularios\reporteGramatica.Designer.cs">
+      <DependentUpon>reporteGramatica.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\repositorio.cs" />
     <Compile Include="Formularios\tabIDE.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="OLC\analizarOLC.cs" />
     <Compile Include="OLC\gramaticaOLC.cs" />
     <Compile Include="memoria.cs" />
-    <Compile Include="OLC\tablaSimboloOLC.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SBScriptGrammar.cs" />
     <Compile Include="TREE\analizarTREE.cs" />
+    <Compile Include="TREE\arbolTREE.cs" />
     <Compile Include="TREE\gramaticaTREE.cs" />
-    <EmbeddedResource Include="Formularios\CrearCarpeta.resx">
-      <DependentUpon>CrearCarpeta.cs</DependentUpon>
+    <EmbeddedResource Include="Formularios\compartirClase.resx">
+      <DependentUpon>compartirClase.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\crearCarpeta.resx">
+      <DependentUpon>crearCarpeta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\login.resx">
+      <DependentUpon>login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Formularios\Principal.resx">
       <DependentUpon>Principal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Formularios\reporteGramatica.resx">
+      <DependentUpon>reporteGramatica.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -147,6 +182,18 @@
   <ItemGroup>
     <None Include="Imagenes\11.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="WINGRAPHVIZLib">
+      <Guid>{052DB09C-95F7-43BD-B7F8-492373D1151E}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

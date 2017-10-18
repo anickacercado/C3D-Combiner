@@ -1,6 +1,6 @@
 ﻿namespace _Compi2_Proyecto2_201212859.Formularios
 {
-    partial class CrearCarpeta
+    partial class crearCarpeta
     {
         /// <summary>
         /// Required designer variable.

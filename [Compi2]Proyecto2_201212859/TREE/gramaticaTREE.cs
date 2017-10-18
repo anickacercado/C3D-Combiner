@@ -81,16 +81,20 @@ namespace _Compi2_Proyecto2_201212859.TREE
             var t_para = ToTerm("para");
             var t_nuevo = ToTerm("nuevo");
             var t_super = ToTerm("super");
+            var t_funcion = ToTerm("funcion");
+            var t_metodo = ToTerm("metodo");
+            var t_out_string = ToTerm("out_string");
 
 
 
             //Expresiones Regulares
             RegexBasedTerminal er_visibilidad = new RegexBasedTerminal("er_visibilidad", "publico|protegido|privado");
-            RegexBasedTerminal er_tipo = new RegexBasedTerminal("er_tipo", "entero|cadena|decimal|booleano|caracter|void");
+            RegexBasedTerminal er_tipo = new RegexBasedTerminal("er_tipo", "entero|cadena|decimal|booleano|caracter");
             RegexBasedTerminal er_casteo = new RegexBasedTerminal("er_casteo", "ParseInt|ParseDouble|intToStr|doubleToStr|doubleToInt");
 
-            // RegexBasedTerminal er_entero = new RegexBasedTerminal("er_entero", "[0-9]+");
-            // RegexBasedTerminal er_decimal = new RegexBasedTerminal("er_decimal", "([0-9]+).([0-9]+)");
+
+            var er_entero = new NumberLiteral("er_entero", NumberOptions.IntOnly);
+            var er_decimal = new NumberLiteral("er_decimal");
             RegexBasedTerminal er_caracter = new RegexBasedTerminal("er_caracter", "'[a-zA-Z0-9]'");
             RegexBasedTerminal er_cadena = new RegexBasedTerminal("er_cadena", "\"[^\n\r]*\"");
             RegexBasedTerminal er_booleano = new RegexBasedTerminal("er_booleano", "true|false");
@@ -103,6 +107,7 @@ namespace _Compi2_Proyecto2_201212859.TREE
             MarkReservedWords("self");
             MarkReservedWords("/**sobrescribir**/");
             MarkReservedWords("retornar");
+            MarkReservedWords("imprimir");
             MarkReservedWords("entero");
             MarkReservedWords("cadena");
             MarkReservedWords("decimal");
@@ -176,7 +181,6 @@ namespace _Compi2_Proyecto2_201212859.TREE
             var LISTA_DIMENSION = new NonTerminal("LISTA_DIMENSION");
             var ARREGLO = new NonTerminal("ARREGLO");
             var LISTA_ARREGLO = new NonTerminal("LISTA_ARREGLO");
-            var TIPO_RETORNO = new NonTerminal("TIPO_RETORNO");
             var OPCION_IMPORTAR = new NonTerminal("OPCION_IMPORTAR");
             var SALIR = new NonTerminal("SALIR");
             var CONTINUAR = new NonTerminal("CONTINUAR");
@@ -186,6 +190,16 @@ namespace _Compi2_Proyecto2_201212859.TREE
             var VALOR = new NonTerminal("VALOR");
             var LOOP = new NonTerminal("LOOP");
             var PARA = new NonTerminal("PARA");
+            var LISTA_CLASE = new NonTerminal("LISTA_CLASE");
+            var CLASE = new NonTerminal("CLASE");
+            var VISIBILIDAD = new NonTerminal("VISIBILIDAD");
+            var LISTA_PARAMETRO_E = new NonTerminal("LISTA_PARAMETRO_E");
+            var LISTA_DIMENSION_METODO_E = new NonTerminal("LISTA_DIMENSION_METODO_E");
+            var LISTA_DIMENSION_METODO = new NonTerminal("LISTA_DIMENSION_METODO");
+            var DIMENSION_METODO = new NonTerminal("DIMENSION_METODO");
+            var HIJO = new NonTerminal("HIJO");
+            var LISTA_E_E = new NonTerminal("LISTA_E_E");
+
 
 
 
@@ -195,60 +209,55 @@ namespace _Compi2_Proyecto2_201212859.TREE
             /*Producciones*/
             /*Clases e importacion*/
 
-            INICIO.Rule = IMPORTAR + Eos + t_clase + er_id + t_cor_abre + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_GLOBALES + Dedent
-                      |IMPORTAR + Eos + t_clase + er_id + t_cor_abre + er_id + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_GLOBALES + Dedent         /*Herencia*/
-                      | t_clase + er_id + t_cor_abre + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_GLOBALES + Dedent
-                      | t_clase + er_id + t_cor_abre + er_id + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_GLOBALES + Dedent                         /*Herencia*/
-                      ;
-            ;
+            INICIO.Rule = IMPORTAR + LISTA_CLASE;
 
-            IMPORTAR.Rule = t_importar + LISTA_IMPORTAR
-             ;
+            CLASE.Rule = t_clase + er_id + t_cor_abre + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_GLOBALES + Dedent
+                | t_clase + er_id + t_cor_abre + er_id + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_GLOBALES + Dedent
+                ;
+
+
+            IMPORTAR.Rule = t_importar + LISTA_IMPORTAR + Eos
+                | Empty
+                ;
 
             OPCION_IMPORTAR.Rule = er_id + ".olc"
                             | er_id + ".tree"
                             | er_cadena
                             ;
 
+     
             /*Sentencias Globales*/
 
             SENTENCIAS_GLOBALES.Rule =
                  METODO 
-                |DECLARAR + Eos
-                |OBJETO + Eos
+                | VISIBILIDAD + DECLARAR + Eos
                 ;
 
-
-            DECLARAR.Rule =
-                er_tipo + LISTA_ID                                                                                                     /*Declarar Variable*/
-              | er_tipo + LISTA_ID  + "=>" + E                                                                                         /*Declarar Variable y asignar*/
-
-              | er_tipo + er_id + LISTA_DIMENSION
-              | er_tipo + er_id + LISTA_DIMENSION + "=>" + E                         /*Declarar Arreglos*/
-              | er_visibilidad + er_tipo + er_id + LISTA_DIMENSION
-              | er_visibilidad + er_tipo + er_id + LISTA_DIMENSION + "=>" + E        /*Declarar Arreglos*/
-
-              | er_visibilidad + er_tipo + LISTA_ID                                                                                     /*Declarar Variable*/
-              | er_visibilidad + er_tipo + LISTA_ID + "=>" + E                                                                          /*Declarar Variable y asignar*/
-              ;
+          DECLARAR.Rule = TIPO + LISTA_ID + "=>" + E
+                        | TIPO + LISTA_ID
+                        | TIPO + er_id + LISTA_DIMENSION;
 
             METODO.Rule =
-                        /*Funciones propias de la clase*/
-                        er_visibilidad + TIPO_RETORNO + er_id + t_cor_abre + LISTA_PARAMETRO + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
-                      | er_visibilidad + TIPO_RETORNO + er_id + t_cor_abre + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
-                      | TIPO_RETORNO + er_id + t_cor_abre + LISTA_PARAMETRO + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
-                      | TIPO_RETORNO + er_id + t_cor_abre + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
-
-                      /*Funciones heredadas*/
-                      | t_sobrescribir + Eos + er_visibilidad + TIPO_RETORNO + er_id + t_cor_abre + LISTA_PARAMETRO + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
-                      | t_sobrescribir + Eos + er_visibilidad + TIPO_RETORNO + er_id + t_cor_abre + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
-                      | t_sobrescribir + Eos + TIPO_RETORNO + er_id + t_cor_abre + LISTA_PARAMETRO + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
-                      | t_sobrescribir + Eos + TIPO_RETORNO + er_id + t_cor_abre + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
-
-                      /*Metodo constructor*/
-                      | t_constructor + t_cor_abre + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
-                      | t_constructor + t_cor_abre + LISTA_PARAMETRO + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
+                        t_sobrescribir + Eos + VISIBILIDAD + t_metodo + er_id + t_cor_abre + LISTA_PARAMETRO_E + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
+                      | VISIBILIDAD + t_metodo + er_id + t_cor_abre + LISTA_PARAMETRO_E + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
+                      
+                      | t_sobrescribir + Eos + VISIBILIDAD + t_funcion + TIPO + LISTA_DIMENSION_METODO_E + er_id + t_cor_abre + LISTA_PARAMETRO_E + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
+                      | VISIBILIDAD + t_funcion + TIPO + LISTA_DIMENSION_METODO_E + er_id + t_cor_abre + LISTA_PARAMETRO_E + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
+                      
+                      | t_constructor + t_cor_abre + LISTA_PARAMETRO_E + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
                       ;
+
+            LISTA_PARAMETRO_E.Rule = LISTA_PARAMETRO
+                | Empty;
+
+            LISTA_DIMENSION_METODO_E.Rule = LISTA_DIMENSION_METODO
+                                    | Empty
+                                    ;
+
+            LISTA_DIMENSION_METODO.Rule = MakePlusRule(LISTA_DIMENSION_METODO, DIMENSION_METODO);
+
+            DIMENSION_METODO.Rule = t_cor_abre + t_cor_cierra;
+
 
             /*Sentencias Locales*/
             SENTENCIAS_LOCALES.Rule = DECLARAR + Eos
@@ -263,15 +272,29 @@ namespace _Compi2_Proyecto2_201212859.TREE
                                     | REPETIR
                                     | LOOP
                                     | PARA
-                                    | OBJETO + Eos
-                                    | F + Eos /*metodos*/
+                                    | LLAMADA_METODO + Eos /*metodos*/
+                                    | AUMENTO_DECREMENTO + Eos;
                                     ;
 
-            ASIGNAR.Rule =    t_self + t_punto + er_id + "=>" + E                             /*Asignar atributos*/
+            ASIGNAR.Rule =    t_self + t_punto + er_id + "=>" + E                              /*Asignar atributos*/
                             | t_self + t_punto + er_id + LISTA_DIMENSION + "=>" + E            /*Asignar atributos arreglos*/
                             | er_id + LISTA_DIMENSION + "=>" + E                               /*Asignar arreglos*/
-                            | er_id + "=>" + E                                                      /*Asignar variables*/
+                            | er_id + "=>" + E                                                 /*Asignar variables*/
                         ;
+
+            ASIGNAR.Rule = OBJETO + er_id + LISTA_DIMENSION + "=>" + E
+                        | er_id + LISTA_DIMENSION + "=>" + E
+                        | OBJETO + er_id + "=>" + E
+                        | er_id + "=>" + E
+                        ;
+
+            LLAMADA_METODO.Rule = OBJETO + er_id + t_cor_abre + LISTA_E_E + t_cor_cierra
+                            | er_id +  t_cor_abre + LISTA_E_E + t_cor_cierra
+                            | OBJETO + er_id + LISTA_DIMENSION
+                            | er_id + LISTA_DIMENSION
+                            | t_out_string + t_cor_abre + E + t_cor_cierra                        /*Imprimir cadena*/
+                            | t_super + t_cor_abre + LISTA_E_E + t_cor_cierra                     /*Llamada a constructor*/                  
+                            ;
 
             RETORNAR.Rule = t_retornar + E
                 ;
@@ -324,32 +347,19 @@ namespace _Compi2_Proyecto2_201212859.TREE
                 | t_para + t_cor_abre + DECLARAR + t_dos_pts + E + t_dos_pts + AUMENTO_DECREMENTO + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
                 ;
 
-
-            OBJETO.Rule =
-                  er_id + er_id                                                                                     /*Declarar Objetos*/
-
-                //| er_id + er_id + LISTA_DIMENSION                                                                   /*Declarar Arreglos de Objetos*/
-                //| er_id + er_id + LISTA_DIMENSION + t_igual + t_llave_abre + LISTA_E + t_llave_cierra               /*Declarar e Asignar Arreglos de Objetos*/
-
-                | er_id + "=>" + t_nuevo + er_id + t_cor_abre + t_cor_cierra                                       /*Instanciar Objetos*/
-                | er_id + "=>" + t_nuevo + er_id + t_cor_abre + LISTA_E + t_cor_cierra                             /*Instanciar Objetos*/
-                | er_id + er_id + "=>" + t_nuevo + er_id + t_cor_abre + t_cor_cierra                               /*Declarar e Instanciar Objetos*/
-                | er_id + er_id + "=>" + t_nuevo + er_id + t_cor_abre + LISTA_E + t_cor_cierra                     /*Declarar e Instanciar Objetos*/
-                ;
-
             DIMENSION.Rule = t_cor_abre + E + t_cor_cierra;
 
 
             /*Parametros y tipos*/
-            PARAMETRO.Rule = er_tipo + er_id
-                | er_id + er_id
+            PARAMETRO.Rule = TIPO +  LISTA_DIMENSION_METODO_E + er_id 
                 ;
 
-            TIPO_RETORNO.Rule = er_tipo
-                //| er_id
-                  | er_tipo + LISTA_DIMENSION
-                  | er_id + LISTA_DIMENSION
+            TIPO.Rule = er_tipo
+                  | er_id
                   ;
+
+            VISIBILIDAD.Rule = er_visibilidad
+                               | Empty;
 
             /*Listas*/
             LISTA_SENTENCIAS_GLOBALES.Rule = MakePlusRule(LISTA_SENTENCIAS_GLOBALES, SENTENCIAS_GLOBALES)
@@ -379,6 +389,13 @@ namespace _Compi2_Proyecto2_201212859.TREE
             LISTA_E.Rule = MakePlusRule(LISTA_E, t_coma, E)
                 ;
 
+            LISTA_CLASE.Rule = MakePlusRule(LISTA_CLASE, CLASE)
+                ;
+
+            LISTA_E_E.Rule = LISTA_E
+                | Empty
+                ;
+
             /*Expresiones*/
             E.Rule = t_llave_abre + E + E + t_or + t_llave_cierra
                 | t_llave_abre + E + E + t_xor + t_llave_cierra
@@ -397,22 +414,30 @@ namespace _Compi2_Proyecto2_201212859.TREE
                 | t_par_abre + E + E + t_potencia + t_par_cierra
                 | t_par_abre + E + t_menos + t_par_cierra
                 | er_casteo + t_cor_abre + E + t_cor_cierra                 /*casteo*/
-                | numero
+                | er_entero
+                | er_decimal
                 | er_caracter
                 | er_cadena
                 | er_booleano
-                | F
-            ;
 
-            /*Llamada metodo - id*/
-            F.Rule =
-                  er_id                                                 /*id*/
-                | t_super                                               /*super*/
-                | t_self                                                /*self*/
-                | er_id + t_cor_abre + t_cor_cierra                     /*Metodo sin parametros*/
-                | er_id + t_cor_abre + LISTA_E + t_cor_cierra           /*Metodo con parametros*/
-                | er_id + LISTA_DIMENSION                               /*Arreglo*/
-                | F + t_punto + F
+                | OBJETO + er_id
+                | OBJETO + er_id + t_cor_abre + LISTA_E_E + t_cor_cierra
+                | OBJETO + er_id + LISTA_DIMENSION
+                | er_id
+                | er_id + t_cor_abre + LISTA_E_E + t_cor_cierra
+                | er_id + LISTA_DIMENSION
+                | t_nuevo + er_id + t_cor_abre + LISTA_E_E + t_cor_cierra
+                ;
+
+
+            OBJETO.Rule = MakePlusRule(OBJETO, HIJO)
+                ;
+
+            HIJO.Rule = er_id + t_punto
+                | er_id + t_cor_abre + LISTA_E_E + t_cor_cierra + t_punto
+                | er_id + LISTA_DIMENSION + t_punto
+                | t_self + t_punto
+                | t_super + t_punto
                 ;
 
             VALOR.Rule = numero
@@ -420,7 +445,7 @@ namespace _Compi2_Proyecto2_201212859.TREE
                 | er_cadena
                 | er_booleano
                 | er_id
-            ;
+                ;
 
             RegisterBracePair("(", ")");
             RegisterBracePair("[", "]");

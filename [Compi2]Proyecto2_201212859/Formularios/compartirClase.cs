@@ -10,11 +10,18 @@ using System.Windows.Forms;
 
 namespace _Compi2_Proyecto2_201212859.Formularios
 {
-    public partial class crearCarpeta : Form
+    public partial class compartirClase : Form
     {
-        public crearCarpeta()
+        public compartirClase()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            repositorio.descripcion = txtDescripcion.Text;
+            repositorio r = new Formularios.repositorio();
+            r.crearRepositorio();
         }
     }
 }

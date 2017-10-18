@@ -40,7 +40,7 @@
             this.tab1 = new System.Windows.Forms.TabPage();
             this.txtConsola = new System.Windows.Forms.TextBox();
             this.tab2 = new System.Windows.Forms.TabPage();
-            tablaErrores = new System.Windows.Forms.DataGridView();
+            this.tablaErrores = new System.Windows.Forms.DataGridView();
             this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.columna = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,12 +48,6 @@
             this.ruta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabSim = new System.Windows.Forms.TabPage();
             this.tablaSimbolos = new System.Windows.Forms.DataGridView();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipoTS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ambito = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.posicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tamanio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab3 = new System.Windows.Forms.TabPage();
             this.txtProcesoOptimizacion = new System.Windows.Forms.TextBox();
             this.tab4 = new System.Windows.Forms.TabPage();
@@ -65,7 +59,24 @@
             this.panel12 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.ControlEditor = new _Compi2_Proyecto2_201212859.Formularios.controlTabIDE();
+            this.panel6 = new System.Windows.Forms.Panel();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.btnIrLinea = new System.Windows.Forms.Button();
+            this.txtIrLinea = new System.Windows.Forms.TextBox();
+            this.btnDetener = new System.Windows.Forms.Button();
+            this.btnPasoArriba = new System.Windows.Forms.Button();
+            this.btnPasarPorAlto = new System.Windows.Forms.Button();
+            this.btnAccionSiguiente = new System.Windows.Forms.Button();
+            this.btnPasoAPaso = new System.Windows.Forms.Button();
+            this.btnIniciar = new System.Windows.Forms.Button();
+            this.panel9 = new System.Windows.Forms.Panel();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -87,28 +98,20 @@
             this.tablaDeSimbolosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.erroresToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gramaticasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel6 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.panel10 = new System.Windows.Forms.Panel();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.panel8 = new System.Windows.Forms.Panel();
-            this.btnIrLinea = new System.Windows.Forms.Button();
-            this.txtIrLinea = new System.Windows.Forms.TextBox();
-            this.btnDetener = new System.Windows.Forms.Button();
-            this.btnPasoArriba = new System.Windows.Forms.Button();
-            this.btnPasarPorAlto = new System.Windows.Forms.Button();
-            this.btnAccionSiguiente = new System.Windows.Forms.Button();
-            this.btnPasoAPaso = new System.Windows.Forms.Button();
-            this.btnIniciar = new System.Windows.Forms.Button();
-            this.panel9 = new System.Windows.Forms.Panel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.crearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crearCarpetaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipoTS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ambito = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tamanio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.posicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             this.tab0.SuspendLayout();
             this.tab1.SuspendLayout();
             this.tab2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(tablaErrores)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaErrores)).BeginInit();
             this.tabSim.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablaSimbolos)).BeginInit();
             this.tab3.SuspendLayout();
@@ -116,20 +119,32 @@
             this.tab5.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
-            this.panel1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
+            this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
+            this.splitContainer1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
             this.panel6.SuspendLayout();
             this.panel7.SuspendLayout();
+            this.panel1.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.tab0);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 338);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(995, 182);
+            this.panel2.Size = new System.Drawing.Size(995, 169);
             this.panel2.TabIndex = 1;
             // 
             // tab0
@@ -145,7 +160,7 @@
             this.tab0.Location = new System.Drawing.Point(0, 0);
             this.tab0.Name = "tab0";
             this.tab0.SelectedIndex = 0;
-            this.tab0.Size = new System.Drawing.Size(995, 182);
+            this.tab0.Size = new System.Drawing.Size(995, 169);
             this.tab0.TabIndex = 0;
             // 
             // tab1
@@ -155,7 +170,7 @@
             this.tab1.Location = new System.Drawing.Point(4, 22);
             this.tab1.Name = "tab1";
             this.tab1.Padding = new System.Windows.Forms.Padding(3);
-            this.tab1.Size = new System.Drawing.Size(987, 156);
+            this.tab1.Size = new System.Drawing.Size(987, 143);
             this.tab1.TabIndex = 0;
             this.tab1.Text = "CONSOLA DE SALIDA";
             this.tab1.UseVisualStyleBackColor = true;
@@ -169,24 +184,24 @@
             this.txtConsola.Multiline = true;
             this.txtConsola.Name = "txtConsola";
             this.txtConsola.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtConsola.Size = new System.Drawing.Size(981, 150);
+            this.txtConsola.Size = new System.Drawing.Size(981, 137);
             this.txtConsola.TabIndex = 0;
             // 
             // tab2
             // 
-            this.tab2.Controls.Add(tablaErrores);
+            this.tab2.Controls.Add(this.tablaErrores);
             this.tab2.Location = new System.Drawing.Point(4, 22);
             this.tab2.Name = "tab2";
             this.tab2.Padding = new System.Windows.Forms.Padding(3);
-            this.tab2.Size = new System.Drawing.Size(987, 156);
+            this.tab2.Size = new System.Drawing.Size(987, 143);
             this.tab2.TabIndex = 1;
             this.tab2.Text = "ERRORES";
             this.tab2.UseVisualStyleBackColor = true;
             // 
             // tablaErrores
             // 
-            tablaErrores.AllowUserToAddRows = false;
-            tablaErrores.AllowUserToDeleteRows = false;
+            this.tablaErrores.AllowUserToAddRows = false;
+            this.tablaErrores.AllowUserToDeleteRows = false;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -194,9 +209,9 @@
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            tablaErrores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            tablaErrores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            tablaErrores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.tablaErrores.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            this.tablaErrores.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tablaErrores.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Linea,
             this.columna,
             this.tipo,
@@ -209,11 +224,11 @@
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            tablaErrores.DefaultCellStyle = dataGridViewCellStyle2;
-            tablaErrores.Dock = System.Windows.Forms.DockStyle.Fill;
-            tablaErrores.Location = new System.Drawing.Point(3, 3);
-            tablaErrores.Name = "tablaErrores";
-            tablaErrores.ReadOnly = true;
+            this.tablaErrores.DefaultCellStyle = dataGridViewCellStyle2;
+            this.tablaErrores.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tablaErrores.Location = new System.Drawing.Point(3, 3);
+            this.tablaErrores.Name = "tablaErrores";
+            this.tablaErrores.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -221,9 +236,9 @@
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            tablaErrores.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            tablaErrores.Size = new System.Drawing.Size(981, 150);
-            tablaErrores.TabIndex = 0;
+            this.tablaErrores.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            this.tablaErrores.Size = new System.Drawing.Size(981, 137);
+            this.tablaErrores.TabIndex = 0;
             // 
             // Linea
             // 
@@ -265,7 +280,7 @@
             this.tabSim.Location = new System.Drawing.Point(4, 22);
             this.tabSim.Name = "tabSim";
             this.tabSim.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSim.Size = new System.Drawing.Size(987, 156);
+            this.tabSim.Size = new System.Drawing.Size(987, 143);
             this.tabSim.TabIndex = 5;
             this.tabSim.Text = "TABLA DE SIMBOLOS";
             this.tabSim.UseVisualStyleBackColor = true;
@@ -288,8 +303,8 @@
             this.tipoTS,
             this.rol,
             this.ambito,
-            this.posicion,
-            this.tamanio});
+            this.tamanio,
+            this.posicion});
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Window;
             dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -310,44 +325,8 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.tablaSimbolos.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.tablaSimbolos.Size = new System.Drawing.Size(981, 150);
+            this.tablaSimbolos.Size = new System.Drawing.Size(981, 137);
             this.tablaSimbolos.TabIndex = 1;
-            // 
-            // nombre
-            // 
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            // 
-            // tipoTS
-            // 
-            this.tipoTS.HeaderText = "Tipo";
-            this.tipoTS.Name = "tipoTS";
-            this.tipoTS.ReadOnly = true;
-            // 
-            // rol
-            // 
-            this.rol.HeaderText = "Rol";
-            this.rol.Name = "rol";
-            this.rol.ReadOnly = true;
-            // 
-            // ambito
-            // 
-            this.ambito.HeaderText = "Ambito";
-            this.ambito.Name = "ambito";
-            this.ambito.ReadOnly = true;
-            // 
-            // posicion
-            // 
-            this.posicion.HeaderText = "Posicion";
-            this.posicion.Name = "posicion";
-            this.posicion.ReadOnly = true;
-            // 
-            // tamanio
-            // 
-            this.tamanio.HeaderText = "Tamaño";
-            this.tamanio.Name = "tamanio";
-            this.tamanio.ReadOnly = true;
             // 
             // tab3
             // 
@@ -355,7 +334,7 @@
             this.tab3.Location = new System.Drawing.Point(4, 22);
             this.tab3.Name = "tab3";
             this.tab3.Padding = new System.Windows.Forms.Padding(3);
-            this.tab3.Size = new System.Drawing.Size(987, 156);
+            this.tab3.Size = new System.Drawing.Size(987, 143);
             this.tab3.TabIndex = 2;
             this.tab3.Text = "SALIDA PROCESO DE OPTIMIZACIÓN";
             this.tab3.UseVisualStyleBackColor = true;
@@ -369,7 +348,7 @@
             this.txtProcesoOptimizacion.Multiline = true;
             this.txtProcesoOptimizacion.Name = "txtProcesoOptimizacion";
             this.txtProcesoOptimizacion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtProcesoOptimizacion.Size = new System.Drawing.Size(981, 150);
+            this.txtProcesoOptimizacion.Size = new System.Drawing.Size(981, 137);
             this.txtProcesoOptimizacion.TabIndex = 1;
             // 
             // tab4
@@ -378,7 +357,7 @@
             this.tab4.Location = new System.Drawing.Point(4, 22);
             this.tab4.Name = "tab4";
             this.tab4.Padding = new System.Windows.Forms.Padding(3);
-            this.tab4.Size = new System.Drawing.Size(987, 156);
+            this.tab4.Size = new System.Drawing.Size(987, 143);
             this.tab4.TabIndex = 3;
             this.tab4.Text = "CODIGO 3D";
             this.tab4.UseVisualStyleBackColor = true;
@@ -392,7 +371,7 @@
             this.txt3D.Multiline = true;
             this.txt3D.Name = "txt3D";
             this.txt3D.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txt3D.Size = new System.Drawing.Size(981, 150);
+            this.txt3D.Size = new System.Drawing.Size(981, 137);
             this.txt3D.TabIndex = 1;
             // 
             // tab5
@@ -401,7 +380,7 @@
             this.tab5.Location = new System.Drawing.Point(4, 22);
             this.tab5.Name = "tab5";
             this.tab5.Padding = new System.Windows.Forms.Padding(3);
-            this.tab5.Size = new System.Drawing.Size(987, 156);
+            this.tab5.Size = new System.Drawing.Size(987, 143);
             this.tab5.TabIndex = 4;
             this.tab5.Text = "CODIGO 3D OPTIMIZADO";
             this.tab5.UseVisualStyleBackColor = true;
@@ -415,7 +394,7 @@
             this.txt3DOptimizado.Multiline = true;
             this.txt3DOptimizado.Name = "txt3DOptimizado";
             this.txt3DOptimizado.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txt3DOptimizado.Size = new System.Drawing.Size(981, 150);
+            this.txt3DOptimizado.Size = new System.Drawing.Size(981, 137);
             this.txt3DOptimizado.TabIndex = 1;
             // 
             // panel3
@@ -423,10 +402,10 @@
             this.panel3.Controls.Add(this.treeView1);
             this.panel3.Controls.Add(this.panel12);
             this.panel3.Controls.Add(this.panel11);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel3.Location = new System.Drawing.Point(0, 23);
+            this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(147, 315);
+            this.panel3.Size = new System.Drawing.Size(154, 324);
             this.panel3.TabIndex = 2;
             // 
             // treeView1
@@ -434,7 +413,7 @@
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(0, 22);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(137, 293);
+            this.treeView1.Size = new System.Drawing.Size(144, 302);
             this.treeView1.TabIndex = 21;
             this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             // 
@@ -442,9 +421,9 @@
             // 
             this.panel12.BackColor = System.Drawing.Color.Navy;
             this.panel12.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel12.Location = new System.Drawing.Point(137, 22);
+            this.panel12.Location = new System.Drawing.Point(144, 22);
             this.panel12.Name = "panel12";
-            this.panel12.Size = new System.Drawing.Size(10, 293);
+            this.panel12.Size = new System.Drawing.Size(10, 302);
             this.panel12.TabIndex = 20;
             // 
             // panel11
@@ -453,17 +432,69 @@
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel11.Location = new System.Drawing.Point(0, 0);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(147, 22);
+            this.panel11.Size = new System.Drawing.Size(154, 22);
             this.panel11.TabIndex = 19;
             // 
             // panel4
             // 
-            this.panel4.Controls.Add(this.ControlEditor);
+            this.panel4.Controls.Add(this.splitContainer3);
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel4.Location = new System.Drawing.Point(147, 23);
+            this.panel4.Location = new System.Drawing.Point(0, 23);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(537, 315);
+            this.panel4.Size = new System.Drawing.Size(995, 497);
             this.panel4.TabIndex = 3;
+            // 
+            // splitContainer3
+            // 
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer3.Panel1
+            // 
+            this.splitContainer3.Panel1.Controls.Add(this.splitContainer1);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.panel2);
+            this.splitContainer3.Size = new System.Drawing.Size(995, 497);
+            this.splitContainer3.SplitterDistance = 324;
+            this.splitContainer3.TabIndex = 2;
+            // 
+            // splitContainer1
+            // 
+            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Name = "splitContainer1";
+            // 
+            // splitContainer1.Panel1
+            // 
+            this.splitContainer1.Panel1.Controls.Add(this.panel3);
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
+            this.splitContainer1.Size = new System.Drawing.Size(995, 324);
+            this.splitContainer1.SplitterDistance = 154;
+            this.splitContainer1.TabIndex = 1;
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.ControlEditor);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.panel6);
+            this.splitContainer2.Size = new System.Drawing.Size(837, 324);
+            this.splitContainer2.SplitterDistance = 800;
+            this.splitContainer2.TabIndex = 0;
             // 
             // ControlEditor
             // 
@@ -471,8 +502,154 @@
             this.ControlEditor.Location = new System.Drawing.Point(0, 0);
             this.ControlEditor.Name = "ControlEditor";
             this.ControlEditor.SelectedIndex = 0;
-            this.ControlEditor.Size = new System.Drawing.Size(537, 315);
+            this.ControlEditor.Size = new System.Drawing.Size(800, 324);
             this.ControlEditor.TabIndex = 0;
+            this.ControlEditor.SelectedIndexChanged += new System.EventHandler(this.ControlEditor_SelectedIndexChanged);
+            this.ControlEditor.TabIndexChanged += new System.EventHandler(this.ControlEditor_TabIndexChanged);
+            // 
+            // panel6
+            // 
+            this.panel6.Controls.Add(this.textBox1);
+            this.panel6.Controls.Add(this.panel10);
+            this.panel6.Controls.Add(this.panel7);
+            this.panel6.Controls.Add(this.panel9);
+            this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel6.Location = new System.Drawing.Point(0, 0);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(33, 324);
+            this.panel6.TabIndex = 5;
+            // 
+            // textBox1
+            // 
+            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.textBox1.Location = new System.Drawing.Point(47, 22);
+            this.textBox1.Multiline = true;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.textBox1.Size = new System.Drawing.Size(0, 302);
+            this.textBox1.TabIndex = 19;
+            // 
+            // panel10
+            // 
+            this.panel10.BackColor = System.Drawing.Color.DarkBlue;
+            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel10.Location = new System.Drawing.Point(47, 0);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(0, 22);
+            this.panel10.TabIndex = 18;
+            // 
+            // panel7
+            // 
+            this.panel7.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.panel7.Controls.Add(this.panel8);
+            this.panel7.Controls.Add(this.btnIrLinea);
+            this.panel7.Controls.Add(this.txtIrLinea);
+            this.panel7.Controls.Add(this.btnDetener);
+            this.panel7.Controls.Add(this.btnPasoArriba);
+            this.panel7.Controls.Add(this.btnPasarPorAlto);
+            this.panel7.Controls.Add(this.btnAccionSiguiente);
+            this.panel7.Controls.Add(this.btnPasoAPaso);
+            this.panel7.Controls.Add(this.btnIniciar);
+            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel7.Location = new System.Drawing.Point(10, 0);
+            this.panel7.Name = "panel7";
+            this.panel7.Size = new System.Drawing.Size(37, 324);
+            this.panel7.TabIndex = 4;
+            // 
+            // panel8
+            // 
+            this.panel8.BackColor = System.Drawing.Color.DarkBlue;
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel8.Location = new System.Drawing.Point(0, 0);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(37, 22);
+            this.panel8.TabIndex = 17;
+            // 
+            // btnIrLinea
+            // 
+            this.btnIrLinea.BackColor = System.Drawing.SystemColors.Control;
+            this.btnIrLinea.Image = global::_Compi2_Proyecto2_201212859.Properties.Resources._11;
+            this.btnIrLinea.Location = new System.Drawing.Point(0, 258);
+            this.btnIrLinea.Name = "btnIrLinea";
+            this.btnIrLinea.Size = new System.Drawing.Size(36, 36);
+            this.btnIrLinea.TabIndex = 16;
+            this.btnIrLinea.UseVisualStyleBackColor = false;
+            // 
+            // txtIrLinea
+            // 
+            this.txtIrLinea.Location = new System.Drawing.Point(0, 238);
+            this.txtIrLinea.Name = "txtIrLinea";
+            this.txtIrLinea.Size = new System.Drawing.Size(36, 20);
+            this.txtIrLinea.TabIndex = 15;
+            // 
+            // btnDetener
+            // 
+            this.btnDetener.BackColor = System.Drawing.SystemColors.Control;
+            this.btnDetener.Image = global::_Compi2_Proyecto2_201212859.Properties.Resources._4;
+            this.btnDetener.Location = new System.Drawing.Point(0, 202);
+            this.btnDetener.Name = "btnDetener";
+            this.btnDetener.Size = new System.Drawing.Size(36, 36);
+            this.btnDetener.TabIndex = 14;
+            this.btnDetener.UseVisualStyleBackColor = false;
+            // 
+            // btnPasoArriba
+            // 
+            this.btnPasoArriba.BackColor = System.Drawing.SystemColors.Control;
+            this.btnPasoArriba.Image = global::_Compi2_Proyecto2_201212859.Properties.Resources._10;
+            this.btnPasoArriba.Location = new System.Drawing.Point(0, 166);
+            this.btnPasoArriba.Name = "btnPasoArriba";
+            this.btnPasoArriba.Size = new System.Drawing.Size(36, 36);
+            this.btnPasoArriba.TabIndex = 13;
+            this.btnPasoArriba.UseVisualStyleBackColor = false;
+            // 
+            // btnPasarPorAlto
+            // 
+            this.btnPasarPorAlto.BackColor = System.Drawing.SystemColors.Control;
+            this.btnPasarPorAlto.Image = global::_Compi2_Proyecto2_201212859.Properties.Resources._8;
+            this.btnPasarPorAlto.Location = new System.Drawing.Point(0, 130);
+            this.btnPasarPorAlto.Name = "btnPasarPorAlto";
+            this.btnPasarPorAlto.Size = new System.Drawing.Size(36, 36);
+            this.btnPasarPorAlto.TabIndex = 12;
+            this.btnPasarPorAlto.UseVisualStyleBackColor = false;
+            // 
+            // btnAccionSiguiente
+            // 
+            this.btnAccionSiguiente.BackColor = System.Drawing.SystemColors.Control;
+            this.btnAccionSiguiente.Image = global::_Compi2_Proyecto2_201212859.Properties.Resources._7;
+            this.btnAccionSiguiente.Location = new System.Drawing.Point(0, 94);
+            this.btnAccionSiguiente.Name = "btnAccionSiguiente";
+            this.btnAccionSiguiente.Size = new System.Drawing.Size(36, 36);
+            this.btnAccionSiguiente.TabIndex = 11;
+            this.btnAccionSiguiente.UseVisualStyleBackColor = false;
+            // 
+            // btnPasoAPaso
+            // 
+            this.btnPasoAPaso.BackColor = System.Drawing.SystemColors.Control;
+            this.btnPasoAPaso.Image = global::_Compi2_Proyecto2_201212859.Properties.Resources._9;
+            this.btnPasoAPaso.Location = new System.Drawing.Point(0, 58);
+            this.btnPasoAPaso.Name = "btnPasoAPaso";
+            this.btnPasoAPaso.Size = new System.Drawing.Size(36, 36);
+            this.btnPasoAPaso.TabIndex = 10;
+            this.btnPasoAPaso.UseVisualStyleBackColor = false;
+            // 
+            // btnIniciar
+            // 
+            this.btnIniciar.BackColor = System.Drawing.SystemColors.Control;
+            this.btnIniciar.Image = global::_Compi2_Proyecto2_201212859.Properties.Resources._2;
+            this.btnIniciar.Location = new System.Drawing.Point(0, 22);
+            this.btnIniciar.Name = "btnIniciar";
+            this.btnIniciar.Size = new System.Drawing.Size(36, 36);
+            this.btnIniciar.TabIndex = 9;
+            this.btnIniciar.UseVisualStyleBackColor = false;
+            // 
+            // panel9
+            // 
+            this.panel9.BackColor = System.Drawing.Color.DarkBlue;
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
+            this.panel9.Location = new System.Drawing.Point(0, 0);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(10, 324);
+            this.panel9.TabIndex = 3;
             // 
             // panel5
             // 
@@ -480,7 +657,7 @@
             this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
             this.panel5.Location = new System.Drawing.Point(995, 23);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(0, 315);
+            this.panel5.Size = new System.Drawing.Size(0, 497);
             this.panel5.TabIndex = 4;
             // 
             // panel1
@@ -597,18 +774,21 @@
             this.iniciarSesiónToolStripMenuItem.Name = "iniciarSesiónToolStripMenuItem";
             this.iniciarSesiónToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.iniciarSesiónToolStripMenuItem.Text = "Iniciar Sesión";
+            this.iniciarSesiónToolStripMenuItem.Click += new System.EventHandler(this.iniciarSesiónToolStripMenuItem_Click);
             // 
             // compartirClaseToolStripMenuItem
             // 
             this.compartirClaseToolStripMenuItem.Name = "compartirClaseToolStripMenuItem";
             this.compartirClaseToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.compartirClaseToolStripMenuItem.Text = "Compartir Clase";
+            this.compartirClaseToolStripMenuItem.Click += new System.EventHandler(this.compartirClaseToolStripMenuItem_Click);
             // 
             // cerrarSesiónToolStripMenuItem
             // 
             this.cerrarSesiónToolStripMenuItem.Name = "cerrarSesiónToolStripMenuItem";
             this.cerrarSesiónToolStripMenuItem.Size = new System.Drawing.Size(159, 22);
             this.cerrarSesiónToolStripMenuItem.Text = "Cerrar Sesión";
+            this.cerrarSesiónToolStripMenuItem.Click += new System.EventHandler(this.cerrarSesiónToolStripMenuItem_Click);
             // 
             // reportesToolStripMenuItem
             // 
@@ -637,150 +817,7 @@
             this.gramaticasToolStripMenuItem.Name = "gramaticasToolStripMenuItem";
             this.gramaticasToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.gramaticasToolStripMenuItem.Text = "Gramaticas";
-            // 
-            // panel6
-            // 
-            this.panel6.Controls.Add(this.textBox1);
-            this.panel6.Controls.Add(this.panel10);
-            this.panel6.Controls.Add(this.panel7);
-            this.panel6.Controls.Add(this.panel9);
-            this.panel6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel6.Location = new System.Drawing.Point(684, 23);
-            this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(311, 315);
-            this.panel6.TabIndex = 5;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(47, 22);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(264, 293);
-            this.textBox1.TabIndex = 19;
-            // 
-            // panel10
-            // 
-            this.panel10.BackColor = System.Drawing.Color.DarkBlue;
-            this.panel10.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel10.Location = new System.Drawing.Point(47, 0);
-            this.panel10.Name = "panel10";
-            this.panel10.Size = new System.Drawing.Size(264, 22);
-            this.panel10.TabIndex = 18;
-            // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.SystemColors.HighlightText;
-            this.panel7.Controls.Add(this.panel8);
-            this.panel7.Controls.Add(this.btnIrLinea);
-            this.panel7.Controls.Add(this.txtIrLinea);
-            this.panel7.Controls.Add(this.btnDetener);
-            this.panel7.Controls.Add(this.btnPasoArriba);
-            this.panel7.Controls.Add(this.btnPasarPorAlto);
-            this.panel7.Controls.Add(this.btnAccionSiguiente);
-            this.panel7.Controls.Add(this.btnPasoAPaso);
-            this.panel7.Controls.Add(this.btnIniciar);
-            this.panel7.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel7.Location = new System.Drawing.Point(10, 0);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(37, 315);
-            this.panel7.TabIndex = 4;
-            // 
-            // panel8
-            // 
-            this.panel8.BackColor = System.Drawing.Color.DarkBlue;
-            this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel8.Location = new System.Drawing.Point(0, 0);
-            this.panel8.Name = "panel8";
-            this.panel8.Size = new System.Drawing.Size(37, 22);
-            this.panel8.TabIndex = 17;
-            // 
-            // btnIrLinea
-            // 
-            this.btnIrLinea.BackColor = System.Drawing.SystemColors.Control;
-            this.btnIrLinea.Image = global::_Compi2_Proyecto2_201212859.Properties.Resources._11;
-            this.btnIrLinea.Location = new System.Drawing.Point(0, 258);
-            this.btnIrLinea.Name = "btnIrLinea";
-            this.btnIrLinea.Size = new System.Drawing.Size(36, 36);
-            this.btnIrLinea.TabIndex = 16;
-            this.btnIrLinea.UseVisualStyleBackColor = false;
-            // 
-            // txtIrLinea
-            // 
-            this.txtIrLinea.Location = new System.Drawing.Point(0, 238);
-            this.txtIrLinea.Name = "txtIrLinea";
-            this.txtIrLinea.Size = new System.Drawing.Size(36, 20);
-            this.txtIrLinea.TabIndex = 15;
-            // 
-            // btnDetener
-            // 
-            this.btnDetener.BackColor = System.Drawing.SystemColors.Control;
-            this.btnDetener.Image = global::_Compi2_Proyecto2_201212859.Properties.Resources._4;
-            this.btnDetener.Location = new System.Drawing.Point(0, 202);
-            this.btnDetener.Name = "btnDetener";
-            this.btnDetener.Size = new System.Drawing.Size(36, 36);
-            this.btnDetener.TabIndex = 14;
-            this.btnDetener.UseVisualStyleBackColor = false;
-            // 
-            // btnPasoArriba
-            // 
-            this.btnPasoArriba.BackColor = System.Drawing.SystemColors.Control;
-            this.btnPasoArriba.Image = global::_Compi2_Proyecto2_201212859.Properties.Resources._10;
-            this.btnPasoArriba.Location = new System.Drawing.Point(0, 166);
-            this.btnPasoArriba.Name = "btnPasoArriba";
-            this.btnPasoArriba.Size = new System.Drawing.Size(36, 36);
-            this.btnPasoArriba.TabIndex = 13;
-            this.btnPasoArriba.UseVisualStyleBackColor = false;
-            // 
-            // btnPasarPorAlto
-            // 
-            this.btnPasarPorAlto.BackColor = System.Drawing.SystemColors.Control;
-            this.btnPasarPorAlto.Image = global::_Compi2_Proyecto2_201212859.Properties.Resources._8;
-            this.btnPasarPorAlto.Location = new System.Drawing.Point(0, 130);
-            this.btnPasarPorAlto.Name = "btnPasarPorAlto";
-            this.btnPasarPorAlto.Size = new System.Drawing.Size(36, 36);
-            this.btnPasarPorAlto.TabIndex = 12;
-            this.btnPasarPorAlto.UseVisualStyleBackColor = false;
-            // 
-            // btnAccionSiguiente
-            // 
-            this.btnAccionSiguiente.BackColor = System.Drawing.SystemColors.Control;
-            this.btnAccionSiguiente.Image = global::_Compi2_Proyecto2_201212859.Properties.Resources._7;
-            this.btnAccionSiguiente.Location = new System.Drawing.Point(0, 94);
-            this.btnAccionSiguiente.Name = "btnAccionSiguiente";
-            this.btnAccionSiguiente.Size = new System.Drawing.Size(36, 36);
-            this.btnAccionSiguiente.TabIndex = 11;
-            this.btnAccionSiguiente.UseVisualStyleBackColor = false;
-            // 
-            // btnPasoAPaso
-            // 
-            this.btnPasoAPaso.BackColor = System.Drawing.SystemColors.Control;
-            this.btnPasoAPaso.Image = global::_Compi2_Proyecto2_201212859.Properties.Resources._9;
-            this.btnPasoAPaso.Location = new System.Drawing.Point(0, 58);
-            this.btnPasoAPaso.Name = "btnPasoAPaso";
-            this.btnPasoAPaso.Size = new System.Drawing.Size(36, 36);
-            this.btnPasoAPaso.TabIndex = 10;
-            this.btnPasoAPaso.UseVisualStyleBackColor = false;
-            // 
-            // btnIniciar
-            // 
-            this.btnIniciar.BackColor = System.Drawing.SystemColors.Control;
-            this.btnIniciar.Image = global::_Compi2_Proyecto2_201212859.Properties.Resources._2;
-            this.btnIniciar.Location = new System.Drawing.Point(0, 22);
-            this.btnIniciar.Name = "btnIniciar";
-            this.btnIniciar.Size = new System.Drawing.Size(36, 36);
-            this.btnIniciar.TabIndex = 9;
-            this.btnIniciar.UseVisualStyleBackColor = false;
-            // 
-            // panel9
-            // 
-            this.panel9.BackColor = System.Drawing.Color.DarkBlue;
-            this.panel9.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel9.Location = new System.Drawing.Point(0, 0);
-            this.panel9.Name = "panel9";
-            this.panel9.Size = new System.Drawing.Size(10, 315);
-            this.panel9.TabIndex = 3;
+            this.gramaticasToolStripMenuItem.Click += new System.EventHandler(this.gramaticasToolStripMenuItem_Click);
             // 
             // contextMenuStrip1
             // 
@@ -804,16 +841,49 @@
             this.crearCarpetaToolStripMenuItem1.Text = "Crear Carpeta";
             this.crearCarpetaToolStripMenuItem1.Click += new System.EventHandler(this.crearCarpetaToolStripMenuItem1_Click);
             // 
+            // nombre
+            // 
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // tipoTS
+            // 
+            this.tipoTS.HeaderText = "Tipo";
+            this.tipoTS.Name = "tipoTS";
+            this.tipoTS.ReadOnly = true;
+            // 
+            // rol
+            // 
+            this.rol.HeaderText = "Rol";
+            this.rol.Name = "rol";
+            this.rol.ReadOnly = true;
+            // 
+            // ambito
+            // 
+            this.ambito.HeaderText = "Ambito";
+            this.ambito.Name = "ambito";
+            this.ambito.ReadOnly = true;
+            // 
+            // tamanio
+            // 
+            this.tamanio.HeaderText = "Tamaño";
+            this.tamanio.Name = "tamanio";
+            this.tamanio.ReadOnly = true;
+            // 
+            // posicion
+            // 
+            this.posicion.HeaderText = "Posicion";
+            this.posicion.Name = "posicion";
+            this.posicion.ReadOnly = true;
+            // 
             // principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(995, 520);
             this.Controls.Add(this.panel4);
-            this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "principal";
@@ -824,7 +894,7 @@
             this.tab1.ResumeLayout(false);
             this.tab1.PerformLayout();
             this.tab2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(tablaErrores)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaErrores)).EndInit();
             this.tabSim.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tablaSimbolos)).EndInit();
             this.tab3.ResumeLayout(false);
@@ -835,14 +905,26 @@
             this.tab5.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
+            this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
+            this.splitContainer1.ResumeLayout(false);
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -904,12 +986,6 @@
         private System.Windows.Forms.ToolStripMenuItem reportesToolStripMenuItem;
         private System.Windows.Forms.TabPage tabSim;
         private System.Windows.Forms.DataGridView tablaSimbolos;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tipoTS;
-        private System.Windows.Forms.DataGridViewTextBoxColumn rol;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ambito;
-        private System.Windows.Forms.DataGridViewTextBoxColumn posicion;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tamanio;
         private System.Windows.Forms.ToolStripMenuItem tablaDeSimbolosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem erroresToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem gramaticasToolStripMenuItem;
@@ -918,7 +994,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn tipo;
         private System.Windows.Forms.DataGridViewTextBoxColumn descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn ruta;
-        public static System.Windows.Forms.DataGridView tablaErrores;
+        private System.Windows.Forms.SplitContainer splitContainer3;
+        private System.Windows.Forms.SplitContainer splitContainer1;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.DataGridView tablaErrores;
+        private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tipoTS;
+        private System.Windows.Forms.DataGridViewTextBoxColumn rol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ambito;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tamanio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn posicion;
     }
 }
 

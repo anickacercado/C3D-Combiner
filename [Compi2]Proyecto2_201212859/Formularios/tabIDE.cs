@@ -15,11 +15,11 @@ namespace _Compi2_Proyecto2_201212859.Formularios
     class tabIDE : TabPage
     {
 
-        IronyFCTB TBContenido;
+        public IronyFCTB TBContenido;
         Label panel;
         bool modificado;
-        string ruta;
-        int tipo;
+        public string ruta;
+        public int tipo;
 
         gramaticaOLC gramatica_olc;
         gramaticaTREE gramatica_tree;

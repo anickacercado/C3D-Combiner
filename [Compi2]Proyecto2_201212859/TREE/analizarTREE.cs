@@ -25,6 +25,7 @@ namespace _Compi2_Proyecto2_201212859.TREE
             if (arbol.Root != null && arbol.ParserMessages.Count == 0)
             {
                 MessageBox.Show("Entrada correcta");
+                arbolTREE.recorrerArbol(arbol.Root);
                 return arbol;
             }
             else

@@ -15,12 +15,15 @@ namespace _Compi2_Proyecto2_201212859
     public partial class principal : Form
     {
         MenuItem myMenuItem = new MenuItem("Show Me");
+
+        public static principal componentes;
         public principal()
         {
             InitializeComponent();
             tablaErrores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             tablaSimbolos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             ListDirectory();
+            principal.componentes = this;
         }
 
         private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
@@ -61,7 +64,6 @@ namespace _Compi2_Proyecto2_201212859
                 directoryNode.Nodes.Add(new TreeNode(file.Name));
             return directoryNode;
         }
-
 
 
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
@@ -105,7 +107,7 @@ namespace _Compi2_Proyecto2_201212859
 
         public void MensajeCrearDirectorio()
         {
-            CrearCarpeta testDialog = new CrearCarpeta();
+            crearCarpeta testDialog = new crearCarpeta();
             if (testDialog.ShowDialog(this) == DialogResult.OK)
             {
                 crearDirectorio(testDialog.textBox1.Text);
@@ -130,13 +132,71 @@ namespace _Compi2_Proyecto2_201212859
         }
 
         public static void insertarError(string linea, string columna, string tipo, string descripcion, string ruta) {
-            tablaErrores.Rows.Insert(0,linea,columna,tipo,descripcion,ruta);
+            componentes.tablaErrores.Rows.Insert(0,linea,columna,tipo,descripcion,ruta);
         }
 
         private void compilarToolStripMenuItem_Click(object sender, EventArgs e)
         {
             limpiarTablaError();
             ControlEditor.analizar();
+        }
+
+     
+        private void compartirClaseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tabIDE tabAux = (tabIDE)ControlEditor.SelectedTab;
+            if (repositorio.usuario != "")
+            {
+                if (tabAux != null)
+                {
+                    if (tabAux.tipo == 2)
+                    {
+                        DateTime dt = DateTime.Now;
+                        string fecha = dt.ToString("yyyy-MM-dd");
+                        repositorio.nombre = tabAux.Text;
+                        repositorio.autor = repositorio.usuario;
+                        repositorio.fecha_creacion = fecha;
+                        repositorio.fecha_modificacion = fecha;
+                        repositorio.codigo = tabAux.TBContenido.Text;
+                        repositorio.ruta = tabAux.ruta.Replace("\\", "\\\\");
+                        compartirClase cla = new compartirClase();
+                        cla.Show();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Debe seleccionar TAB de Gramatica TREE");
+                    }
+                }
+                else { MessageBox.Show("Debe seleccionar archivo"); }
+            }
+            else { MessageBox.Show("Debe iniciar sesión primero"); }
+        }
+
+        private void ControlEditor_TabIndexChanged(object sender, EventArgs e)
+        {
+     
+        }
+
+        private void ControlEditor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+         
+        }
+
+        private void iniciarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            login l = new login();
+            l.Show();
+        }
+
+        private void cerrarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            repositorio.cerrarSesion();
+        }
+
+        private void gramaticasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            reporteGramatica rg = new reporteGramatica();
+            rg.Show();
         }
     }
 }
