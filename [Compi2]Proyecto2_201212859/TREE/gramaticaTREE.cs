@@ -175,7 +175,6 @@ namespace _Compi2_Proyecto2_201212859.TREE
             var HACER_MIENTRAS = new NonTerminal("HACER_MIENTRAS");
             var REPETIR = new NonTerminal("REPETIR");           
             var AUMENTO_DECREMENTO = new NonTerminal("AUMENTO_DECREMENTO");
-            var F = new NonTerminal("F");
             var LLAMADA_METODO = new NonTerminal("LLAMADA_METODO");
             var DIMENSION = new NonTerminal("DIMENSION");
             var LISTA_DIMENSION = new NonTerminal("LISTA_DIMENSION");
@@ -199,6 +198,7 @@ namespace _Compi2_Proyecto2_201212859.TREE
             var DIMENSION_METODO = new NonTerminal("DIMENSION_METODO");
             var HIJO = new NonTerminal("HIJO");
             var LISTA_E_E = new NonTerminal("LISTA_E_E");
+            var LLAMADA_OBJETO = new NonTerminal("LLAMADA_OBJETO");
 
 
 
@@ -413,22 +413,24 @@ namespace _Compi2_Proyecto2_201212859.TREE
                 | t_par_abre + E + E + t_div + t_par_cierra
                 | t_par_abre + E + E + t_potencia + t_par_cierra
                 | t_par_abre + E + t_menos + t_par_cierra
-                | er_casteo + t_cor_abre + E + t_cor_cierra                 /*casteo*/
-                | er_entero
                 | er_decimal
+                | er_entero             
                 | er_caracter
                 | er_cadena
                 | er_booleano
+                | LLAMADA_OBJETO
+                | t_nuevo + er_id + t_cor_abre + LISTA_E_E + t_cor_cierra
+                | er_casteo + t_cor_abre + E + t_cor_cierra    /*casteo*/
+                ;
 
-                | OBJETO + er_id
+
+            LLAMADA_OBJETO.Rule = OBJETO + er_id
                 | OBJETO + er_id + t_cor_abre + LISTA_E_E + t_cor_cierra
                 | OBJETO + er_id + LISTA_DIMENSION
                 | er_id
                 | er_id + t_cor_abre + LISTA_E_E + t_cor_cierra
                 | er_id + LISTA_DIMENSION
-                | t_nuevo + er_id + t_cor_abre + LISTA_E_E + t_cor_cierra
                 ;
-
 
             OBJETO.Rule = MakePlusRule(OBJETO, HIJO)
                 ;
@@ -459,7 +461,7 @@ namespace _Compi2_Proyecto2_201212859.TREE
             RegisterOperators(8, Associativity.Left, "pow");
             RegisterOperators(9, numero, er_caracter, er_cadena, er_booleano);
             RegisterOperators(10, er_id);
-            MarkPunctuation(";", ",", ".", ":");
+            MarkPunctuation(";", ",", ".", ":", "(", ")", "[", "]", "{", "}");
             Root = INICIO;
         }
 

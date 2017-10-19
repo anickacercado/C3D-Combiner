@@ -62,6 +62,11 @@
     <Compile Include="codigo3D\ambito.cs" />
     <Compile Include="codigo3D\clase.cs" />
     <Compile Include="codigo3D\expresion.cs" />
+    <Compile Include="codigo3D\llamadaArreglo.cs" />
+    <Compile Include="codigo3D\llamadaArregloMetodo.cs" />
+    <Compile Include="codigo3D\llamadaMetodo.cs" />
+    <Compile Include="codigo3D\llamadaObjeto.cs" />
+    <Compile Include="codigo3D\nuevo.cs" />
     <Compile Include="codigo3D\simbolo.cs" />
     <Compile Include="Formularios\compartirClase.cs">
       <SubType>Form</SubType>

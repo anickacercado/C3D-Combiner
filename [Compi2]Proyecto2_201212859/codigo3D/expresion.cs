@@ -13,7 +13,9 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
         public double DECIMAL;
         public String CADENA;
         public bool BOOL;
-        public char CHAR;
+        public char CARACTER;
+        public llamadaObjeto llamadaObjeto;
+        public nuevo nuevo;
         public expresion expIzq;
         public expresion expDer;
         public String tipo;
@@ -117,6 +119,9 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             this.DECIMAL = nodo.DECIMAL;
             this.CADENA = nodo.CADENA;
             this.BOOL = nodo.BOOL;
+            this.CARACTER = nodo.CARACTER;
+            this.llamadaObjeto = nodo.llamadaObjeto;
+            this.nuevo = nodo.nuevo;
             this.expIzq = nodo.expIzq;
             this.expDer = nodo.expDer;
             this.tipo = nodo.tipo;
@@ -131,12 +136,14 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             this.tipo = tipo;
             this.fila = fila;
             this.columna = columna;
+
             if (tipo.Equals("ENTERO"))
             {
                 this.ENTERO = Int32.Parse(valor.ToString());
+                this.DECIMAL = Double.Parse(valor.ToString());
                 this.CADENA = valor.ToString();
             }
-            else if (tipo.Equals("DOUBLE"))
+            else if (tipo.Equals("DECIMAL"))
             {
                 this.DECIMAL = Double.Parse(valor.ToString());
                 this.CADENA = valor.ToString();
@@ -144,11 +151,12 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             else if (tipo.Equals("CADENA"))
             {
                 this.CADENA = (String)valor;
+                this.CADENA = this.CADENA.Substring(1, this.CADENA.Length - 2);
             }
-            else if (tipo.Equals("BOOL"))
+            else if (tipo.Equals("BOOLEANO"))
             {
                 this.CADENA = valor.ToString();
-                if (this.CADENA.Equals("true"))
+                if (this.CADENA.ToUpper().Equals("TRUE"))
                 {
                     this.BOOL = true;
                     this.ENTERO = 1;
@@ -161,124 +169,140 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
                     this.DECIMAL = 0;
                 }
             }
-            else if (tipo.Equals("CHAR"))
+            else if (tipo.Equals("CARACTER"))
             {
-                    //Agregar Acciones
+                this.CADENA = valor.ToString();
+                this.CADENA = this.CADENA.Substring(1, this.CADENA.Length - 2);
+                this.CARACTER = this.CADENA[0];
+                this.ENTERO = this.CARACTER;
+            }
+            else if (tipo.Equals("LLAMADA_OBJETO"))
+            {
+                this.llamadaObjeto = (llamadaObjeto)valor;
+
+            }
+            else if (tipo.Equals("NUEVO"))
+            {
+                this.nuevo = (nuevo)valor;
             }
         }
 
-    private expresion resCondicion(expresion nodo)
-{
-    expresion temp = new expresion(null, null, "ERROR", "ERROR", nodo.fila, nodo.columna, null);
-    expresion expIzq = nodo.expIzq;
-    expresion expDer = nodo.expDer;
-
-    if (nodo.expIzq != null)
-    {
-        expIzq = nodo.expIzq.resCondicion();
-    }
-    if (nodo.expDer != null)
-    {
-        expDer = nodo.expDer.resCondicion();
-    }
-    if (nodo.tipo.Equals("+"))
-    {
-        temp = resSuma(expIzq, expDer);
-    }
-    else if (nodo.tipo.Equals("-"))
-    {
-        if (nodo.expIzq != null)
+        private expresion resCondicion(expresion nodo)
         {
-            temp = resResta(expIzq, expDer);
-        }
-        else
-        {
-            temp = resResta(expDer);
-        }
-    }
-    else if (nodo.tipo.Equals("*"))
-    {
-        temp = resMultiplicacion(expIzq, expDer);
-    }
-    else if (nodo.tipo.Equals("/"))
-    {
-        temp = resDivision(expIzq, expDer);
-    }
-    else if (nodo.tipo.Equals("^"))
-    {
-        temp = resPotencia(expIzq, expDer);
-    }
-    else if (nodo.tipo.Equals("++"))
-    {
-        temp = resAumento(expIzq);
-    }
-    else if (nodo.tipo.Equals("--"))
-    {
-        temp = resDecremento(expIzq);
-    }
-    else if (nodo.tipo.Equals(">"))
-    {
-        temp = resMayor(expIzq, expDer);
-    }
-    else if (nodo.tipo.Equals("<"))
-    {
-        temp = resMenor(expIzq, expDer);
-    }
-    else if (nodo.tipo.Equals(">="))
-    {
-        temp = resMayorIgual(expIzq, expDer);
-    }
-    else if (nodo.tipo.Equals("<="))
-    {
-        temp = resMenorIgual(expIzq, expDer);
-    }
-    else if (nodo.tipo.Equals("=="))
-    {
-        temp = resIgual(expIzq, expDer);
-    }
-    else if (nodo.tipo.Equals("!="))
-    {
-        temp = resDiferente(expIzq, expDer);
-    }
-    else if (nodo.tipo.Equals("OR"))
-    {
-        temp = resOr(expIzq, expDer);
-    }
-    else if (nodo.tipo.Equals("AND"))
-    {
-        temp = resAnd(expIzq, expDer);
-    }
-    else if (nodo.tipo.Equals("!"))
-    {
-        temp = resNot(expDer);
-    }
-    else if (nodo.tipo.Equals("ENTERO"))
-    {
-        temp = new expresion(nodo);
-    }
-    else if (nodo.tipo.Equals("DOUBLE"))
-    {
-        temp = new expresion(nodo);
-    }
-    else if (nodo.tipo.Equals("CADENA"))
-    {
-        temp = new expresion(nodo);
-    }
-    else if (nodo.tipo.Equals("BOOL"))
-    {
-        temp = new expresion(nodo);
-    }
-    else if (nodo.tipo.Equals("CHAR"))
-    {   
-        //Agregar Acciones
-    }
-    return temp;
-}
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", nodo.fila, nodo.columna, null);
+            expresion expIzq = nodo.expIzq;
+            expresion expDer = nodo.expDer;
 
-public expresion resCondicion()
-{
-    return resCondicion(this);
-}
+            if (nodo.expIzq != null)
+            {
+                expIzq = nodo.expIzq.resCondicion();
+            }
+            if (nodo.expDer != null)
+            {
+                expDer = nodo.expDer.resCondicion();
+            }
+            if (nodo.tipo.Equals("+"))
+            {
+                temp = resSuma(expIzq, expDer);
+            }
+            else if (nodo.tipo.Equals("-"))
+            {
+                if (nodo.expIzq != null)
+                {
+                    temp = resResta(expIzq, expDer);
+                }
+                else
+                {
+                    temp = resResta(expDer);
+                }
+            }
+            else if (nodo.tipo.Equals("*"))
+            {
+                temp = resMultiplicacion(expIzq, expDer);
+            }
+            else if (nodo.tipo.Equals("/"))
+            {
+                temp = resDivision(expIzq, expDer);
+            }
+            else if (nodo.tipo.Equals("^") || nodo.tipo.ToUpper().Equals("POW"))
+            {
+                temp = resPotencia(expIzq, expDer);
+            }
+            else if (nodo.tipo.Equals("++"))
+            {
+                temp = resAumento(expIzq);
+            }
+            else if (nodo.tipo.Equals("--"))
+            {
+                temp = resDecremento(expIzq);
+            }
+            else if (nodo.tipo.Equals(">"))
+            {
+                temp = resMayor(expIzq, expDer);
+            }
+            else if (nodo.tipo.Equals("<"))
+            {
+                temp = resMenor(expIzq, expDer);
+            }
+            else if (nodo.tipo.Equals(">="))
+            {
+                temp = resMayorIgual(expIzq, expDer);
+            }
+            else if (nodo.tipo.Equals("<="))
+            {
+                temp = resMenorIgual(expIzq, expDer);
+            }
+            else if (nodo.tipo.Equals("=="))
+            {
+                temp = resIgual(expIzq, expDer);
+            }
+            else if (nodo.tipo.Equals("!="))
+            {
+                temp = resDiferente(expIzq, expDer);
+            }
+            else if (nodo.tipo.ToUpper().Equals("OR") || nodo.tipo.Equals("||"))
+            {
+                temp = resOr(expIzq, expDer);
+            }
+            else if (nodo.tipo.ToUpper().Equals("XOR") || nodo.tipo.Equals("??"))
+            {
+                temp = resXor(expIzq, expDer);
+            }
+            else if (nodo.tipo.ToUpper().Equals("AND") || nodo.tipo.Equals("&&"))
+            {
+                temp = resAnd(expIzq, expDer);
+            }
+            else if (nodo.tipo.ToUpper().Equals("NOT") || nodo.tipo.Equals("!"))
+            {
+                temp = resNot(expDer);
+            }
+            else if (nodo.tipo.Equals("ENTERO"))
+            {
+                temp = new expresion(nodo);
+            }
+            else if (nodo.tipo.Equals("DECIMAL"))
+            {
+                temp = new expresion(nodo);
+            }
+            else if (nodo.tipo.Equals("CADENA"))
+            {
+                temp = new expresion(nodo);
+            }
+            else if (nodo.tipo.Equals("BOOLEANO"))
+            {
+                temp = new expresion(nodo);
+            }
+            else if (nodo.tipo.Equals("CHAR"))
+            {
+                //Agregar Acciones
+            }
+            return temp;
+        }
+
+        public expresion resCondicion()
+        {
+            return resCondicion(this);
+        }
 
         public expresion resMayor(expresion expIzq, expresion expDer)
         {
@@ -288,756 +312,992 @@ public expresion resCondicion()
                 switch (expDer.tipo)
                 {
                     case "ENTERO":
-                        temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO > expDer.ENTERO);
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO > expDer.ENTERO);
                         break;
-                    case "DOUBLE":
-                        temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO > expDer.DECIMAL);
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO > expDer.DECIMAL);
                         break;
-                    case "BOOL":
-                        temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO > expDer.ENTERO);
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO > expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO > expDer.CARACTER);
                         break;
                     default:
                         memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " > " + expDer.tipo, fila, columna);
                         break;
                 }
             }
-            else if (expIzq.tipo.Equals("DOUBLE"))
+            else if (expIzq.tipo.Equals("DECIMAL"))
             {
                 switch (expDer.tipo)
                 {
                     case "ENTERO":
-                        temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.DECIMAL > expDer.ENTERO);
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL > expDer.ENTERO);
                         break;
-                    case "DOUBLE":
-                        temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.DECIMAL > expDer.DECIMAL);
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL > expDer.DECIMAL);
                         break;
-                    case "BOOL":
-                        temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.DECIMAL > expDer.ENTERO);
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL > expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL > expDer.CARACTER);
                         break;
                     default:
                         memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " > " + expDer.tipo, fila, columna);
                         break;
                 }
             }
-            else if (expIzq.tipo.Equals("BOOL"))
+            else if (expIzq.tipo.Equals("BOOLEANO"))
             {
                 switch (expDer.tipo)
                 {
                     case "ENTERO":
-                        temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO > expDer.ENTERO);
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO > expDer.ENTERO);
                         break;
-                    case "DOUBLE":
-                        temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO > expDer.DECIMAL);
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO > expDer.DECIMAL);
                         break;
-                    case "BOOL":
-                        temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO > expDer.ENTERO);
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO > expDer.ENTERO);
                         break;
                     default:
                         memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " > " + expDer.tipo, fila, columna);
                         break;
                 }
             }
-    return temp;
-}
+            else if (expIzq.tipo.Equals("CARACTER"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER > expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER > expDer.DECIMAL);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER > expDer.CARACTER);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " > " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            return temp;
+        }
 
-public expresion resMenor(expresion expIzq, expresion expDer)
-{
-    expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-    if (expIzq.tipo.Equals("ENTERO"))
-    {
-        switch (expDer.tipo)
+        public expresion resMenor(expresion expIzq, expresion expDer)
         {
-            case "ENTERO":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO < expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO < expDer.DECIMAL);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO < expDer.ENTERO);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " < " + expDer.tipo, fila, columna);
-                break;
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            if (expIzq.tipo.Equals("ENTERO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO < expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO < expDer.DECIMAL);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO < expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO < expDer.CARACTER);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " < " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("DECIMAL"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL < expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL < expDer.DECIMAL);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL < expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL < expDer.CARACTER);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " < " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("BOOLEANO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO < expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO < expDer.DECIMAL);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO < expDer.ENTERO);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " < " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("CARACTER"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER < expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER < expDer.DECIMAL);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER < expDer.CARACTER);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " > " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            return temp;
         }
-    }
-    else if (expIzq.tipo.Equals("DOUBLE"))
-    {
-        switch (expDer.tipo)
-        {
-            case "ENTERO":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.DECIMAL < expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.DECIMAL < expDer.DECIMAL);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.DECIMAL < expDer.ENTERO);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " < " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    else if (expIzq.tipo.Equals("BOOL"))
-    {
-        switch (expDer.tipo)
-        {
-            case "ENTERO":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO < expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO < expDer.DECIMAL);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO < expDer.ENTERO);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " < " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    return temp;
-}
 
-public expresion resIgual(expresion expIzq, expresion expDer)
-{
-    expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-    if (expIzq.tipo.Equals("ENTERO"))
-    {
-        switch (expDer.tipo)
+        public expresion resIgual(expresion expIzq, expresion expDer)
         {
-            case "ENTERO":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO == expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO == expDer.DECIMAL);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO == expDer.ENTERO);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " = " + expDer.tipo, fila, columna);
-                break;
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            if (expIzq.tipo.Equals("ENTERO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO == expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO == expDer.DECIMAL);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO == expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO == expDer.CARACTER);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " == " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("DECIMAL"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL == expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL == expDer.DECIMAL);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL == expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL == expDer.CARACTER);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " == " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("CADENA"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "CADENA":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CADENA.Equals(expDer.CADENA));
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CADENA.Equals(expDer.CARACTER.ToString()));
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " == " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("BOOLEANO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO == expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO == expDer.DECIMAL);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.BOOL == expDer.BOOL);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " == " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("CARACTER"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER == expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER == expDer.DECIMAL);
+                        break;
+                    case "CADENA":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER == expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER.ToString().Equals(expDer.CADENA));
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " == " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            return temp;
         }
-    }
-    else if (expIzq.tipo.Equals("DOUBLE"))
-    {
-        switch (expDer.tipo)
-        {
-            case "ENTERO":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.DECIMAL == expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.DECIMAL == expDer.DECIMAL);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.DECIMAL == expDer.ENTERO);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " = " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    else if (expIzq.tipo.Equals("CADENA"))
-    {
-        switch (expDer.tipo)
-        {
-            case "CADENA":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.CADENA.Equals(expDer.CADENA));
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " = " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    else if (expIzq.tipo.Equals("BOOL"))
-    {
-        switch (expDer.tipo)
-        {
-            case "ENTERO":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO == expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO == expDer.DECIMAL);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.BOOL == expDer.BOOL);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " = " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    return temp;
-}
 
-public expresion resDiferente(expresion expIzq, expresion expDer)
-{
-    expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-    if (expIzq.tipo.Equals("ENTERO"))
-    {
-        switch (expDer.tipo)
+        public expresion resDiferente(expresion expIzq, expresion expDer)
         {
-            case "ENTERO":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO != expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO != expDer.DECIMAL);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO != expDer.ENTERO);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " != " + expDer.tipo, fila, columna);
-                break;
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            if (expIzq.tipo.Equals("ENTERO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO != expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO != expDer.DECIMAL);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO != expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO != expDer.CARACTER);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " != " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("DECIMAL"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL != expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL != expDer.DECIMAL);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL != expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL != expDer.CARACTER);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " != " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("CADENA"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "CADENA":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, !expIzq.CADENA.Equals(expDer.CADENA));
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, !expIzq.CADENA.Equals(expDer.CARACTER.ToString()));
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " != " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("BOOLEANO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO != expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO != expDer.DECIMAL);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.BOOL != expDer.BOOL);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " != " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("CARACTER"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER != expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER != expDer.DECIMAL);
+                        break;
+                    case "CADENA":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER != expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, !expIzq.CARACTER.ToString().Equals(expDer.CADENA));
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " != " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            return temp;
         }
-    }
-    else if (expIzq.tipo.Equals("DOUBLE"))
-    {
-        switch (expDer.tipo)
-        {
-            case "ENTERO":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.DECIMAL != expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.DECIMAL != expDer.DECIMAL);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.DECIMAL != expDer.ENTERO);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " != " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    else if (expIzq.tipo.Equals("CADENA"))
-    {
-        switch (expDer.tipo)
-        {
-            case "CADENA":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, !expIzq.CADENA.Equals(expDer.CADENA));
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " != " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    else if (expIzq.tipo.Equals("BOOL"))
-    {
-        switch (expDer.tipo)
-        {
-            case "ENTERO":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO != expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.ENTERO != expDer.DECIMAL);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.BOOL != expDer.BOOL);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " != " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    return temp;
-}
 
-public expresion resMayorIgual(expresion expIzq, expresion expDer)
-{
-    expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-    expresion mayor = resMayor(expIzq, expDer);
-    expresion igual = resIgual(expIzq, expDer);
-    if (mayor.tipo.Equals("BOOL"))
-    {
-        switch (igual.tipo)
+        public expresion resMayorIgual(expresion expIzq, expresion expDer)
         {
-            case "BOOL":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, mayor.BOOL || igual.BOOL);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " >= " + expDer.tipo, fila, columna);
-                break;
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            expresion mayor = resMayor(expIzq, expDer);
+            expresion igual = resIgual(expIzq, expDer);
+            if (mayor.tipo.Equals("BOOLEANO"))
+            {
+                switch (igual.tipo)
+                {
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, mayor.BOOL || igual.BOOL);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " >= " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            return temp;
         }
-    }
-    return temp;
-}
 
-public expresion resMenorIgual(expresion expIzq, expresion expDer)
-{
-    expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-    expresion menor = resMenor(expIzq, expDer);
-    expresion igual = resIgual(expIzq, expDer);
-    if (menor.tipo.Equals("BOOL"))
-    {
-        switch (igual.tipo)
+        public expresion resMenorIgual(expresion expIzq, expresion expDer)
         {
-            case "BOOL":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, menor.BOOL || igual.BOOL);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " <= " + expDer.tipo, fila, columna);
-                break;
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            expresion menor = resMenor(expIzq, expDer);
+            expresion igual = resIgual(expIzq, expDer);
+            if (menor.tipo.Equals("BOOLEANO"))
+            {
+                switch (igual.tipo)
+                {
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, menor.BOOL || igual.BOOL);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " <= " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            return temp;
         }
-    }
-    return temp;
-}
 
-public expresion resOr(expresion expIzq, expresion expDer)
-{
-    expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-    if (expIzq.tipo.Equals("BOOL"))
-    {
-        switch (expDer.tipo)
+        public expresion resOr(expresion expIzq, expresion expDer)
         {
-            case "BOOL":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.BOOL || expDer.BOOL);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " || " + expDer.tipo, fila, columna);
-                break;
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            if (expIzq.tipo.Equals("BOOLEANO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.BOOL || expDer.BOOL);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " || " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            return temp;
         }
-    }
-    return temp;
-}
 
-public expresion resAnd(expresion expIzq, expresion expDer)
-{
-    expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-    if (expIzq.tipo.Equals("BOOL"))
-    {
-        switch (expDer.tipo)
+        public expresion resAnd(expresion expIzq, expresion expDer)
         {
-            case "BOOL":
-                temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, expIzq.BOOL && expDer.BOOL);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " && " + expDer.tipo, fila, columna);
-                break;
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            if (expIzq.tipo.Equals("BOOLEANO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.BOOL && expDer.BOOL);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " && " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            return temp;
         }
-    }
-    return temp;
-}
 
-public expresion resNot(expresion expDer)
-{
-    expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-    if (expDer.tipo.Equals("BOOL"))
-    {
-        temp = new expresion(null, null, "BOOL", "BOOL", fila, columna, !expDer.BOOL);
-    }
-    else
-    {
-        memoria.addError("ERROR SEMANTICO ", "!" + expDer.tipo, fila, columna);
-    }
-    return temp;
-}
+        public expresion resXor(expresion expIzq, expresion expDer)
+        {
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            if (expIzq.tipo.Equals("BOOLEANO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, (!expIzq.BOOL && expDer.BOOL) || (expIzq.BOOL && !expDer.BOOL));
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " && " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            return temp;
+        }
 
-public expresion resSuma(expresion expIzq, expresion expDer)
-{
-    expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-    if (expIzq.tipo.Equals("ENTERO"))
-    {
-        switch (expDer.tipo)
+        public expresion resNot(expresion expDer)
         {
-            case "ENTERO":
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.ENTERO + expDer.DECIMAL);
-                break;
-            case "CADENA":
-                temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.ENTERO.ToString() + expDer.CADENA);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.ENTERO);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
-                break;
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            if (expDer.tipo.Equals("BOOLEANO"))
+            {
+                temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, !expDer.BOOL);
+            }
+            else
+            {
+                memoria.addError("ERROR SEMANTICO ", "!" + expDer.tipo, fila, columna);
+            }
+            return temp;
         }
-    }
-    else if (expIzq.tipo.Equals("DOUBLE"))
-    {
-        switch (expDer.tipo)
-        {
-            case "ENTERO":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.DECIMAL + expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.DECIMAL + expDer.DECIMAL);
-                break;
-            case "CADENA":
-                temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.DECIMAL.ToString() + expDer.CADENA);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.DECIMAL + expDer.ENTERO);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    else if (expIzq.tipo.Equals("CADENA"))
-    {
-        switch (expDer.tipo)
-        {
-            case "ENTERO":
-                temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.ENTERO.ToString());
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.DECIMAL.ToString());
-                break;
-            case "CADENA":
-                temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.CADENA);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    else if (expIzq.tipo.Equals("BOOL"))
-    {
-        switch (expDer.tipo)
-        {
-            case "ENTERO":
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.ENTERO + expDer.DECIMAL);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.BOOL || expDer.BOOL);
-                break;
-            case "CADENA":
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.CADENA + expDer.CADENA);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    else if (expIzq.tipo.Equals("DATE"))
-    {
-        switch (expDer.tipo)
-        {
-            case "CADENA":
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.CADENA + expDer.CADENA);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    else if (expIzq.tipo.Equals("DATETIME"))
-    {
-        switch (expDer.tipo)
-        {
-            case "CADENA":
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.CADENA + expDer.CADENA);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    return temp;
-}
 
-public expresion resResta(expresion expDer)
-{
-    expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-    if (expDer.tipo.Equals("ENTERO"))
-    {
-        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, -expDer.ENTERO);
-    }
-    else if (expDer.tipo.Equals("DOUBLE"))
-    {
-        temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, -expDer.DECIMAL);
-    }
-    else if (expDer.tipo.Equals("BOOL"))
-    {
-        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, -expDer.ENTERO);
-    }
-    else
-    {
-        memoria.addError("ERROR SEMANTICO", expDer.tipo + " - " + expDer.tipo, fila, columna);
-    }
-    return temp;
-}
+        public expresion resSuma(expresion expIzq, expresion expDer)
+        {
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            if (expIzq.tipo.Equals("ENTERO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO + expDer.DECIMAL);
+                        break;
+                    case "CADENA":
+                        temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.ENTERO.ToString() + expDer.CADENA);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.CARACTER);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("DECIMAL"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + expDer.DECIMAL);
+                        break;
+                    case "CADENA":
+                        temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.DECIMAL.ToString() + expDer.CADENA);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + expDer.CARACTER);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("CADENA"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.ENTERO.ToString());
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.DECIMAL.ToString());
+                        break;
+                    case "CADENA":
+                        temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.CADENA);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.CADENA);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("BOOLEANO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO + expDer.DECIMAL);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.BOOL || expDer.BOOL);
+                        break;
+                    case "CADENA":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.CADENA + expDer.CADENA);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("CARACTER"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.CARACTER + expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.CARACTER + expDer.DECIMAL);
+                        break;
+                    case "CADENA":
+                        temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.CADENA);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.CADENA);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            return temp;
+        }
 
-public expresion resResta(expresion expIzq, expresion expDer)
-{
-    expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-    if (expIzq.tipo.Equals("ENTERO"))
-    {
-        switch (expDer.tipo)
+        public expresion resResta(expresion expDer)
         {
-            case "ENTERO":
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.ENTERO - expDer.DECIMAL);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - expDer.ENTERO);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " - " + expDer.tipo, fila, columna);
-                break;
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            if (expDer.tipo.Equals("ENTERO"))
+            {
+                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, -expDer.ENTERO);
+            }
+            else if (expDer.tipo.Equals("DECIMAL"))
+            {
+                temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, -expDer.DECIMAL);
+            }
+            else if (expDer.tipo.Equals("BOOLEANO"))
+            {
+                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, -expDer.ENTERO);
+            }
+            else if (expDer.tipo.Equals("CARACTER"))
+            {
+                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, -expDer.CARACTER);
+            }
+            else
+            {
+                memoria.addError("ERROR SEMANTICO", expDer.tipo + " - " + expDer.tipo, fila, columna);
+            }
+            return temp;
         }
-    }
-    else if (expIzq.tipo.Equals("DOUBLE"))
-    {
-        switch (expDer.tipo)
-        {
-            case "ENTERO":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.DECIMAL - expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.DECIMAL - expDer.DECIMAL);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.DECIMAL - expDer.ENTERO);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " - " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    else if (expIzq.tipo.Equals("BOOL"))
-    {
-        switch (expDer.tipo)
-        {
-            case "ENTERO":
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.ENTERO - expDer.DECIMAL);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " - " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    return temp;
-}
 
-public expresion resMultiplicacion(expresion expIzq, expresion expDer)
-{
-    expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-    if (expIzq.tipo.Equals("ENTERO"))
-    {
-        switch (expDer.tipo)
+        public expresion resResta(expresion expIzq, expresion expDer)
         {
-            case "ENTERO":
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO * expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.ENTERO * expDer.DECIMAL);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO * expDer.ENTERO);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " * " + expDer.tipo, fila, columna);
-                break;
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            if (expIzq.tipo.Equals("ENTERO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - expDer.DECIMAL);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - expDer.CARACTER);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " - " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("DECIMAL"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL - expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL - expDer.DECIMAL);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL - expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL - expDer.CARACTER);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " - " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("BOOLEANO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO - expDer.DECIMAL);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " - " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("CARACTER"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.CARACTER - expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.CARACTER - expDer.DECIMAL);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " - " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            return temp;
         }
-    }
-    else if (expIzq.tipo.Equals("DOUBLE"))
-    {
-        switch (expDer.tipo)
-        {
-            case "ENTERO":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.DECIMAL * expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.DECIMAL * expDer.DECIMAL);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.DECIMAL * expDer.ENTERO);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " * " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    else if (expIzq.tipo.Equals("BOOL"))
-    {
-        switch (expDer.tipo)
-        {
-            case "ENTERO":
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO * expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.ENTERO * expDer.DECIMAL);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.BOOL && expDer.BOOL);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " * " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    return temp;
-}
 
-public expresion resDivision(expresion expIzq, expresion expDer)
-{
-    expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-    if (expIzq.tipo.Equals("ENTERO"))
-    {
-        switch (expDer.tipo)
+        public expresion resMultiplicacion(expresion expIzq, expresion expDer)
         {
-            case "ENTERO":
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO / expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.ENTERO / expDer.DECIMAL);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.ENTERO / expDer.ENTERO);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " / " + expDer.tipo, fila, columna);
-                break;
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            if (expIzq.tipo.Equals("ENTERO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO * expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO * expDer.DECIMAL);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO * expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO * expDer.CARACTER);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " * " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("DECIMAL"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL * expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL * expDer.DECIMAL);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL * expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL * expDer.CARACTER);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " * " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("BOOLEANO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO * expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO * expDer.DECIMAL);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.BOOL && expDer.BOOL);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " * " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("CARACTER"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.CARACTER * expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.CARACTER * expDer.DECIMAL);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " - " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            return temp;
         }
-    }
-    else if (expIzq.tipo.Equals("DOUBLE"))
-    {
-        switch (expDer.tipo)
-        {
-            case "ENTERO":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.DECIMAL / expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.DECIMAL / expDer.DECIMAL);
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.DECIMAL / expDer.ENTERO);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " / " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    else if (expIzq.tipo.Equals("BOOL"))
-    {
-        switch (expDer.tipo)
-        {
-            case "ENTERO":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.ENTERO / expDer.ENTERO);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.ENTERO / expDer.DECIMAL);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " / " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    return temp;
-}
 
-public expresion resPotencia(expresion expIzq, expresion expDer)
-{
-    expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-    if (expIzq.tipo.Equals("ENTERO"))
-    {
-        switch (expDer.tipo)
+        public expresion resDivision(expresion expIzq, expresion expDer)
         {
-            case "ENTERO":
-                double p = Math.Pow(expIzq.ENTERO, expDer.ENTERO);
-                int v = (int)p;
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, v);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, Math.Pow(expIzq.ENTERO, expDer.DECIMAL));
-                break;
-            case "BOOL":
-                double pb = Math.Pow(expIzq.ENTERO, expDer.ENTERO);
-                int vb = (int)pb;
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, vb);
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ^ " + expDer.tipo, fila, columna);
-                break;
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            if (expIzq.tipo.Equals("ENTERO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO / expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO / expDer.DECIMAL);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO / expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO / expDer.CARACTER);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " / " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("DECIMAL"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL / expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL / expDer.DECIMAL);
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL / expDer.ENTERO);
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO / expDer.CARACTER);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " / " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("BOOLEANO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO / expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO / expDer.DECIMAL);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " / " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("CARACTER"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.CARACTER / expDer.ENTERO);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.CARACTER / expDer.DECIMAL);
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " - " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            return temp;
         }
-    }
-    else if (expIzq.tipo.Equals("DOUBLE"))
-    {
-        switch (expDer.tipo)
-        {
-            case "ENTERO":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, Math.Pow(expIzq.DECIMAL, expDer.ENTERO));
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, Math.Pow(expIzq.DECIMAL, expDer.DECIMAL));
-                break;
-            case "BOOL":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, Math.Pow(expIzq.DECIMAL, expDer.ENTERO));
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ^ " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    else if (expIzq.tipo.Equals("BOOL"))
-    {
-        switch (expDer.tipo)
-        {
-            case "ENTERO":
-                double p = Math.Pow(expIzq.ENTERO, expDer.ENTERO);
-                int v = (int)p;
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, v);
-                break;
-            case "DOUBLE":
-                temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, Math.Pow(expIzq.ENTERO, expDer.DECIMAL));
-                break;
-            default:
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ^ " + expDer.tipo, fila, columna);
-                break;
-        }
-    }
-    return temp;
-}
 
-public expresion resAumento(expresion expIzq)
-{
-    expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-    if (expIzq.tipo.Equals("ENTERO"))
-    {
-        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + 1);
-    }
-    else if (expIzq.tipo.Equals("DOUBLE"))
-    {
-        temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.DECIMAL + 1);
-    }
-    else
-    {
-        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ++ ", fila, columna);
-    }
-    return temp;
-}
+        public expresion resPotencia(expresion expIzq, expresion expDer)
+        {
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            if (expIzq.tipo.Equals("ENTERO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        double p = Math.Pow(expIzq.ENTERO, expDer.ENTERO);
+                        int v = (int)p;
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, v);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.Pow(expIzq.ENTERO, expDer.DECIMAL));
+                        break;
+                    case "BOOLEANO":
+                        {
+                            double pb = Math.Pow(expIzq.ENTERO, expDer.ENTERO);
+                            int vb = (int)pb;
+                            temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, vb);
+                        }
+                        break;
+                    case "CARACTER":
+                        {
+                            double pb = Math.Pow(expIzq.ENTERO, expDer.ENTERO);
+                            int vb = (int)pb;
+                            temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, vb);
+                        }
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ^ " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("DECIMAL"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.Pow(expIzq.DECIMAL, expDer.ENTERO));
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.Pow(expIzq.DECIMAL, expDer.DECIMAL));
+                        break;
+                    case "BOOLEANO":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.Pow(expIzq.DECIMAL, expDer.ENTERO));
+                        break;
+                    case "CARACTER":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.Pow(expIzq.DECIMAL, expDer.ENTERO));
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ^ " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("BOOLEANO"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        double p = Math.Pow(expIzq.ENTERO, expDer.ENTERO);
+                        int v = (int)p;
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, v);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.Pow(expIzq.ENTERO, expDer.DECIMAL));
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ^ " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (expIzq.tipo.Equals("CARACTER"))
+            {
+                switch (expDer.tipo)
+                {
+                    case "ENTERO":
+                        double pb = Math.Pow(expIzq.ENTERO, expDer.ENTERO);
+                        int vb = (int)pb;
+                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, vb);
+                        break;
+                    case "DECIMAL":
+                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.Pow(expIzq.ENTERO, expDer.DECIMAL));
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " - " + expDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            return temp;
+        }
 
-public expresion resDecremento(expresion expIzq)
-{
-    expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-    if (expIzq.tipo.Equals("ENTERO"))
-    {
-        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - 1);
-    }
-    else if (expIzq.tipo.Equals("DOUBLE"))
-    {
-        temp = new expresion(null, null, "DOUBLE", "DOUBLE", fila, columna, expIzq.DECIMAL - 1);
-    }
-    else
-    {
-        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " -- ", fila, columna);
-    }
-    return temp;
-}
+        public expresion resAumento(expresion expIzq)
+        {
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            if (expIzq.tipo.Equals("ENTERO"))
+            {
+                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + 1);
+            }
+            else if (expIzq.tipo.Equals("DECIMAL"))
+            {
+                temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + 1);
+            }
+            else if (expIzq.tipo.Equals("CARACTER"))
+            {
+                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + 1);
+            }
+            else
+            {
+                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ++ ", fila, columna);
+            }
+            return temp;
+        }
+
+        public expresion resDecremento(expresion expIzq)
+        {
+            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            if (expIzq.tipo.Equals("ENTERO"))
+            {
+                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - 1);
+            }
+            else if (expIzq.tipo.Equals("DECIMAL"))
+            {
+                temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL - 1);
+            }
+            else if (expIzq.tipo.Equals("CARACTER"))
+            {
+                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - 1);
+            }
+            else
+            {
+                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " -- ", fila, columna);
+            }
+            return temp;
+        }
     }
 }
