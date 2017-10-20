@@ -147,6 +147,9 @@ namespace _Compi2_Proyecto2_201212859.TREE
             MarkReservedWords("doubleToInt");
             MarkReservedWords("nuevo");
             MarkReservedWords("super");
+            MarkReservedWords("funcion");
+            MarkReservedWords("metodo");
+            MarkReservedWords("out_string");
 
             var INICIO = new NonTerminal("INICIO");
             var IMPORTAR = new NonTerminal("IMPORTAR");
@@ -199,10 +202,6 @@ namespace _Compi2_Proyecto2_201212859.TREE
             var HIJO = new NonTerminal("HIJO");
             var LISTA_E_E = new NonTerminal("LISTA_E_E");
             var LLAMADA_OBJETO = new NonTerminal("LLAMADA_OBJETO");
-
-
-
-
 
 
 
@@ -275,12 +274,6 @@ namespace _Compi2_Proyecto2_201212859.TREE
                                     | LLAMADA_METODO + Eos /*metodos*/
                                     | AUMENTO_DECREMENTO + Eos;
                                     ;
-
-            ASIGNAR.Rule =    t_self + t_punto + er_id + "=>" + E                              /*Asignar atributos*/
-                            | t_self + t_punto + er_id + LISTA_DIMENSION + "=>" + E            /*Asignar atributos arreglos*/
-                            | er_id + LISTA_DIMENSION + "=>" + E                               /*Asignar arreglos*/
-                            | er_id + "=>" + E                                                 /*Asignar variables*/
-                        ;
 
             ASIGNAR.Rule = OBJETO + er_id + LISTA_DIMENSION + "=>" + E
                         | er_id + LISTA_DIMENSION + "=>" + E
@@ -442,7 +435,8 @@ namespace _Compi2_Proyecto2_201212859.TREE
                 | t_super + t_punto
                 ;
 
-            VALOR.Rule = numero
+            VALOR.Rule = er_decimal
+                | er_entero
                 | er_caracter
                 | er_cadena
                 | er_booleano
@@ -461,7 +455,7 @@ namespace _Compi2_Proyecto2_201212859.TREE
             RegisterOperators(8, Associativity.Left, "pow");
             RegisterOperators(9, numero, er_caracter, er_cadena, er_booleano);
             RegisterOperators(10, er_id);
-            MarkPunctuation(";", ",", ".", ":", "(", ")", "[", "]", "{", "}");
+            MarkPunctuation(";", ",", ".", ":", "(", ")", "[", "]", "{", "}", "=>");
             Root = INICIO;
         }
 

@@ -57,13 +57,51 @@ namespace _Compi2_Proyecto2_201212859.TREE
                         return importar;
                     }
                 case "DECLARAR":
-                    {
-                        foreach (ParseTreeNode nodo in raiz.ChildNodes)
                         {
-                            Object o = recorrerArbol(nodo);
+                            List<simbolo> tablaSimbolo = new List<simbolo>();
+                            String tipo = (String)recorrerArbol(raiz.ChildNodes[0]);
+                            if (raiz.ChildNodes.Count == 2)
+                            {
+                                foreach (ParseTreeNode variable in raiz.ChildNodes[1].ChildNodes)
+                                {
+                                    List<expresion> lista_expresion = new List<expresion>();
+                                    ambito ambito = new ambito("DECLARACION");
+                                    declaracion declaracion = new declaracion("PUBLICO", tipo, variable.Token.ValueString, lista_expresion, ambito, variable.Token.Location.Line + 1, variable.Token.Location.Column, null);
+                                    simbolo simbolo = new simbolo(declaracion.visibilidad, declaracion.tipo, declaracion.nombre, "DECLARACION", declaracion.fila, declaracion.columna, declaracion.ambito, declaracion);
+                                    simbolo.tamanio = 1;
+                                    declaracion.padre = simbolo;
+                                    tablaSimbolo.Add(simbolo);
+                                }
+                            }
+                            else
+                            {
+                                if (raiz.ChildNodes[2].Term.Name.Equals("E"))
+                                {
+                                    expresion valor = (expresion)recorrerArbol(raiz.ChildNodes[2]);
+                                    foreach (ParseTreeNode variable in raiz.ChildNodes[1].ChildNodes)
+                                    {
+                                        List<expresion> lista_expresion = new List<expresion>();
+                                        ambito ambito = new ambito("DECLARACION");
+                                        declaracion declaracion = new declaracion("PUBLICO", tipo, variable.Token.ValueString, lista_expresion, ambito, variable.Token.Location.Line + 1, variable.Token.Location.Column, valor);
+                                        simbolo simbolo = new simbolo(declaracion.visibilidad, declaracion.tipo, declaracion.nombre, "DECLARACION", declaracion.fila, declaracion.columna, declaracion.ambito, declaracion);
+                                        simbolo.tamanio = 1;
+                                        declaracion.padre = simbolo;
+                                        tablaSimbolo.Add(simbolo);
+                                    }
+                                }
+                                else
+                                {          
+                                    List<expresion> lista_expresion =  (List<expresion>)recorrerArbol(raiz.ChildNodes[2]);
+                                    ambito ambito = new ambito("DECLARACION");
+                                    declaracion declaracion = new declaracion("PUBLICO", tipo, raiz.ChildNodes[1].Token.ValueString, lista_expresion, ambito, raiz.ChildNodes[1].Token.Location.Line + 1, raiz.ChildNodes[1].Token.Location.Column, null);
+                                    simbolo simbolo = new simbolo(declaracion.visibilidad, declaracion.tipo, declaracion.nombre, "DECLARACION", declaracion.fila, declaracion.columna, declaracion.ambito, declaracion);
+                                    simbolo.tamanio = 1;
+                                    declaracion.padre = simbolo;
+                                    tablaSimbolo.Add(simbolo);
+                                }
+                            }
+                            return tablaSimbolo;
                         }
-                    }
-                    break;
                 case "LISTA_ID":
                     {
                         foreach (ParseTreeNode nodo in raiz.ChildNodes)
@@ -122,20 +160,26 @@ namespace _Compi2_Proyecto2_201212859.TREE
                     break;
                 case "SENTENCIAS_LOCALES":
                     {
-                        foreach (ParseTreeNode nodo in raiz.ChildNodes)
-                        {
-                            Object o = recorrerArbol(nodo);
-                        }
+                        return recorrerArbol(raiz.ChildNodes[0]);
                     }
-                    break;
+
                 case "LISTA_SENTENCIAS_LOCALES":
                     {
-                        foreach (ParseTreeNode nodo in raiz.ChildNodes)
                         {
-                            Object o = recorrerArbol(nodo);
+                            List<simbolo> tablaSimbolo = new List<simbolo>();
+                            foreach (ParseTreeNode nodo in raiz.ChildNodes)
+                            {
+                                simbolo hermano = null;
+                                foreach (simbolo simbolo in (List<simbolo>)recorrerArbol(nodo))
+                                {
+                                    simbolo.hermano = hermano;
+                                    hermano = simbolo;
+                                    tablaSimbolo.Add(simbolo);
+                                }
+                            }
+                            return tablaSimbolo;
                         }
                     }
-                    break;
                 case "RETORNAR":
                     {
                         foreach (ParseTreeNode nodo in raiz.ChildNodes)
@@ -146,12 +190,8 @@ namespace _Compi2_Proyecto2_201212859.TREE
                     break;
                 case "TIPO":
                     {
-                        foreach (ParseTreeNode nodo in raiz.ChildNodes)
-                        {
-                            Object o = recorrerArbol(nodo);
-                        }
+                        return raiz.ChildNodes[0].Token.ToString();
                     }
-                    break;
                 case "SI":
                     {
                         foreach (ParseTreeNode nodo in raiz.ChildNodes)
@@ -194,28 +234,55 @@ namespace _Compi2_Proyecto2_201212859.TREE
                     break;
                 case "MIENTRAS":
                     {
-                        foreach (ParseTreeNode nodo in raiz.ChildNodes)
-                        {
-                            Object o = recorrerArbol(nodo);
-                        }
+                        expresion expresion = (expresion)recorrerArbol(raiz.ChildNodes[1]);
+                        List<simbolo> tablaSimbolo = (List<simbolo>)recorrerArbol(raiz.ChildNodes[2]);
+                        ambito ambito = new codigo3D.ambito("MIENTRAS", tablaSimbolo);
+
+                        mientras mientras = new mientras(expresion, ambito);
+                        simbolo simbolo = new simbolo("MIENTRAS", "MIENTRAS", "MIENTRAS", "MIENTRAS", raiz.ChildNodes[0].Token.Location.Line + 1, raiz.ChildNodes[0].Token.Location.Column + 1, mientras.ambito, mientras);
+                        simbolo.posicion = -1;
+                        mientras.padre = simbolo;
+
+                        set_simbolo(tablaSimbolo, simbolo);
+
+                        List<simbolo> retorna_tabla_simbolo = new List<simbolo>();
+                        retorna_tabla_simbolo.Add(simbolo);
+                        return retorna_tabla_simbolo;
                     }
-                    break;
                 case "HACER_MIENTRAS":
                     {
-                        foreach (ParseTreeNode nodo in raiz.ChildNodes)
-                        {
-                            Object o = recorrerArbol(nodo);
-                        }
+                        expresion expresion = (expresion)recorrerArbol(raiz.ChildNodes[3]);
+                        List<simbolo> tablaSimbolo = (List<simbolo>)recorrerArbol(raiz.ChildNodes[1]);
+                        ambito ambito = new codigo3D.ambito("HACER_MIENTRAS", tablaSimbolo);
+
+                        hacer_mientras hacer_mientras = new hacer_mientras(expresion, ambito);
+                        simbolo simbolo = new simbolo("HACER_MIENTRAS", "HACER_MIENTRAS", "HACER_MIENTRAS", "HACER_MIENTRAS", raiz.ChildNodes[0].Token.Location.Line + 1, raiz.ChildNodes[0].Token.Location.Column + 1, hacer_mientras.ambito, hacer_mientras);
+                        simbolo.posicion = -1;
+                        hacer_mientras.padre = simbolo;
+
+                        set_simbolo(tablaSimbolo, simbolo);
+
+                        List<simbolo> retorna_tabla_simbolo = new List<simbolo>();
+                        retorna_tabla_simbolo.Add(simbolo);
+                        return retorna_tabla_simbolo;
                     }
-                    break;
                 case "REPETIR":
                     {
-                        foreach (ParseTreeNode nodo in raiz.ChildNodes)
-                        {
-                            Object o = recorrerArbol(nodo);
-                        }
+                        expresion expresion = (expresion)recorrerArbol(raiz.ChildNodes[3]);
+                        List<simbolo> tablaSimbolo = (List<simbolo>)recorrerArbol(raiz.ChildNodes[1]);
+                        ambito ambito = new codigo3D.ambito("REPETIR_HASTA", tablaSimbolo);
+
+                        repetir_hasta repetir_hasta = new repetir_hasta(expresion, ambito);
+                        simbolo simbolo = new simbolo("REPETIR_HASTA", "REPETIR_HASTA", "REPETIR_HASTA", "REPETIR_HASTA", raiz.ChildNodes[0].Token.Location.Line + 1, raiz.ChildNodes[0].Token.Location.Column + 1, repetir_hasta.ambito, repetir_hasta);
+                        simbolo.posicion = -1;
+                        repetir_hasta.padre = simbolo;
+
+                        set_simbolo(tablaSimbolo, simbolo);
+
+                        List<simbolo> retorna_tabla_simbolo = new List<simbolo>();
+                        retorna_tabla_simbolo.Add(simbolo);
+                        return retorna_tabla_simbolo;
                     }
-                    break;
                 case "AUMENTO_DECREMENTO":
                     {
                         foreach (ParseTreeNode nodo in raiz.ChildNodes)
@@ -316,12 +383,20 @@ namespace _Compi2_Proyecto2_201212859.TREE
                     break;
                 case "LOOP":
                     {
-                        foreach (ParseTreeNode nodo in raiz.ChildNodes)
-                        {
-                            Object o = recorrerArbol(nodo);
-                        }
+                        List<simbolo> tablaSimbolo = (List<simbolo>)recorrerArbol(raiz.ChildNodes[1]);
+                        ambito ambito = new codigo3D.ambito("LOOP", tablaSimbolo);
+
+                        loop loop = new loop(ambito);
+                        simbolo simbolo = new simbolo("LOOP", "LOOP", "LOOP", "LOOP", raiz.ChildNodes[0].Token.Location.Line + 1, raiz.ChildNodes[0].Token.Location.Column + 1, loop.ambito, loop);
+                        simbolo.posicion = -1;
+                        loop.padre = simbolo;
+
+                        set_simbolo(tablaSimbolo, simbolo);
+
+                        List<simbolo> retorna_tabla_simbolo = new List<simbolo>();
+                        retorna_tabla_simbolo.Add(simbolo);
+                        return retorna_tabla_simbolo;
                     }
-                    break;
                 case "PARA":
                     {
                         foreach (ParseTreeNode nodo in raiz.ChildNodes)
@@ -348,12 +423,13 @@ namespace _Compi2_Proyecto2_201212859.TREE
                     break;
                 case "VISIBILIDAD":
                     {
-                        foreach (ParseTreeNode nodo in raiz.ChildNodes)
-                        {
-                            Object o = recorrerArbol(nodo);
+                        String visibilidad = "PUBLICO";
+                        if (raiz.ChildNodes.Count > 0) {
+                            visibilidad = raiz.ChildNodes[0].Token.ToString();
                         }
+                        return visibilidad;
+                        
                     }
-                    break;
                 case "LISTA_PARAMETRO_E":
                     {
                         foreach (ParseTreeNode nodo in raiz.ChildNodes)
@@ -632,6 +708,14 @@ namespace _Compi2_Proyecto2_201212859.TREE
                     }
             }
             return null;
+        }
+
+
+        private static void set_simbolo(List<simbolo> tablaSimbolo, simbolo simbolo) {
+            foreach (simbolo simbolo_sentencia in tablaSimbolo)
+            {
+                simbolo_sentencia.Padre = simbolo;
+            }
         }
     }
 }

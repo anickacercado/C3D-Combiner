@@ -12,24 +12,29 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
         public String nombre;
         public String rol;
         public String tipo;
+        public String visibilidad;
         public ambito ambito;
         public int tamanio;
         public int posicion;
+        public simbolo hermano = null;
+        public simbolo Padre = null;
         public Object valor;
         public int fila;
         public int columna;
 
 
-        public simbolo(String nombre, String rol, String tipo, ambito ambito, int tamanio, int posicion, Object valor, int fila, int columna) {
-              this.nombre = nombre;
-              this.rol = rol;
-              this.tipo = tipo;
-              this.ambito = ambito;
-              this.tamanio = tamanio;
-              this.posicion = posicion;
-              this.valor = valor;
-              this.fila = fila;
-              this.columna = columna;
+        public simbolo(String visibilidad, String tipo, String nombre, String rol, int fila, int columna, ambito ambito, Object valor)
+        {
+            this.visibilidad = visibilidad;
+            this.tipo = tipo;
+            this.nombre = nombre;
+            this.rol = rol;
+            this.fila = fila;
+            this.columna = columna;
+            this.ambito = ambito;
+            this.valor = valor;
+            this.tamanio = this.ambito.tamanio;
         }
+
     }
 }

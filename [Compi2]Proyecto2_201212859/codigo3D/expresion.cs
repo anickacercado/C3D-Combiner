@@ -292,9 +292,9 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             {
                 temp = new expresion(nodo);
             }
-            else if (nodo.tipo.Equals("CHAR"))
+            else if (nodo.tipo.Equals("CARACTER"))
             {
-                //Agregar Acciones
+                temp = new expresion(nodo);
             }
             return temp;
         }
