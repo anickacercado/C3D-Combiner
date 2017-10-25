@@ -202,6 +202,8 @@ namespace _Compi2_Proyecto2_201212859.TREE
             var HIJO = new NonTerminal("HIJO");
             var LISTA_E_E = new NonTerminal("LISTA_E_E");
             var LLAMADA_OBJETO = new NonTerminal("LLAMADA_OBJETO");
+            var DEFECTO = new NonTerminal("DEFECTO");
+            var SOBRESCRIBIR = new NonTerminal("SOBRESCRIBIR");
 
 
 
@@ -245,6 +247,8 @@ namespace _Compi2_Proyecto2_201212859.TREE
                       
                       | t_constructor + t_cor_abre + LISTA_PARAMETRO_E + t_cor_cierra + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
                       ;
+
+            SOBRESCRIBIR.Rule = t_sobrescribir + Eos;
 
             LISTA_PARAMETRO_E.Rule = LISTA_PARAMETRO
                 | Empty;
@@ -313,12 +317,14 @@ namespace _Compi2_Proyecto2_201212859.TREE
             CONTINUAR.Rule = t_continuar
                 ;
 
-            ELEGIR.Rule = t_elegir + t_caso + E + t_dos_pts + Eos + Indent + LISTA_CASO + Dedent
+            ELEGIR.Rule = t_elegir + t_caso + E + t_dos_pts + Eos + Indent + LISTA_CASO + DEFECTO + Dedent
                 ;
 
             CASO.Rule = VALOR + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
-                |t_defecto + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
                 ;
+
+            DEFECTO.Rule = t_defecto + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
+                | Empty;
 
             MIENTRAS.Rule = t_mientras + E + t_dos_pts + Eos + Indent + LISTA_SENTENCIAS_LOCALES + Dedent
                 ;
@@ -440,7 +446,6 @@ namespace _Compi2_Proyecto2_201212859.TREE
                 | er_caracter
                 | er_cadena
                 | er_booleano
-                | er_id
                 ;
 
             RegisterBracePair("(", ")");

@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace _Compi2_Proyecto2_201212859.codigo3D
 {
-    class loop
+    class sino
     {
         public ambito ambito;
         public simbolo padre = null;
 
-        public loop(ambito ambito) {
+        public sino(ambito ambito)
+        {
             this.ambito = ambito;
         }
     }

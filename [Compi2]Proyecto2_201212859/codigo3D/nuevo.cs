@@ -10,7 +10,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
     {
         public String nombre;
         public List<expresion> parametros;
-        simbolo padre;
+        simbolo padre = null;
         public int fila;
         public int columna;
 

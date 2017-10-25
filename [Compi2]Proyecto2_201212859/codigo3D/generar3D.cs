@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace _Compi2_Proyecto2_201212859.codigo3D
 {
-    class loop
+    class generar3D
     {
-        public ambito ambito;
-        public simbolo padre = null;
-
-        public loop(ambito ambito) {
-            this.ambito = ambito;
-        }
     }
 }

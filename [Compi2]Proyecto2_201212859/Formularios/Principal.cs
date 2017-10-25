@@ -126,19 +126,30 @@ namespace _Compi2_Proyecto2_201212859
             ControlEditor.borrarTab();
         }
 
-        public void limpiarTablaError() {
+        public void limpiarGrid() {
             tablaErrores.Rows.Clear();
             tablaErrores.Refresh();
+            tablaSimbolos.Rows.Clear();
+            tablaSimbolos.Refresh();
         }
 
-        public static void insertarError(string linea, string columna, string tipo, string descripcion, string ruta) {
-            componentes.tablaErrores.Rows.Insert(0,linea,columna,tipo,descripcion,ruta);
+        public static void insertarError(string linea, string columna, string tipo, string descripcion, string ruta)
+        {
+            componentes.tablaErrores.Rows.Add(linea,columna,tipo,descripcion,ruta);
         }
+
+        public static void insertarTablaSimbolo(string nombre, string tipo, string rol, string visibilidad, string ambito, int tamanio, int posicion)
+        {
+            componentes.tablaSimbolos.Rows.Add(nombre, tipo, rol, visibilidad, ambito, tamanio, posicion);
+        }
+
 
         private void compilarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            limpiarTablaError();
+            memoria.temporal = 0;
+            limpiarGrid();
             ControlEditor.analizar();
+            txt3D.Text = memoria.cadena3D;
         }
 
      

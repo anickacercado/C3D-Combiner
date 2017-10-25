@@ -6,21 +6,22 @@ using System.Threading.Tasks;
 
 namespace _Compi2_Proyecto2_201212859.codigo3D
 {
-    class clase
-    { 
-        public String nombre;
-        public String herencia;
-        public ambito ambito;
+    class parametro
+    {
+        public string tipo;
+        public string nombre;
+        public int dimensiones;
         public int fila;
         public int columna;
-        public simbolo padre = null;
+        public simbolo padre=null;
 
-        public clase(String nombre, String herencia, ambito ambito, int fila, int columna) {
+        public parametro(string tipo, string nombre, int dimensiones, int fila, int columna) {
+            this.tipo = tipo;
             this.nombre = nombre;
-            this.ambito = ambito;
-            this.herencia = herencia;
+            this.dimensiones = dimensiones;
             this.fila = fila;
             this.columna = columna;
         }
+
     }
 }

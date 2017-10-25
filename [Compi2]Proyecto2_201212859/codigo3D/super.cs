@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace _Compi2_Proyecto2_201212859.codigo3D
 {
-    class loop
+    class super
     {
-        public ambito ambito;
+        public List<expresion> parametros;
         public simbolo padre = null;
 
-        public loop(ambito ambito) {
-            this.ambito = ambito;
+        public super(List<expresion> parametros) {
+            this.parametros = parametros;
         }
     }
 }

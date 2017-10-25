@@ -15,7 +15,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
         public llamadaMetodo llamadaMetodo;
         public llamadaArreglo llamadaArreglo;
         public llamadaArregloMetodo llamadaArregloMetodo;
-        public simbolo padre;
+        public simbolo padre = null;
         public int fila;
         public int columna;
    

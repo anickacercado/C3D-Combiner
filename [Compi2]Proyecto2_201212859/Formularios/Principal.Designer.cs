@@ -48,6 +48,13 @@
             this.ruta = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabSim = new System.Windows.Forms.TabPage();
             this.tablaSimbolos = new System.Windows.Forms.DataGridView();
+            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipoTS = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.visibilidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ambito = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tamanio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.posicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab3 = new System.Windows.Forms.TabPage();
             this.txtProcesoOptimizacion = new System.Windows.Forms.TextBox();
             this.tab4 = new System.Windows.Forms.TabPage();
@@ -101,12 +108,6 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.crearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crearCarpetaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tipoTS = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.rol = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ambito = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tamanio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.posicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel2.SuspendLayout();
             this.tab0.SuspendLayout();
             this.tab1.SuspendLayout();
@@ -302,6 +303,7 @@
             this.nombre,
             this.tipoTS,
             this.rol,
+            this.visibilidad,
             this.ambito,
             this.tamanio,
             this.posicion});
@@ -327,6 +329,48 @@
             this.tablaSimbolos.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
             this.tablaSimbolos.Size = new System.Drawing.Size(981, 137);
             this.tablaSimbolos.TabIndex = 1;
+            // 
+            // nombre
+            // 
+            this.nombre.HeaderText = "Nombre";
+            this.nombre.Name = "nombre";
+            this.nombre.ReadOnly = true;
+            // 
+            // tipoTS
+            // 
+            this.tipoTS.HeaderText = "Tipo";
+            this.tipoTS.Name = "tipoTS";
+            this.tipoTS.ReadOnly = true;
+            // 
+            // rol
+            // 
+            this.rol.HeaderText = "Rol";
+            this.rol.Name = "rol";
+            this.rol.ReadOnly = true;
+            // 
+            // visibilidad
+            // 
+            this.visibilidad.HeaderText = "Visibilidad";
+            this.visibilidad.Name = "visibilidad";
+            this.visibilidad.ReadOnly = true;
+            // 
+            // ambito
+            // 
+            this.ambito.HeaderText = "Ambito";
+            this.ambito.Name = "ambito";
+            this.ambito.ReadOnly = true;
+            // 
+            // tamanio
+            // 
+            this.tamanio.HeaderText = "Tamaño";
+            this.tamanio.Name = "tamanio";
+            this.tamanio.ReadOnly = true;
+            // 
+            // posicion
+            // 
+            this.posicion.HeaderText = "Posicion";
+            this.posicion.Name = "posicion";
+            this.posicion.ReadOnly = true;
             // 
             // tab3
             // 
@@ -841,42 +885,6 @@
             this.crearCarpetaToolStripMenuItem1.Text = "Crear Carpeta";
             this.crearCarpetaToolStripMenuItem1.Click += new System.EventHandler(this.crearCarpetaToolStripMenuItem1_Click);
             // 
-            // nombre
-            // 
-            this.nombre.HeaderText = "Nombre";
-            this.nombre.Name = "nombre";
-            this.nombre.ReadOnly = true;
-            // 
-            // tipoTS
-            // 
-            this.tipoTS.HeaderText = "Tipo";
-            this.tipoTS.Name = "tipoTS";
-            this.tipoTS.ReadOnly = true;
-            // 
-            // rol
-            // 
-            this.rol.HeaderText = "Rol";
-            this.rol.Name = "rol";
-            this.rol.ReadOnly = true;
-            // 
-            // ambito
-            // 
-            this.ambito.HeaderText = "Ambito";
-            this.ambito.Name = "ambito";
-            this.ambito.ReadOnly = true;
-            // 
-            // tamanio
-            // 
-            this.tamanio.HeaderText = "Tamaño";
-            this.tamanio.Name = "tamanio";
-            this.tamanio.ReadOnly = true;
-            // 
-            // posicion
-            // 
-            this.posicion.HeaderText = "Posicion";
-            this.posicion.Name = "posicion";
-            this.posicion.ReadOnly = true;
-            // 
             // principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1001,6 +1009,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn tipoTS;
         private System.Windows.Forms.DataGridViewTextBoxColumn rol;
+        private System.Windows.Forms.DataGridViewTextBoxColumn visibilidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn ambito;
         private System.Windows.Forms.DataGridViewTextBoxColumn tamanio;
         private System.Windows.Forms.DataGridViewTextBoxColumn posicion;

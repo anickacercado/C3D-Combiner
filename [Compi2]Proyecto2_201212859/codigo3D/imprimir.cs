@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace _Compi2_Proyecto2_201212859.codigo3D
 {
-    class loop
+    class imprimir
     {
-        public ambito ambito;
+        public expresion expresion;
         public simbolo padre = null;
 
-        public loop(ambito ambito) {
-            this.ambito = ambito;
+        public imprimir(expresion expresion) {
+            this.expresion = expresion;
         }
     }
 }

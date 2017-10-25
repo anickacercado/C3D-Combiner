@@ -72,6 +72,14 @@ namespace _Compi2_Proyecto2_201212859.Formularios
 
 
         public static void cerrarSesion() {
+
+            if (repositorio.usuario != "")
+            {
+                MessageBox.Show("No se ha iniciado previamente sesión");
+            }
+            else {
+                MessageBox.Show("Ha cerrado su sesión exitosamente, si desea utilizar el modulo de código compartido inicie sesión nuevamente.");
+            }
             repositorio.usuario = "";
             repositorio.contrasenia = "";
             repositorio.nombre = "";
@@ -81,8 +89,7 @@ namespace _Compi2_Proyecto2_201212859.Formularios
             repositorio.fecha_modificacion = "";
             repositorio.descripcion = "";
             repositorio.codigo = "";
-            repositorio.ruta = "";
-            MessageBox.Show("Ha cerrado sus sesión exitosamente, si desea utilizar el modulo de código compartido inicie sesión nuevamente.");
+            repositorio.ruta = "";    
         }
     }
 }

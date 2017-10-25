@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 
 namespace _Compi2_Proyecto2_201212859.codigo3D
 {
-    class loop
+    class sino_si
     {
+        public expresion expresion;
         public ambito ambito;
         public simbolo padre = null;
 
-        public loop(ambito ambito) {
+        public sino_si(expresion expresion, ambito ambito)
+        {
+            this.expresion = expresion;
             this.ambito = ambito;
         }
+
     }
 }

@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 
 namespace _Compi2_Proyecto2_201212859.codigo3D
 {
-    class clase
-    { 
-        public String nombre;
-        public String herencia;
-        public ambito ambito;
+    class aumento_decremento
+    {
+        //Recibir Variable
+        public llamadaObjeto llamadaObjeto; 
+        public String tipo;
         public int fila;
         public int columna;
+        public ambito ambito;
         public simbolo padre = null;
 
-        public clase(String nombre, String herencia, ambito ambito, int fila, int columna) {
-            this.nombre = nombre;
+        public aumento_decremento(llamadaObjeto llamadaObjeto, String tipo, ambito ambito, int fila, int columna) {
+            this.llamadaObjeto = llamadaObjeto;
+            this.tipo = tipo;
             this.ambito = ambito;
-            this.herencia = herencia;
             this.fila = fila;
             this.columna = columna;
         }

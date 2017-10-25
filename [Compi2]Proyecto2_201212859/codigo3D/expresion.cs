@@ -21,6 +21,9 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
         public String tipo;
         public int fila;
         public int columna;
+        public simbolo padre;
+        public cadena3D c3DIzq;
+        public cadena3D c3DDer;
 
         public int getENTERO()
         {
@@ -127,6 +130,9 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             this.tipo = nodo.tipo;
             this.fila = nodo.fila;
             this.columna = nodo.columna;
+            this.padre = nodo.padre;
+            this.c3DIzq = nodo.c3DIzq;
+            this.c3DDer = nodo.c3DDer;
         }
 
         public expresion(expresion expIzq, expresion expDer, String tipo, String nombre, int fila, int columna, Object valor)
@@ -187,23 +193,17 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             }
         }
 
-        private expresion resCondicion(expresion nodo)
+        private cadena3D resCondicion(expresion nodo)
         {
+            
             expresion temp = new expresion(null, null, "ERROR", "ERROR", nodo.fila, nodo.columna, null);
             expresion expIzq = nodo.expIzq;
             expresion expDer = nodo.expDer;
+            cadena3D c3D = new cadena3D();
 
-            if (nodo.expIzq != null)
-            {
-                expIzq = nodo.expIzq.resCondicion();
-            }
-            if (nodo.expDer != null)
-            {
-                expDer = nodo.expDer.resCondicion();
-            }
             if (nodo.tipo.Equals("+"))
             {
-                temp = resSuma(expIzq, expDer);
+                c3D = resSuma(expIzq, expDer);
             }
             else if (nodo.tipo.Equals("-"))
             {
@@ -278,28 +278,58 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             }
             else if (nodo.tipo.Equals("ENTERO"))
             {
+                c3D.temporal = memoria.getTemp();
+                c3D.codigo = memoria.temporal + "=" + nodo.CADENA + "; //ENTERO";
+                c3D.tipo = nodo.tipo;
                 temp = new expresion(nodo);
             }
             else if (nodo.tipo.Equals("DECIMAL"))
             {
+                c3D.temporal = memoria.getTemp();
+                c3D.codigo = memoria.temporal + "=" + nodo.CADENA + "; //DECIMAL";
+                c3D.tipo = nodo.tipo;
                 temp = new expresion(nodo);
             }
             else if (nodo.tipo.Equals("CADENA"))
             {
+                c3D.temporal = memoria.getTemp();
+
+                /*CODIGO CADENA*/
+                Char finCadena = '\0';
+                String codigo = "";
+                codigo += "\t\n" + c3D.temporal + "= H; //INICIO DE CADENA";
+                codigo += "\t\n" + "H = H + 1;";
+
+                for (int i=0; i<nodo.CADENA.Length - 1; i++) {
+                    codigo += "\t\n" + "Heap[H] = " + (int)nodo.CADENA[i] + ";";
+                    codigo += "\t\n" + "H = H + 1;";
+                }
+
+                codigo += "\t\n" + "Heap[H] = " + (int)finCadena + "; //FIN DE CADENA";
+                codigo += "\t\n" + "H = H + 1;";
+                /*CODIGO CADENA*/
+
                 temp = new expresion(nodo);
+
             }
             else if (nodo.tipo.Equals("BOOLEANO"))
             {
+                c3D.temporal = memoria.getTemp();
+                c3D.codigo = memoria.temporal + "=" + nodo.ENTERO.ToString() + "; //BOOLEANO";
+                c3D.tipo = nodo.tipo;
                 temp = new expresion(nodo);
             }
             else if (nodo.tipo.Equals("CARACTER"))
             {
+                c3D.temporal = memoria.getTemp();
+                c3D.codigo = memoria.temporal + "=" + nodo.ENTERO.ToString() + "; //CARACTER";
+                c3D.tipo = nodo.tipo;
                 temp = new expresion(nodo);
             }
-            return temp;
+            return c3D;
         }
 
-        public expresion resCondicion()
+        public cadena3D resCondicion()
         {
             return resCondicion(this);
         }
@@ -784,120 +814,133 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             return temp;
         }
 
-        public expresion resSuma(expresion expIzq, expresion expDer)
+        public cadena3D resSuma(expresion expIzq, expresion expDer)
         {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            //expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            cadena3D temp = new cadena3D();
+            cadena3D c3DIzq = resCondicion(expIzq);
+            cadena3D c3DDer = resCondicion(expDer);
+
+
             if (expIzq.tipo.Equals("ENTERO"))
             {
                 switch (expDer.tipo)
                 {
                     case "ENTERO":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.ENTERO);
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "ENTERO";
+
+                        String codigo = "";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += "\t\n\n" + temp.temporal + "=" + c3DIzq.temporal + "+" + c3DDer.temporal + "; //SUMA RETORNA ENTERO";
+                        temp.codigo += codigo;
+
+                        //temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.ENTERO);
                         break;
                     case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO + expDer.DECIMAL);
+                        //temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO + expDer.DECIMAL);
                         break;
                     case "CADENA":
-                        temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.ENTERO.ToString() + expDer.CADENA);
+                        //temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.ENTERO.ToString() + expDer.CADENA);
                         break;
                     case "BOOLEANO":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.ENTERO);
+                        //temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.ENTERO);
                         break;
                     case "CARACTER":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.CARACTER);
+                        //temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.CARACTER);
                         break;
                     default:
                         memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
                         break;
                 }
             }
-            else if (expIzq.tipo.Equals("DECIMAL"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + expDer.DECIMAL);
-                        break;
-                    case "CADENA":
-                        temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.DECIMAL.ToString() + expDer.CADENA);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + expDer.ENTERO);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + expDer.CARACTER);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("CADENA"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.ENTERO.ToString());
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.DECIMAL.ToString());
-                        break;
-                    case "CADENA":
-                        temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.CADENA);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.CADENA);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("BOOLEANO"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO + expDer.DECIMAL);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.BOOL || expDer.BOOL);
-                        break;
-                    case "CADENA":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.CADENA + expDer.CADENA);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("CARACTER"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.CARACTER + expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.CARACTER + expDer.DECIMAL);
-                        break;
-                    case "CADENA":
-                        temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.CADENA);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.CADENA);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
+            //else if (expIzq.tipo.Equals("DECIMAL"))
+            //{
+            //    switch (expDer.tipo)
+            //    {
+            //        case "ENTERO":
+            //            temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + expDer.ENTERO);
+            //            break;
+            //        case "DECIMAL":
+            //            temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + expDer.DECIMAL);
+            //            break;
+            //        case "CADENA":
+            //            temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.DECIMAL.ToString() + expDer.CADENA);
+            //            break;
+            //        case "BOOLEANO":
+            //            temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + expDer.ENTERO);
+            //            break;
+            //        case "CARACTER":
+            //            temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + expDer.CARACTER);
+            //            break;
+            //        default:
+            //            memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
+            //            break;
+            //    }
+            //}
+            //else if (expIzq.tipo.Equals("CADENA"))
+            //{
+            //    switch (expDer.tipo)
+            //    {
+            //        case "ENTERO":
+            //            temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.ENTERO.ToString());
+            //            break;
+            //        case "DECIMAL":
+            //            temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.DECIMAL.ToString());
+            //            break;
+            //        case "CADENA":
+            //            temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.CADENA);
+            //            break;
+            //        case "CARACTER":
+            //            temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.CADENA);
+            //            break;
+            //        default:
+            //            memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
+            //            break;
+            //    }
+            //}
+            //else if (expIzq.tipo.Equals("BOOLEANO"))
+            //{
+            //    switch (expDer.tipo)
+            //    {
+            //        case "ENTERO":
+            //            temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.ENTERO);
+            //            break;
+            //        case "DECIMAL":
+            //            temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO + expDer.DECIMAL);
+            //            break;
+            //        case "BOOLEANO":
+            //            temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.BOOL || expDer.BOOL);
+            //            break;
+            //        case "CADENA":
+            //            temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.CADENA + expDer.CADENA);
+            //            break;
+            //        default:
+            //            memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
+            //            break;
+            //    }
+            //}
+            //else if (expIzq.tipo.Equals("CARACTER"))
+            //{
+            //    switch (expDer.tipo)
+            //    {
+            //        case "ENTERO":
+            //            temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.CARACTER + expDer.ENTERO);
+            //            break;
+            //        case "DECIMAL":
+            //            temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.CARACTER + expDer.DECIMAL);
+            //            break;
+            //        case "CADENA":
+            //            temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.CADENA);
+            //            break;
+            //        case "CARACTER":
+            //            temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.CADENA);
+            //            break;
+            //        default:
+            //            memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
+            //            break;
+            //    }
+            //}
             return temp;
         }
 

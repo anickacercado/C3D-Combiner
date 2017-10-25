@@ -58,21 +58,36 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="codigo3D\asignacion.cs" />
+    <Compile Include="codigo3D\aumento_decremento.cs" />
     <Compile Include="codigo3D\cadena3D.cs" />
     <Compile Include="codigo3D\ambito.cs" />
+    <Compile Include="codigo3D\caso.cs" />
     <Compile Include="codigo3D\clase.cs" />
     <Compile Include="codigo3D\declaracion.cs" />
+    <Compile Include="codigo3D\generar3D.cs" />
+    <Compile Include="codigo3D\pasadas.cs" />
+    <Compile Include="codigo3D\elegir.cs" />
+    <Compile Include="codigo3D\estructura_clase.cs" />
     <Compile Include="codigo3D\expresion.cs" />
     <Compile Include="codigo3D\hacer_mientras.cs" />
+    <Compile Include="codigo3D\imprimir.cs" />
     <Compile Include="codigo3D\llamadaArreglo.cs" />
     <Compile Include="codigo3D\llamadaArregloMetodo.cs" />
     <Compile Include="codigo3D\llamadaMetodo.cs" />
     <Compile Include="codigo3D\llamadaObjeto.cs" />
     <Compile Include="codigo3D\loop.cs" />
+    <Compile Include="codigo3D\metodo.cs" />
     <Compile Include="codigo3D\mientras.cs" />
     <Compile Include="codigo3D\nuevo.cs" />
+    <Compile Include="codigo3D\para.cs" />
+    <Compile Include="codigo3D\parametro.cs" />
     <Compile Include="codigo3D\repetir_hasta.cs" />
+    <Compile Include="codigo3D\si.cs" />
     <Compile Include="codigo3D\simbolo.cs" />
+    <Compile Include="codigo3D\sino.cs" />
+    <Compile Include="codigo3D\sino_si.cs" />
+    <Compile Include="codigo3D\super.cs" />
     <Compile Include="Formularios\compartirClase.cs">
       <SubType>Form</SubType>
     </Compile>
