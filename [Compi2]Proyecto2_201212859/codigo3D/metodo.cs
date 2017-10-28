@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using _Compi2_Proyecto2_201212859.ejecucion_alto_nivel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,5 +31,9 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             this.columna = columna;
         }
 
+        public void generar3D() {
+            pasadas pasadas = new pasadas(ambito.tablaSimbolo);
+            pasadas.ejecutar();
+        }
     }
 }

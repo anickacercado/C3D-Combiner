@@ -95,8 +95,8 @@ namespace _Compi2_Proyecto2_201212859.TREE
 
             var er_entero = new NumberLiteral("er_entero", NumberOptions.IntOnly);
             var er_decimal = new NumberLiteral("er_decimal");
-            RegexBasedTerminal er_caracter = new RegexBasedTerminal("er_caracter", "'[a-zA-Z0-9]'");
-            RegexBasedTerminal er_cadena = new RegexBasedTerminal("er_cadena", "\"[^\n\r]*\"");
+            var er_caracter = new StringLiteral("er_caracter", "'", StringOptions.IsChar);
+            var er_cadena = new StringLiteral("er_cadena", "\"");
             RegexBasedTerminal er_booleano = new RegexBasedTerminal("er_booleano", "true|false");
             RegexBasedTerminal er_id = new RegexBasedTerminal("er_id", "[a-zA-Z][a-zA-Z0-9_-]*");
             NumberLiteral numero = new NumberLiteral("numero");
@@ -417,6 +417,7 @@ namespace _Compi2_Proyecto2_201212859.TREE
                 | er_caracter
                 | er_cadena
                 | er_booleano
+                | t_self
                 | LLAMADA_OBJETO
                 | t_nuevo + er_id + t_cor_abre + LISTA_E_E + t_cor_cierra
                 | er_casteo + t_cor_abre + E + t_cor_cierra    /*casteo*/

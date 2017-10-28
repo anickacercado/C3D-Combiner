@@ -38,7 +38,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.tab0 = new System.Windows.Forms.TabControl();
             this.tab1 = new System.Windows.Forms.TabPage();
-            this.txtConsola = new System.Windows.Forms.TextBox();
+            this.txtConsolaSalida = new System.Windows.Forms.RichTextBox();
             this.tab2 = new System.Windows.Forms.TabPage();
             this.tablaErrores = new System.Windows.Forms.DataGridView();
             this.Linea = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -56,11 +56,11 @@
             this.tamanio = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.posicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tab3 = new System.Windows.Forms.TabPage();
-            this.txtProcesoOptimizacion = new System.Windows.Forms.TextBox();
+            this.txtProcesoOptimizacion = new System.Windows.Forms.RichTextBox();
             this.tab4 = new System.Windows.Forms.TabPage();
-            this.txt3D = new System.Windows.Forms.TextBox();
+            this.txt3D = new System.Windows.Forms.RichTextBox();
             this.tab5 = new System.Windows.Forms.TabPage();
-            this.txt3DOptimizado = new System.Windows.Forms.TextBox();
+            this.txt3DOptimizado = new System.Windows.Forms.RichTextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.panel12 = new System.Windows.Forms.Panel();
@@ -166,7 +166,7 @@
             // 
             // tab1
             // 
-            this.tab1.Controls.Add(this.txtConsola);
+            this.tab1.Controls.Add(this.txtConsolaSalida);
             this.tab1.ForeColor = System.Drawing.Color.DarkBlue;
             this.tab1.Location = new System.Drawing.Point(4, 22);
             this.tab1.Name = "tab1";
@@ -176,17 +176,17 @@
             this.tab1.Text = "CONSOLA DE SALIDA";
             this.tab1.UseVisualStyleBackColor = true;
             // 
-            // txtConsola
+            // txtConsolaSalida
             // 
-            this.txtConsola.BackColor = System.Drawing.Color.DarkBlue;
-            this.txtConsola.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtConsola.ForeColor = System.Drawing.Color.White;
-            this.txtConsola.Location = new System.Drawing.Point(3, 3);
-            this.txtConsola.Multiline = true;
-            this.txtConsola.Name = "txtConsola";
-            this.txtConsola.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtConsola.Size = new System.Drawing.Size(981, 137);
-            this.txtConsola.TabIndex = 0;
+            this.txtConsolaSalida.BackColor = System.Drawing.Color.DarkBlue;
+            this.txtConsolaSalida.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtConsolaSalida.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConsolaSalida.ForeColor = System.Drawing.Color.White;
+            this.txtConsolaSalida.Location = new System.Drawing.Point(3, 3);
+            this.txtConsolaSalida.Name = "txtConsolaSalida";
+            this.txtConsolaSalida.Size = new System.Drawing.Size(981, 137);
+            this.txtConsolaSalida.TabIndex = 1;
+            this.txtConsolaSalida.Text = "";
             // 
             // tab2
             // 
@@ -387,13 +387,13 @@
             // 
             this.txtProcesoOptimizacion.BackColor = System.Drawing.Color.DarkBlue;
             this.txtProcesoOptimizacion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtProcesoOptimizacion.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtProcesoOptimizacion.ForeColor = System.Drawing.Color.White;
             this.txtProcesoOptimizacion.Location = new System.Drawing.Point(3, 3);
-            this.txtProcesoOptimizacion.Multiline = true;
             this.txtProcesoOptimizacion.Name = "txtProcesoOptimizacion";
-            this.txtProcesoOptimizacion.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtProcesoOptimizacion.Size = new System.Drawing.Size(981, 137);
             this.txtProcesoOptimizacion.TabIndex = 1;
+            this.txtProcesoOptimizacion.Text = "";
             // 
             // tab4
             // 
@@ -410,13 +410,13 @@
             // 
             this.txt3D.BackColor = System.Drawing.Color.DarkBlue;
             this.txt3D.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txt3D.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt3D.ForeColor = System.Drawing.Color.White;
             this.txt3D.Location = new System.Drawing.Point(3, 3);
-            this.txt3D.Multiline = true;
             this.txt3D.Name = "txt3D";
-            this.txt3D.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt3D.Size = new System.Drawing.Size(981, 137);
-            this.txt3D.TabIndex = 1;
+            this.txt3D.TabIndex = 0;
+            this.txt3D.Text = "";
             // 
             // tab5
             // 
@@ -433,13 +433,13 @@
             // 
             this.txt3DOptimizado.BackColor = System.Drawing.Color.DarkBlue;
             this.txt3DOptimizado.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txt3DOptimizado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt3DOptimizado.ForeColor = System.Drawing.Color.White;
             this.txt3DOptimizado.Location = new System.Drawing.Point(3, 3);
-            this.txt3DOptimizado.Multiline = true;
             this.txt3DOptimizado.Name = "txt3DOptimizado";
-            this.txt3DOptimizado.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txt3DOptimizado.Size = new System.Drawing.Size(981, 137);
             this.txt3DOptimizado.TabIndex = 1;
+            this.txt3DOptimizado.Text = "";
             // 
             // panel3
             // 
@@ -900,17 +900,13 @@
             this.panel2.ResumeLayout(false);
             this.tab0.ResumeLayout(false);
             this.tab1.ResumeLayout(false);
-            this.tab1.PerformLayout();
             this.tab2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tablaErrores)).EndInit();
             this.tabSim.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tablaSimbolos)).EndInit();
             this.tab3.ResumeLayout(false);
-            this.tab3.PerformLayout();
             this.tab4.ResumeLayout(false);
-            this.tab4.PerformLayout();
             this.tab5.ResumeLayout(false);
-            this.tab5.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
@@ -971,10 +967,6 @@
         private System.Windows.Forms.TabPage tab3;
         private System.Windows.Forms.TabPage tab4;
         private System.Windows.Forms.TabPage tab5;
-        private System.Windows.Forms.TextBox txtConsola;
-        private System.Windows.Forms.TextBox txtProcesoOptimizacion;
-        private System.Windows.Forms.TextBox txt3D;
-        private System.Windows.Forms.TextBox txt3DOptimizado;
         private System.Windows.Forms.ToolStripMenuItem nuevoToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem guardarToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem guardarComoToolStripMenuItem;
@@ -1013,6 +1005,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ambito;
         private System.Windows.Forms.DataGridViewTextBoxColumn tamanio;
         private System.Windows.Forms.DataGridViewTextBoxColumn posicion;
+        private System.Windows.Forms.RichTextBox txt3D;
+        private System.Windows.Forms.RichTextBox txtConsolaSalida;
+        private System.Windows.Forms.RichTextBox txtProcesoOptimizacion;
+        private System.Windows.Forms.RichTextBox txt3DOptimizado;
     }
 }
 

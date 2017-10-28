@@ -1,10 +1,11 @@
-﻿using System;
+﻿using _Compi2_Proyecto2_201212859.codigo3D;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace _Compi2_Proyecto2_201212859.codigo3D
+namespace _Compi2_Proyecto2_201212859.ejecucion_alto_nivel
 {
     class estructura_clase
     {
@@ -17,6 +18,12 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             this.importar = importar;
             this.ambito = ambito;
             this.ruta = ruta;
+        }
+
+        public void generar3D()
+        {
+            pasadas pasadas = new pasadas(ambito.tablaSimbolo);
+            pasadas.ejecutar();
         }
 
         public void generar_tabla_simbolo(simbolo simbolo, string nombre_ambito) {
