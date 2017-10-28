@@ -97,6 +97,7 @@
             this.ejecucionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compilarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uMToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.móduloDeDiagramasUMLToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.códigoCompartidoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iniciarSesiónToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.compartirClaseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -799,9 +800,18 @@
             // 
             // uMToolStripMenuItem
             // 
+            this.uMToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.móduloDeDiagramasUMLToolStripMenuItem});
             this.uMToolStripMenuItem.Name = "uMToolStripMenuItem";
             this.uMToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.uMToolStripMenuItem.Text = "UML";
+            // 
+            // móduloDeDiagramasUMLToolStripMenuItem
+            // 
+            this.móduloDeDiagramasUMLToolStripMenuItem.Name = "móduloDeDiagramasUMLToolStripMenuItem";
+            this.móduloDeDiagramasUMLToolStripMenuItem.Size = new System.Drawing.Size(218, 22);
+            this.móduloDeDiagramasUMLToolStripMenuItem.Text = "Módulo de diagramas UML";
+            this.móduloDeDiagramasUMLToolStripMenuItem.Click += new System.EventHandler(this.móduloDeDiagramasUMLToolStripMenuItem_Click);
             // 
             // códigoCompartidoToolStripMenuItem
             // 
@@ -1013,6 +1023,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ambito;
         private System.Windows.Forms.DataGridViewTextBoxColumn tamanio;
         private System.Windows.Forms.DataGridViewTextBoxColumn posicion;
+        private System.Windows.Forms.ToolStripMenuItem móduloDeDiagramasUMLToolStripMenuItem;
     }
 }
 

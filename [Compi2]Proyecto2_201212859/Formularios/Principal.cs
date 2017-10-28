@@ -209,5 +209,11 @@ namespace _Compi2_Proyecto2_201212859
             reporteGramatica rg = new reporteGramatica();
             rg.Show();
         }
+
+        private void móduloDeDiagramasUMLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ModuloDiagramasUML mod = new ModuloDiagramasUML();
+            mod.Show();
+        }
     }
 }
