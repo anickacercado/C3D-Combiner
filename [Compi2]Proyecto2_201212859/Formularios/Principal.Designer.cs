@@ -58,9 +58,7 @@
             this.tab3 = new System.Windows.Forms.TabPage();
             this.txtProcesoOptimizacion = new System.Windows.Forms.RichTextBox();
             this.tab4 = new System.Windows.Forms.TabPage();
-            this.txt3D = new System.Windows.Forms.RichTextBox();
             this.tab5 = new System.Windows.Forms.TabPage();
-            this.txt3DOptimizado = new System.Windows.Forms.RichTextBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.panel12 = new System.Windows.Forms.Panel();
@@ -69,9 +67,7 @@
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.ControlEditor = new _Compi2_Proyecto2_201212859.Formularios.controlTabIDE();
             this.panel6 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panel10 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -108,6 +104,8 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.crearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crearCarpetaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.ControlEditor = new _Compi2_Proyecto2_201212859.Formularios.controlTabIDE();
             this.panel2.SuspendLayout();
             this.tab0.SuspendLayout();
             this.tab1.SuspendLayout();
@@ -116,8 +114,6 @@
             this.tabSim.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablaSimbolos)).BeginInit();
             this.tab3.SuspendLayout();
-            this.tab4.SuspendLayout();
-            this.tab5.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
@@ -145,7 +141,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(995, 169);
+            this.panel2.Size = new System.Drawing.Size(1084, 169);
             this.panel2.TabIndex = 1;
             // 
             // tab0
@@ -161,7 +157,7 @@
             this.tab0.Location = new System.Drawing.Point(0, 0);
             this.tab0.Name = "tab0";
             this.tab0.SelectedIndex = 0;
-            this.tab0.Size = new System.Drawing.Size(995, 169);
+            this.tab0.Size = new System.Drawing.Size(1084, 169);
             this.tab0.TabIndex = 0;
             // 
             // tab1
@@ -171,7 +167,7 @@
             this.tab1.Location = new System.Drawing.Point(4, 22);
             this.tab1.Name = "tab1";
             this.tab1.Padding = new System.Windows.Forms.Padding(3);
-            this.tab1.Size = new System.Drawing.Size(987, 143);
+            this.tab1.Size = new System.Drawing.Size(1076, 143);
             this.tab1.TabIndex = 0;
             this.tab1.Text = "CONSOLA DE SALIDA";
             this.tab1.UseVisualStyleBackColor = true;
@@ -184,7 +180,7 @@
             this.txtConsolaSalida.ForeColor = System.Drawing.Color.White;
             this.txtConsolaSalida.Location = new System.Drawing.Point(3, 3);
             this.txtConsolaSalida.Name = "txtConsolaSalida";
-            this.txtConsolaSalida.Size = new System.Drawing.Size(981, 137);
+            this.txtConsolaSalida.Size = new System.Drawing.Size(1070, 137);
             this.txtConsolaSalida.TabIndex = 1;
             this.txtConsolaSalida.Text = "";
             // 
@@ -194,7 +190,7 @@
             this.tab2.Location = new System.Drawing.Point(4, 22);
             this.tab2.Name = "tab2";
             this.tab2.Padding = new System.Windows.Forms.Padding(3);
-            this.tab2.Size = new System.Drawing.Size(987, 143);
+            this.tab2.Size = new System.Drawing.Size(1076, 143);
             this.tab2.TabIndex = 1;
             this.tab2.Text = "ERRORES";
             this.tab2.UseVisualStyleBackColor = true;
@@ -238,7 +234,7 @@
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.tablaErrores.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
-            this.tablaErrores.Size = new System.Drawing.Size(981, 137);
+            this.tablaErrores.Size = new System.Drawing.Size(1070, 137);
             this.tablaErrores.TabIndex = 0;
             // 
             // Linea
@@ -281,7 +277,7 @@
             this.tabSim.Location = new System.Drawing.Point(4, 22);
             this.tabSim.Name = "tabSim";
             this.tabSim.Padding = new System.Windows.Forms.Padding(3);
-            this.tabSim.Size = new System.Drawing.Size(987, 143);
+            this.tabSim.Size = new System.Drawing.Size(1076, 143);
             this.tabSim.TabIndex = 5;
             this.tabSim.Text = "TABLA DE SIMBOLOS";
             this.tabSim.UseVisualStyleBackColor = true;
@@ -327,7 +323,7 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.tablaSimbolos.RowHeadersDefaultCellStyle = dataGridViewCellStyle6;
-            this.tablaSimbolos.Size = new System.Drawing.Size(981, 137);
+            this.tablaSimbolos.Size = new System.Drawing.Size(1070, 137);
             this.tablaSimbolos.TabIndex = 1;
             // 
             // nombre
@@ -378,7 +374,7 @@
             this.tab3.Location = new System.Drawing.Point(4, 22);
             this.tab3.Name = "tab3";
             this.tab3.Padding = new System.Windows.Forms.Padding(3);
-            this.tab3.Size = new System.Drawing.Size(987, 143);
+            this.tab3.Size = new System.Drawing.Size(1076, 143);
             this.tab3.TabIndex = 2;
             this.tab3.Text = "SALIDA PROCESO DE OPTIMIZACIÓN";
             this.tab3.UseVisualStyleBackColor = true;
@@ -391,55 +387,29 @@
             this.txtProcesoOptimizacion.ForeColor = System.Drawing.Color.White;
             this.txtProcesoOptimizacion.Location = new System.Drawing.Point(3, 3);
             this.txtProcesoOptimizacion.Name = "txtProcesoOptimizacion";
-            this.txtProcesoOptimizacion.Size = new System.Drawing.Size(981, 137);
+            this.txtProcesoOptimizacion.Size = new System.Drawing.Size(1070, 137);
             this.txtProcesoOptimizacion.TabIndex = 1;
             this.txtProcesoOptimizacion.Text = "";
             // 
             // tab4
             // 
-            this.tab4.Controls.Add(this.txt3D);
             this.tab4.Location = new System.Drawing.Point(4, 22);
             this.tab4.Name = "tab4";
             this.tab4.Padding = new System.Windows.Forms.Padding(3);
-            this.tab4.Size = new System.Drawing.Size(987, 143);
+            this.tab4.Size = new System.Drawing.Size(1076, 143);
             this.tab4.TabIndex = 3;
             this.tab4.Text = "CODIGO 3D";
             this.tab4.UseVisualStyleBackColor = true;
             // 
-            // txt3D
-            // 
-            this.txt3D.BackColor = System.Drawing.Color.DarkBlue;
-            this.txt3D.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txt3D.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt3D.ForeColor = System.Drawing.Color.White;
-            this.txt3D.Location = new System.Drawing.Point(3, 3);
-            this.txt3D.Name = "txt3D";
-            this.txt3D.Size = new System.Drawing.Size(981, 137);
-            this.txt3D.TabIndex = 0;
-            this.txt3D.Text = "";
-            // 
             // tab5
             // 
-            this.tab5.Controls.Add(this.txt3DOptimizado);
             this.tab5.Location = new System.Drawing.Point(4, 22);
             this.tab5.Name = "tab5";
             this.tab5.Padding = new System.Windows.Forms.Padding(3);
-            this.tab5.Size = new System.Drawing.Size(987, 143);
+            this.tab5.Size = new System.Drawing.Size(1076, 143);
             this.tab5.TabIndex = 4;
             this.tab5.Text = "CODIGO 3D OPTIMIZADO";
             this.tab5.UseVisualStyleBackColor = true;
-            // 
-            // txt3DOptimizado
-            // 
-            this.txt3DOptimizado.BackColor = System.Drawing.Color.DarkBlue;
-            this.txt3DOptimizado.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txt3DOptimizado.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt3DOptimizado.ForeColor = System.Drawing.Color.White;
-            this.txt3DOptimizado.Location = new System.Drawing.Point(3, 3);
-            this.txt3DOptimizado.Name = "txt3DOptimizado";
-            this.txt3DOptimizado.Size = new System.Drawing.Size(981, 137);
-            this.txt3DOptimizado.TabIndex = 1;
-            this.txt3DOptimizado.Text = "";
             // 
             // panel3
             // 
@@ -449,7 +419,7 @@
             this.panel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(154, 324);
+            this.panel3.Size = new System.Drawing.Size(167, 324);
             this.panel3.TabIndex = 2;
             // 
             // treeView1
@@ -457,7 +427,7 @@
             this.treeView1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.treeView1.Location = new System.Drawing.Point(0, 22);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(144, 302);
+            this.treeView1.Size = new System.Drawing.Size(157, 302);
             this.treeView1.TabIndex = 21;
             this.treeView1.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.treeView1_NodeMouseClick);
             // 
@@ -465,7 +435,7 @@
             // 
             this.panel12.BackColor = System.Drawing.Color.Navy;
             this.panel12.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel12.Location = new System.Drawing.Point(144, 22);
+            this.panel12.Location = new System.Drawing.Point(157, 22);
             this.panel12.Name = "panel12";
             this.panel12.Size = new System.Drawing.Size(10, 302);
             this.panel12.TabIndex = 20;
@@ -476,7 +446,7 @@
             this.panel11.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel11.Location = new System.Drawing.Point(0, 0);
             this.panel11.Name = "panel11";
-            this.panel11.Size = new System.Drawing.Size(154, 22);
+            this.panel11.Size = new System.Drawing.Size(167, 22);
             this.panel11.TabIndex = 19;
             // 
             // panel4
@@ -485,7 +455,7 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 23);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(995, 497);
+            this.panel4.Size = new System.Drawing.Size(1084, 497);
             this.panel4.TabIndex = 3;
             // 
             // splitContainer3
@@ -502,7 +472,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.panel2);
-            this.splitContainer3.Size = new System.Drawing.Size(995, 497);
+            this.splitContainer3.Size = new System.Drawing.Size(1084, 497);
             this.splitContainer3.SplitterDistance = 324;
             this.splitContainer3.TabIndex = 2;
             // 
@@ -519,8 +489,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(995, 324);
-            this.splitContainer1.SplitterDistance = 154;
+            this.splitContainer1.Size = new System.Drawing.Size(1084, 324);
+            this.splitContainer1.SplitterDistance = 167;
             this.splitContainer1.TabIndex = 1;
             // 
             // splitContainer2
@@ -536,42 +506,21 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.panel6);
-            this.splitContainer2.Size = new System.Drawing.Size(837, 324);
-            this.splitContainer2.SplitterDistance = 800;
+            this.splitContainer2.Size = new System.Drawing.Size(913, 324);
+            this.splitContainer2.SplitterDistance = 872;
             this.splitContainer2.TabIndex = 0;
-            // 
-            // ControlEditor
-            // 
-            this.ControlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ControlEditor.Location = new System.Drawing.Point(0, 0);
-            this.ControlEditor.Name = "ControlEditor";
-            this.ControlEditor.SelectedIndex = 0;
-            this.ControlEditor.Size = new System.Drawing.Size(800, 324);
-            this.ControlEditor.TabIndex = 0;
-            this.ControlEditor.SelectedIndexChanged += new System.EventHandler(this.ControlEditor_SelectedIndexChanged);
-            this.ControlEditor.TabIndexChanged += new System.EventHandler(this.ControlEditor_TabIndexChanged);
             // 
             // panel6
             // 
-            this.panel6.Controls.Add(this.textBox1);
+            this.panel6.Controls.Add(this.panel13);
             this.panel6.Controls.Add(this.panel10);
             this.panel6.Controls.Add(this.panel7);
             this.panel6.Controls.Add(this.panel9);
             this.panel6.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel6.Location = new System.Drawing.Point(0, 0);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(33, 324);
+            this.panel6.Size = new System.Drawing.Size(37, 324);
             this.panel6.TabIndex = 5;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(47, 22);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBox1.Size = new System.Drawing.Size(0, 302);
-            this.textBox1.TabIndex = 19;
             // 
             // panel10
             // 
@@ -699,7 +648,7 @@
             // 
             this.panel5.AutoSize = true;
             this.panel5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel5.Location = new System.Drawing.Point(995, 23);
+            this.panel5.Location = new System.Drawing.Point(1084, 23);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(0, 497);
             this.panel5.TabIndex = 4;
@@ -710,7 +659,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(995, 23);
+            this.panel1.Size = new System.Drawing.Size(1084, 23);
             this.panel1.TabIndex = 0;
             // 
             // menuStrip1
@@ -723,7 +672,7 @@
             this.reportesToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(995, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1084, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -885,11 +834,30 @@
             this.crearCarpetaToolStripMenuItem1.Text = "Crear Carpeta";
             this.crearCarpetaToolStripMenuItem1.Click += new System.EventHandler(this.crearCarpetaToolStripMenuItem1_Click);
             // 
+            // panel13
+            // 
+            this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel13.Location = new System.Drawing.Point(47, 22);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(0, 302);
+            this.panel13.TabIndex = 19;
+            // 
+            // ControlEditor
+            // 
+            this.ControlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ControlEditor.Location = new System.Drawing.Point(0, 0);
+            this.ControlEditor.Name = "ControlEditor";
+            this.ControlEditor.SelectedIndex = 0;
+            this.ControlEditor.Size = new System.Drawing.Size(872, 324);
+            this.ControlEditor.TabIndex = 0;
+            this.ControlEditor.SelectedIndexChanged += new System.EventHandler(this.ControlEditor_SelectedIndexChanged);
+            this.ControlEditor.TabIndexChanged += new System.EventHandler(this.ControlEditor_TabIndexChanged);
+            // 
             // principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(995, 520);
+            this.ClientSize = new System.Drawing.Size(1084, 520);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel1);
@@ -905,8 +873,6 @@
             this.tabSim.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.tablaSimbolos)).EndInit();
             this.tab3.ResumeLayout(false);
-            this.tab4.ResumeLayout(false);
-            this.tab5.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel4.ResumeLayout(false);
             this.splitContainer3.Panel1.ResumeLayout(false);
@@ -922,7 +888,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
             this.panel6.ResumeLayout(false);
-            this.panel6.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -961,7 +926,6 @@
         private System.Windows.Forms.Panel panel9;
         private System.Windows.Forms.Panel panel10;
         private System.Windows.Forms.Panel panel8;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Panel panel11;
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.TabPage tab3;
@@ -1005,10 +969,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ambito;
         private System.Windows.Forms.DataGridViewTextBoxColumn tamanio;
         private System.Windows.Forms.DataGridViewTextBoxColumn posicion;
-        private System.Windows.Forms.RichTextBox txt3D;
         private System.Windows.Forms.RichTextBox txtConsolaSalida;
         private System.Windows.Forms.RichTextBox txtProcesoOptimizacion;
-        private System.Windows.Forms.RichTextBox txt3DOptimizado;
+        private System.Windows.Forms.Panel panel13;
     }
 }
 

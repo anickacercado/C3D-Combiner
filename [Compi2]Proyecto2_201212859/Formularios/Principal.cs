@@ -11,17 +11,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using FastColoredTextBoxNS;
+using _Compi2_Proyecto2_201212859.C3D;
+using Irony.Parsing;
 
 namespace _Compi2_Proyecto2_201212859
 {
     public partial class principal : Form
     {
         MenuItem myMenuItem = new MenuItem("Show Me");
+        IronyFCTB txt3D;
+        IronyFCTB txt3D_optimizado;
+        IronyFCTB txt3D_debug;
 
         public static principal componentes;
         public principal()
         {
             InitializeComponent();
+            texto_3D();
             tablaErrores.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             tablaSimbolos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             ListDirectory();
@@ -77,7 +84,8 @@ namespace _Compi2_Proyecto2_201212859
             }
         }
 
-        private void crearDirectorio(string Carpeta) {
+        private void crearDirectorio(string Carpeta)
+        {
             string Path = memoria.pathProyecto + Carpeta;
             try
             {
@@ -86,7 +94,8 @@ namespace _Compi2_Proyecto2_201212859
                     Console.WriteLine("That path exists already.");
                     return;
                 }
-                else {
+                else
+                {
                     DirectoryInfo di = Directory.CreateDirectory(Path);
                     Console.WriteLine("The directory was created successfully at {0}.", Directory.GetCreationTime(Path));
                 }
@@ -128,7 +137,8 @@ namespace _Compi2_Proyecto2_201212859
             ControlEditor.borrarTab();
         }
 
-        public void limpiarGrid() {
+        public void limpiarGrid()
+        {
             tablaErrores.Rows.Clear();
             tablaErrores.Refresh();
             tablaSimbolos.Rows.Clear();
@@ -137,7 +147,7 @@ namespace _Compi2_Proyecto2_201212859
 
         public static void insertarError(string linea, string columna, string tipo, string descripcion, string ruta)
         {
-            componentes.tablaErrores.Rows.Add(linea,columna,tipo,descripcion,ruta);
+            componentes.tablaErrores.Rows.Add(linea, columna, tipo, descripcion, ruta);
         }
 
         public static void insertarTablaSimbolo(string nombre, string tipo, string rol, string visibilidad, string ambito, int tamanio, int posicion)
@@ -163,7 +173,7 @@ namespace _Compi2_Proyecto2_201212859
             memoria.lista_estructura_clase = new List<estructura_clase>();
         }
 
-     
+
         private void compartirClaseToolStripMenuItem_Click(object sender, EventArgs e)
         {
             tabIDE tabAux = (tabIDE)ControlEditor.SelectedTab;
@@ -196,12 +206,12 @@ namespace _Compi2_Proyecto2_201212859
 
         private void ControlEditor_TabIndexChanged(object sender, EventArgs e)
         {
-     
+
         }
 
         private void ControlEditor_SelectedIndexChanged(object sender, EventArgs e)
         {
-         
+
         }
 
         private void iniciarSesiónToolStripMenuItem_Click(object sender, EventArgs e)
@@ -219,6 +229,34 @@ namespace _Compi2_Proyecto2_201212859
         {
             reporteGramatica rg = new reporteGramatica();
             rg.Show();
+        }
+
+        private void texto_3D()
+        {
+            gramaticaC3D gramatica = new gramaticaC3D();
+            LanguageData language = new LanguageData(gramatica);
+            Parser parser = new Parser(language);
+
+            txt3D = new IronyFCTB();
+            txt3D.Grammar = gramatica;
+            txt3D.Multiline = true;
+            txt3D.WordWrap = false;
+            txt3D.Dock = DockStyle.Fill;
+            this.tab4.Controls.Add(txt3D);
+
+            txt3D_optimizado = new IronyFCTB();
+            txt3D_optimizado.Grammar = gramatica;
+            txt3D_optimizado.Multiline = true;
+            txt3D_optimizado.WordWrap = false;
+            txt3D_optimizado.Dock = DockStyle.Fill;
+            this.tab5.Controls.Add(txt3D_optimizado);
+
+            txt3D_debug = new IronyFCTB();
+            txt3D_debug.Grammar = gramatica;
+            txt3D_debug.Multiline = true;
+            txt3D_debug.WordWrap = false;
+            txt3D_debug.Dock = DockStyle.Fill;
+            this.panel13.Controls.Add(txt3D_debug);
         }
     }
 }

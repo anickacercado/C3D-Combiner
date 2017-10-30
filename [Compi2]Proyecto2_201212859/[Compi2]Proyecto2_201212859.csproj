@@ -58,6 +58,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="C3D\gramaticaC3D.cs" />
     <Compile Include="codigo3D\asignacion.cs" />
     <Compile Include="codigo3D\aumento_decremento.cs" />
     <Compile Include="codigo3D\cadena3D.cs" />

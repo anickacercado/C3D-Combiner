@@ -29,6 +29,7 @@ namespace FastColoredTextBoxNS
         Style purpleStyle = new TextStyle(Brushes.Purple, Brushes.White, FontStyle.Regular);
         Style orangeStyle = new TextStyle(Brushes.Orange, Brushes.White, FontStyle.Regular);
         Style grayStyle = new TextStyle(Brushes.Gray, Brushes.White, FontStyle.Regular);
+        Style redStyle = new TextStyle(Brushes.Red, Brushes.White, FontStyle.Regular);
 
 
 
@@ -187,6 +188,9 @@ namespace FastColoredTextBoxNS
                                 break;
                             case "er_tipo":
                                 GetTokenRange(t).SetStyle(SyntaxHighlighter.KeywordStyle);
+                                break;
+                            case "er_etiq":
+                                GetTokenRange(t).SetStyle(redStyle);
                                 break;
                             case "er_importar":
                                 GetTokenRange(t).SetStyle(SyntaxHighlighter.KeywordStyle);

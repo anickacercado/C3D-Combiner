@@ -18,20 +18,41 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             this.ambito = ambito;
         }
 
-        public void generar3D()
+        public String  generar3D()
         {
-
             String codigo = "";
-            cadena3D expresion3D = expresion.resCondicion(); 
-            if (expresion.tipo.Equals("BOOLEANO")) {
+            String etqRetorno = memoria.getEtq();
+            cadena3D expresion3D = expresion.resCondicion();
 
+            if (expresion3D.tipo.Equals("BOOLEANO"))
+            {
+                codigo += "//Inicio del ciclo Mientras" + "\r\n";
+                codigo += etqRetorno + ":" + "\r\n";
+                codigo += expresion3D.codigo;
 
+                //Para el caso de While(True)
+                if (expresion3D.etqVerdadera == "" && expresion3D.etqFalsa == "") {
+                    expresion3D.etqVerdadera = memoria.getEtq();
+                    expresion3D.etqFalsa = memoria.getEtq();
 
+                    codigo += "\t" + "if " + expresion3D.temporal + "==1 goto " + expresion3D.etqVerdadera + ";\n";
+                    codigo += "\t" + "goto " + expresion3D.etqFalsa + ";\n";
+                }
+                codigo += expresion3D.etqVerdadera + ":" + "\r\n";
+
+                /*Se concatena las sentencias dentro del mientras*/
+                pasadas pasadas = new pasadas(ambito.tablaSimbolo);
+                codigo += pasadas.ejecutar();
+                /*Se concatena las sentencias dentro del mientras*/
+
+                codigo += "goto " + etqRetorno + ";\n";
+                codigo += expresion3D.etqFalsa + ":" + "\r\n";
+                codigo += "//Fin del ciclo Mientras" + "\r\n\n";
             }
-
-            memoria.cadena3D += expresion3D.codigo;
-            pasadas pasadas = new pasadas(ambito.tablaSimbolo);
-            pasadas.ejecutar();
+            else {
+                //Por si hubiera error
+            }
+            return codigo;
         }
     }
 }

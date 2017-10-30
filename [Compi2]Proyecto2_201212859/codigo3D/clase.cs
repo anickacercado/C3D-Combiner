@@ -24,10 +24,12 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             this.columna = columna;
         }
 
-        public void generar3D()
+        public String generar3D()
         {
+            String codigo = "";
             pasadas pasadas = new pasadas(ambito.tablaSimbolo);
-            pasadas.ejecutar();
+            codigo += pasadas.ejecutar();
+            return codigo;
         }
     }
 }

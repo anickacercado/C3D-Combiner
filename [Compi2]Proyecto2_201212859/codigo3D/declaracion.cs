@@ -30,10 +30,12 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             this.expresion = expresion;
         }
 
-        public void generar3D()
+        public String generar3D()
         {
+          String codigo = "";
           cadena3D expresion3D = expresion.resCondicion();
-          memoria.cadena3D += expresion3D.codigo;
+          codigo += expresion3D.codigo;
+          return codigo;
         }
     }
 }
