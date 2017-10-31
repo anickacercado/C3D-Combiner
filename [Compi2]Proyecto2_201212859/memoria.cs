@@ -1,4 +1,5 @@
 ﻿using _Compi2_Proyecto2_201212859.codigo3D;
+using _Compi2_Proyecto2_201212859.ejecucion_alto_nivel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,14 +15,24 @@ namespace _Compi2_Proyecto2_201212859
         public static String ruta = "";         //Ruta del archivo que se esta analizando
 
         /*Codigo 3D*/
-        public static int temporal;
-        public static String cadena3D;
+        public static int temporal = 0;
+        public static int etiqueta = 0;
+        public static String cadena3D = "";
+        public static Char finCadena = '\0';
 
-        public static String getTemp() {
-            memoria.temporal++;
+        public static String getTemp() {    
             String temp = "t" + memoria.temporal.ToString();
+            memoria.temporal++;
             return temp;
         }
+
+        public static String getEtq()
+        {      
+            String temp = "l" + memoria.etiqueta.ToString();
+            memoria.etiqueta++;
+            return temp;
+        }
+
 
         public static List<estructura_clase> lista_estructura_clase = new List<estructura_clase>();
 

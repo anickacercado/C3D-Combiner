@@ -29,5 +29,11 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             this.columna = columna;
             this.expresion = expresion;
         }
+
+        public void generar3D()
+        {
+          cadena3D expresion3D = expresion.resCondicion();
+          memoria.cadena3D += expresion3D.codigo;
+        }
     }
 }

@@ -156,8 +156,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             }
             else if (tipo.Equals("CADENA"))
             {
-                this.CADENA = (String)valor;
-                this.CADENA = this.CADENA.Substring(1, this.CADENA.Length - 2);
+                this.CADENA = valor.ToString();
             }
             else if (tipo.Equals("BOOLEANO"))
             {
@@ -178,7 +177,6 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             else if (tipo.Equals("CARACTER"))
             {
                 this.CADENA = valor.ToString();
-                this.CADENA = this.CADENA.Substring(1, this.CADENA.Length - 2);
                 this.CARACTER = this.CADENA[0];
                 this.ENTERO = this.CARACTER;
             }
@@ -209,84 +207,84 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             {
                 if (nodo.expIzq != null)
                 {
-                    temp = resResta(expIzq, expDer);
+                    c3D = resResta(expIzq, expDer);
                 }
                 else
                 {
-                    temp = resResta(expDer);
+                    c3D = resResta(expDer);
                 }
             }
             else if (nodo.tipo.Equals("*"))
             {
-                temp = resMultiplicacion(expIzq, expDer);
+                c3D = resMultiplicacion(expIzq, expDer);
             }
             else if (nodo.tipo.Equals("/"))
             {
-                temp = resDivision(expIzq, expDer);
+                c3D = resDivision(expIzq, expDer);
             }
             else if (nodo.tipo.Equals("^") || nodo.tipo.ToUpper().Equals("POW"))
             {
-                temp = resPotencia(expIzq, expDer);
+                c3D = resPotencia(expIzq, expDer);
             }
             else if (nodo.tipo.Equals("++"))
             {
-                temp = resAumento(expIzq);
+                c3D = resAumento(expIzq);
             }
             else if (nodo.tipo.Equals("--"))
             {
-                temp = resDecremento(expIzq);
+                c3D = resDecremento(expIzq);
             }
             else if (nodo.tipo.Equals(">"))
             {
-                temp = resMayor(expIzq, expDer);
+                c3D = resRelacional(expIzq, expDer, ">");
             }
             else if (nodo.tipo.Equals("<"))
             {
-                temp = resMenor(expIzq, expDer);
+                c3D = resRelacional(expIzq, expDer, "<");
             }
             else if (nodo.tipo.Equals(">="))
             {
-                temp = resMayorIgual(expIzq, expDer);
+                c3D = resRelacional(expIzq, expDer, ">=");
             }
             else if (nodo.tipo.Equals("<="))
             {
-                temp = resMenorIgual(expIzq, expDer);
+                c3D = resRelacional(expIzq, expDer, "<=");
             }
             else if (nodo.tipo.Equals("=="))
             {
-                temp = resIgual(expIzq, expDer);
+                c3D = resRelacional(expIzq, expDer, "==");
             }
             else if (nodo.tipo.Equals("!="))
             {
-                temp = resDiferente(expIzq, expDer);
+                c3D = resRelacional(expIzq, expDer, "!=");
             }
             else if (nodo.tipo.ToUpper().Equals("OR") || nodo.tipo.Equals("||"))
             {
-                temp = resOr(expIzq, expDer);
+                c3D = resOr(expIzq, expDer);
             }
             else if (nodo.tipo.ToUpper().Equals("XOR") || nodo.tipo.Equals("??"))
             {
-                temp = resXor(expIzq, expDer);
+                c3D = resXor(expIzq, expDer);
             }
             else if (nodo.tipo.ToUpper().Equals("AND") || nodo.tipo.Equals("&&"))
             {
-                temp = resAnd(expIzq, expDer);
+                c3D = resAnd(expIzq, expDer);
             }
             else if (nodo.tipo.ToUpper().Equals("NOT") || nodo.tipo.Equals("!"))
             {
-                temp = resNot(expDer);
+                c3D = resNot(expDer);
             }
             else if (nodo.tipo.Equals("ENTERO"))
             {
                 c3D.temporal = memoria.getTemp();
-                c3D.codigo = memoria.temporal + "=" + nodo.CADENA + "; //ENTERO";
+                c3D.codigo = c3D.temporal + "=" + nodo.ENTERO.ToString() + "; //Entero" + "\r\n";
                 c3D.tipo = nodo.tipo;
                 temp = new expresion(nodo);
             }
             else if (nodo.tipo.Equals("DECIMAL"))
             {
                 c3D.temporal = memoria.getTemp();
-                c3D.codigo = memoria.temporal + "=" + nodo.CADENA + "; //DECIMAL";
+                c3D.codigo = c3D.temporal + "=" + nodo.DECIMAL.ToString() + "; //Decimal" + "\r\n";
                 c3D.tipo = nodo.tipo;
                 temp = new expresion(nodo);
             }
@@ -295,34 +293,35 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
                 c3D.temporal = memoria.getTemp();
 
                 /*CODIGO CADENA*/
-                Char finCadena = '\0';
                 String codigo = "";
-                codigo += "\t\n" + c3D.temporal + "= H; //INICIO DE CADENA";
-                codigo += "\t\n" + "H = H + 1;";
+                codigo +=  c3D.temporal + " = H; //Inicio de cadena" + "\r\n";
+                codigo += "H = H + 1;" + "\r\n";
 
-                for (int i=0; i<nodo.CADENA.Length - 1; i++) {
-                    codigo += "\t\n" + "Heap[H] = " + (int)nodo.CADENA[i] + ";";
-                    codigo += "\t\n" + "H = H + 1;";
+                for (int i=0; i<nodo.CADENA.Length; i++) {
+                    codigo += "Heap[H] = " + (int)nodo.CADENA[i] + ";" + "\r\n";
+                    codigo += "H = H + 1;" + "\r\n";
                 }
 
-                codigo += "\t\n" + "Heap[H] = " + (int)finCadena + "; //FIN DE CADENA";
-                codigo += "\t\n" + "H = H + 1;";
+                codigo += "Heap[H] = " + (int)memoria.finCadena + "; //Fin de cadena" + "\r\n";
+                codigo += "H = H + 1;" + "\r\n";
                 /*CODIGO CADENA*/
 
+                c3D.tipo = nodo.tipo;
+                c3D.codigo = codigo;
                 temp = new expresion(nodo);
 
             }
             else if (nodo.tipo.Equals("BOOLEANO"))
             {
                 c3D.temporal = memoria.getTemp();
-                c3D.codigo = memoria.temporal + "=" + nodo.ENTERO.ToString() + "; //BOOLEANO";
+                c3D.codigo = c3D.temporal + "=" + nodo.ENTERO.ToString() + "; //Booleano" + "\r\n";
                 c3D.tipo = nodo.tipo;
                 temp = new expresion(nodo);
             }
             else if (nodo.tipo.Equals("CARACTER"))
             {
                 c3D.temporal = memoria.getTemp();
-                c3D.codigo = memoria.temporal + "=" + nodo.ENTERO.ToString() + "; //CARACTER";
+                c3D.codigo = c3D.temporal + "=" + nodo.ENTERO.ToString() + "; //Caracter" + "\r\n";
                 c3D.tipo = nodo.tipo;
                 temp = new expresion(nodo);
             }
@@ -334,216 +333,237 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             return resCondicion(this);
         }
 
-        public expresion resMayor(expresion expIzq, expresion expDer)
+        public cadena3D resRelacional(expresion expIzq, expresion expDer, String tipo)
         {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-            if (expIzq.tipo.Equals("ENTERO"))
+            String codigo = "";
+            cadena3D temp = new cadena3D();
+            cadena3D c3DIzq = resCondicion(expIzq);
+            cadena3D c3DDer = resCondicion(expDer);
+            if (c3DIzq.tipo.Equals("ENTERO"))
             {
-                switch (expDer.tipo)
+                switch (c3DDer.tipo)
                 {
                     case "ENTERO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO > expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO > expDer.DECIMAL);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO > expDer.ENTERO);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO > expDer.CARACTER);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " > " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("DECIMAL"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL > expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL > expDer.DECIMAL);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL > expDer.ENTERO);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL > expDer.CARACTER);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " > " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("BOOLEANO"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO > expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO > expDer.DECIMAL);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO > expDer.ENTERO);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " > " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("CARACTER"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER > expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER > expDer.DECIMAL);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER > expDer.CARACTER);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " > " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            return temp;
-        }
+                        {
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
 
-        public expresion resMenor(expresion expIzq, expresion expDer)
-        {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-            if (expIzq.tipo.Equals("ENTERO"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO < expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO < expDer.DECIMAL);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO < expDer.ENTERO);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO < expDer.CARACTER);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " < " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("DECIMAL"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL < expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL < expDer.DECIMAL);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL < expDer.ENTERO);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL < expDer.CARACTER);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " < " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("BOOLEANO"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO < expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO < expDer.DECIMAL);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO < expDer.ENTERO);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " < " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("CARACTER"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER < expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER < expDer.DECIMAL);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER < expDer.CARACTER);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " > " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            return temp;
-        }
+                            codigo += "//Inicio relacional entero " + tipo + " entero" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += "if " + c3DIzq.temporal + "" + tipo + "" + c3DDer.temporal + " goto " + etq1 + ";" + "\r\n";
+                            codigo += "goto " + etq2 + ";" + "\r\n";
+                            codigo += "//Fin relacional entero " + tipo + " entero" + "\r\n\n";
 
-        public expresion resIgual(expresion expIzq, expresion expDer)
-        {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-            if (expIzq.tipo.Equals("ENTERO"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO == expDer.ENTERO);
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq1;
+                            temp.etqFalsa = etq2;
+                            temp.codigo += codigo;
+                        }
                         break;
                     case "DECIMAL":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO == expDer.DECIMAL);
+                        {
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+
+                            codigo += "//Inicio relacional entero " + tipo + " decimal" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += "if " + c3DIzq.temporal + "" + tipo + "" + c3DDer.temporal + " goto " + etq1 + ";" + "\r\n";
+                            codigo += "goto " + etq2 + ";" + "\r\n";
+                            codigo += "//Fin relacional entero " + tipo + " decimal" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq1;
+                            temp.etqFalsa = etq2;
+                            temp.codigo += codigo;
+                        }
+                        break;
+                    case "CADENA":
+                        {
+                            String tempEntero = memoria.getTemp();
+                            String tempCad1 = memoria.getTemp();
+                            String tempSumaCad1 = memoria.getTemp();
+                            String tempHeap1 = memoria.getTemp();
+
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+                            String etq3 = memoria.getEtq();
+                            String etq4 = memoria.getEtq();
+
+                            codigo += "//Inicio comparacion de entero " + tipo + " cadena" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo + "\r\n";
+
+                            codigo += tempEntero + "=" + c3DIzq.temporal + "; //Entero" + "\r\n";
+                            codigo += tempCad1 + "=" + c3DDer.temporal + "; //Posicion en Heap caracter cadena 1" + "\r\n";
+                            codigo += tempSumaCad1 + "=0" + "; //Suma cadena 1" + "\r\n";
+                            codigo += "\r\n";
+                            codigo += etq1 + ":" + "\r\n";
+                            codigo += "\t" + tempHeap1 + "=" + "Heap[" + tempCad1 + "]" + "; //Valor de ascii del Heap cadena 1" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap1 + "" + tipo + "0 goto " + etq2 + ";" + "\r\n";
+                            codigo += "\t" + tempSumaCad1 + "=" + tempSumaCad1 + "+" + tempHeap1 + ";" + "\r\n";
+                            codigo += "\t" + tempCad1 + "=" + tempCad1 + "+1;" + "\r\n";
+                            codigo += "\t" + "goto " + etq1 + ";" + "\r\n\n";
+
+                            codigo += etq2 + ":" + "\r\n";
+                            codigo += "\t" + "if " + tempEntero + "" + tipo + "" + tempSumaCad1 + " goto " + etq3 + ";" + "\r\n";
+                            codigo += "\t" + "goto " + etq4 + ";" + "\r\n";
+                            codigo += "//Fin comparacion de entero " + tipo + " cadena" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq3;
+                            temp.etqFalsa = etq4;
+                            temp.codigo += codigo;
+                        }
                         break;
                     case "BOOLEANO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO == expDer.ENTERO);
+                        {
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+
+                            codigo += "//Inicio relacional entero " + tipo + " booleano" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += "if " + c3DIzq.temporal + "" + tipo + "" + c3DDer.temporal + " goto " + etq1 + ";" + "\r\n";
+                            codigo += "goto " + etq2 + ";" + "\r\n";
+                            codigo += "//Fin relacional entero " + tipo + " booleano" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq1;
+                            temp.etqFalsa = etq2;
+                            temp.codigo += codigo;
+                        }
                         break;
                     case "CARACTER":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO == expDer.CARACTER);
+                        {
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+
+                            codigo += "//Inicio relacional entero " + tipo + " caracter" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += "if " + c3DIzq.temporal + "" + tipo + "" + c3DDer.temporal + " goto " + etq1 + ";" + "\r\n";
+                            codigo += "goto " + etq2 + ";" + "\r\n";
+                            codigo += "//Fin relacional entero " + tipo + " caracter" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq1;
+                            temp.etqFalsa = etq2;
+                            temp.codigo += codigo;
+                        }
                         break;
                     default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " == " + expDer.tipo, fila, columna);
+                        memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " " + tipo + " " + c3DDer.tipo, fila, columna);
                         break;
                 }
             }
-            else if (expIzq.tipo.Equals("DECIMAL"))
+            else if (c3DIzq.tipo.Equals("DECIMAL"))
             {
-                switch (expDer.tipo)
+                switch (c3DDer.tipo)
                 {
                     case "ENTERO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL == expDer.ENTERO);
+                        {
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+
+                            codigo += "//Inicio relacional decimal " + tipo + " entero" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += "if " + c3DIzq.temporal + "" + tipo + "" + c3DDer.temporal + " goto " + etq1 + ";" + "\r\n";
+                            codigo += "goto " + etq2 + ";" + "\r\n";
+                            codigo += "//Fin relacional decimal " + tipo + " entero" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq1;
+                            temp.etqFalsa = etq2;
+                            temp.codigo += codigo;
+                        }
                         break;
                     case "DECIMAL":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL == expDer.DECIMAL);
+                        {
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+
+                            codigo += "//Inicio relacional decimal " + tipo + " decimal" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += "if " + c3DIzq.temporal + "" + tipo + "" + c3DDer.temporal + " goto " + etq1 + ";" + "\r\n";
+                            codigo += "goto " + etq2 + ";" + "\r\n";
+                            codigo += "//Fin relacional decimal " + tipo + " decimal" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq1;
+                            temp.etqFalsa = etq2;
+                            temp.codigo += codigo;
+                        }
+                        break;
+                    case "CADENA":
+                        {
+                            String tempEntero = memoria.getTemp();
+                            String tempCad1 = memoria.getTemp();
+                            String tempSumaCad1 = memoria.getTemp();
+                            String tempHeap1 = memoria.getTemp();
+
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+                            String etq3 = memoria.getEtq();
+                            String etq4 = memoria.getEtq();
+
+                            codigo += "//Inicio comparacion de decimal " + tipo + " cadena" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo + "\r\n";
+
+                            codigo += tempEntero + "=" + c3DIzq.temporal + "; //Decimal" + "\r\n";
+                            codigo += tempCad1 + "=" + c3DDer.temporal + "; //Posicion en Heap caracter cadena 1" + "\r\n";
+                            codigo += tempSumaCad1 + "=0" + "; //Suma cadena 1" + "\r\n";
+                            codigo += "\r\n";
+                            codigo += etq1 + ":" + "\r\n";
+                            codigo += "\t" + tempHeap1 + "=" + "Heap[" + tempCad1 + "]" + "; //Valor de ascii del Heap cadena 1" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap1 + "" + tipo + "0 goto " + etq2 + ";" + "\r\n";
+                            codigo += "\t" + tempSumaCad1 + "=" + tempSumaCad1 + "+" + tempHeap1 + ";" + "\r\n";
+                            codigo += "\t" + tempCad1 + "=" + tempCad1 + "+1;" + "\r\n";
+                            codigo += "\t" + "goto " + etq1 + ";" + "\r\n\n";
+
+                            codigo += etq2 + ":" + "\r\n";
+                            codigo += "\t" + "if " + tempEntero + "" + tipo + "" + tempSumaCad1 + " goto " + etq3 + ";" + "\r\n";
+                            codigo += "\t" + "goto " + etq4 + ";" + "\r\n";
+                            codigo += "//Fin comparacion de decimal " + tipo + " cadena" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq3;
+                            temp.etqFalsa = etq4;
+                            temp.codigo += codigo;
+                        }
                         break;
                     case "BOOLEANO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL == expDer.ENTERO);
+                        {
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+
+                            codigo += "//Inicio relacional decimal " + tipo + " booleano" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += "if " + c3DIzq.temporal + "" + tipo + "" + c3DDer.temporal + " goto " + etq1 + ";" + "\r\n";
+                            codigo += "goto " + etq2 + ";" + "\r\n";
+                            codigo += "//Fin relacional decimal " + tipo + " booleano" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq1;
+                            temp.etqFalsa = etq2;
+                            temp.codigo += codigo;
+                        }
                         break;
                     case "CARACTER":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL == expDer.CARACTER);
+                        {
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+
+                            codigo += "//Inicio relacional decimal " + tipo + " caracter" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += "if " + c3DIzq.temporal + "" + tipo + "" + c3DDer.temporal + " goto " + etq1 + ";" + "\r\n";
+                            codigo += "goto " + etq2 + ";" + "\r\n";
+                            codigo += "//Fin relacional decimal " + tipo + " caracter" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq1;
+                            temp.etqFalsa = etq2;
+                            temp.codigo += codigo;
+                        }
                         break;
                     default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " == " + expDer.tipo, fila, columna);
+                        memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " " + tipo + " " + c3DDer.tipo, fila, columna);
                         break;
                 }
             }
@@ -552,31 +572,154 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
                 switch (expDer.tipo)
                 {
                     case "CADENA":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CADENA.Equals(expDer.CADENA));
+                        {
+                            String tempCad1 = memoria.getTemp();
+                            String tempCad2 = memoria.getTemp();
+                            String tempSumaCad1 = memoria.getTemp();
+                            String tempHeap1 = memoria.getTemp();
+                            String tempSumaCad2 = memoria.getTemp();
+                            String tempHeap2 = memoria.getTemp();
+
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+                            String etq3 = memoria.getEtq();
+                            String etq4 = memoria.getEtq();
+                            String etq5 = memoria.getEtq();
+                            String etq6 = memoria.getEtq();
+
+                            codigo += "//Inicio relacional de cadena " + tipo + " cadena" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo + "\r\n";
+
+                            codigo += tempCad1 + "=" + c3DIzq.temporal + "; //Posicion en Heap caracter cadena 1" + "\r\n";
+                            codigo += tempCad2 + "=" + c3DDer.temporal + "; //Posicion en Heap caracter cadena 2" + "\r\n";
+                            codigo += tempSumaCad1 + "=0" + "; //Suma cadena 1" + "\r\n";
+                            codigo += "\r\n";
+                            codigo += etq1 + ":" + "\r\n";
+                            codigo += "\t" + tempHeap1 + "=" + "Heap[" + tempCad1 + "]" + "; //Valor de ascii del Heap cadena 1" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap1 + "" + tipo + "0 goto " + etq2 + ";" + "\r\n";
+                            codigo += "\t" + tempSumaCad1 + "=" + tempSumaCad1 + "+" + tempHeap1 + ";" + "\r\n";
+                            codigo += "\t" + tempCad1 + "=" + tempCad1 + "+1;" + "\r\n";
+                            codigo += "\t" + "goto " + etq1 + ";" + "\r\n\n";
+
+                            codigo += etq2 + ":" + "\r\n";
+                            codigo += "\t" + tempSumaCad2 + "=0" + "; //Suma cadena 2" + "\r\n";
+                            codigo += etq3 + ":" + "\r\n";
+                            codigo += "\t" + tempHeap2 + "=" + "Heap[" + tempCad2 + "]" + "; //Valor de ascii del Heap cadena 2" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap2 + "" + tipo + "0 goto " + etq4 + ";" + "\r\n";
+                            codigo += "\t" + tempSumaCad2 + "=" + tempSumaCad2 + "+" + tempHeap2 + ";" + "\r\n";
+                            codigo += "\t" + tempCad2 + "=" + tempCad2 + "+1;" + "\r\n";
+                            codigo += "\t" + "goto " + etq3 + ";" + "\r\n\n";
+
+                            codigo += etq4 + ":" + "\r\n";
+                            codigo += "\t" + "if " + tempSumaCad1 + "" + tipo + "" + tempSumaCad2 + " goto " + etq5 + ";" + "\r\n";
+                            codigo += "\t" + "goto " + etq6 + ";" + "\r\n";
+                            codigo += "//Fin relacional de cadena " + tipo + " cadena" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq5;
+                            temp.etqFalsa = etq6;
+                            temp.codigo += codigo;
+                        }
                         break;
                     case "CARACTER":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CADENA.Equals(expDer.CARACTER.ToString()));
+                        {
+                            String tempCad1 = memoria.getTemp();
+                            String tempEntero = memoria.getTemp();
+                            String tempSumaCad1 = memoria.getTemp();
+                            String tempHeap1 = memoria.getTemp();
+
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+                            String etq3 = memoria.getEtq();
+                            String etq4 = memoria.getEtq();
+
+                            codigo += "//Inicio relacional de cadena " + tipo + " caracter" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo + "\r\n";
+
+                            codigo += tempCad1 + "=" + c3DIzq.temporal + "; //Posicion en Heap caracter cadena 1" + "\r\n";
+                            codigo += tempEntero + "=" + c3DDer.temporal + "; //Caracter" + "\r\n";
+                            codigo += tempSumaCad1 + "=0" + "; //Suma cadena 1" + "\r\n";
+                            codigo += "\r\n";
+                            codigo += etq1 + ":" + "\r\n";
+                            codigo += "\t" + tempHeap1 + "=" + "Heap[" + tempCad1 + "]" + "; //Valor de ascii del Heap cadena 1" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap1 + "" + tipo + "0 goto " + etq2 + ";" + "\r\n";
+                            codigo += "\t" + tempSumaCad1 + "=" + tempSumaCad1 + "+" + tempHeap1 + ";" + "\r\n";
+                            codigo += "\t" + tempCad1 + "=" + tempCad1 + "+1;" + "\r\n";
+                            codigo += "\t" + "goto " + etq1 + ";" + "\r\n\n";
+
+                            codigo += etq2 + ":" + "\r\n";
+                            codigo += "\t" + "if " + tempSumaCad1 + "" + tipo + "" + tempEntero + " goto " + etq3 + ";" + "\r\n";
+                            codigo += "\t" + "goto " + etq4 + ";" + "\r\n";
+                            codigo += "//Fin relacional de cadena " + tipo + " caracter" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq3;
+                            temp.etqFalsa = etq4;
+                            temp.codigo += codigo;
+                        }
                         break;
                     default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " == " + expDer.tipo, fila, columna);
+                        memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " " + tipo + " " + c3DDer.tipo, fila, columna);
                         break;
                 }
             }
-            else if (expIzq.tipo.Equals("BOOLEANO"))
+            else if (c3DIzq.tipo.Equals("BOOLEANO"))
             {
-                switch (expDer.tipo)
+                switch (c3DDer.tipo)
                 {
                     case "ENTERO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO == expDer.ENTERO);
+                        {
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+
+                            codigo += "//Inicio relacional booleano " + tipo + " entero" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += "if " + c3DIzq.temporal + "" + tipo + "" + c3DDer.temporal + " goto " + etq1 + ";" + "\r\n";
+                            codigo += "goto " + etq2 + ";" + "\r\n";
+                            codigo += "//Fin relacional booleano " + tipo + " entero" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq1;
+                            temp.etqFalsa = etq2;
+                            temp.codigo += codigo;
+                        }
                         break;
                     case "DECIMAL":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO == expDer.DECIMAL);
+                        {
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+
+                            codigo += "//Inicio relacional booleano " + tipo + " decimal" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += "if " + c3DIzq.temporal + "" + tipo + "" + c3DDer.temporal + " goto " + etq1 + ";" + "\r\n";
+                            codigo += "goto " + etq2 + ";" + "\r\n";
+                            codigo += "//Fin relacional booleano " + tipo + " decimal" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq1;
+                            temp.etqFalsa = etq2;
+                            temp.codigo += codigo;
+                        }
                         break;
                     case "BOOLEANO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.BOOL == expDer.BOOL);
+                        {
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+
+                            codigo += "//Inicio relacional booleano " + tipo + " booleano" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += "if " + c3DIzq.temporal + "" + tipo + "" + c3DDer.temporal + " goto " + etq1 + ";" + "\r\n";
+                            codigo += "goto " + etq2 + ";" + "\r\n";
+                            codigo += "//Fin relacional booleano " + tipo + " booleano" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq1;
+                            temp.etqFalsa = etq2;
+                            temp.codigo += codigo;
+                        }
                         break;
                     default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " == " + expDer.tipo, fila, columna);
+                        memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " " + tipo + " " + c3DDer.tipo, fila, columna);
                         break;
                 }
             }
@@ -585,176 +728,155 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
                 switch (expDer.tipo)
                 {
                     case "ENTERO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER == expDer.ENTERO);
+                        {
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+
+                            codigo += "//Inicio relacional caracter " + tipo + " entero" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += "if " + c3DIzq.temporal + "" + tipo + "" + c3DDer.temporal + " goto " + etq1 + ";" + "\r\n";
+                            codigo += "goto " + etq2 + ";" + "\r\n";
+                            codigo += "//Fin relacional caracter " + tipo + " entero" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq1;
+                            temp.etqFalsa = etq2;
+                            temp.codigo += codigo;
+                        }
                         break;
                     case "DECIMAL":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER == expDer.DECIMAL);
+                        {
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+
+                            codigo += "//Inicio relacional caracter " + tipo + " decimal" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += "if " + c3DIzq.temporal + "" + tipo + "" + c3DDer.temporal + " goto " + etq1 + ";" + "\r\n";
+                            codigo += "goto " + etq2 + ";" + "\r\n";
+                            codigo += "//Fin relacional  caracter " + tipo + " decimal" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq1;
+                            temp.etqFalsa = etq2;
+                            temp.codigo += codigo;
+                        }
                         break;
                     case "CADENA":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER == expDer.ENTERO);
+                        {
+                            String tempEntero = memoria.getTemp();
+                            String tempCad1 = memoria.getTemp();
+                            String tempSumaCad1 = memoria.getTemp();
+                            String tempHeap1 = memoria.getTemp();
+
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+                            String etq3 = memoria.getEtq();
+                            String etq4 = memoria.getEtq();
+
+                            codigo += "//Inicio relacional de caracter " + tipo + " cadena" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo + "\r\n";
+
+                            codigo += tempEntero + "=" + c3DIzq.temporal + "; //Caracter" + "\r\n";
+                            codigo += tempCad1 + "=" + c3DDer.temporal + "; //Posicion en Heap caracter cadena 1" + "\r\n";
+                            codigo += tempSumaCad1 + "=0" + "; //Suma cadena 1" + "\r\n";
+                            codigo += "\r\n";
+                            codigo += etq1 + ":" + "\r\n";
+                            codigo += "\t" + tempHeap1 + "=" + "Heap[" + tempCad1 + "]" + "; //Valor de ascii del Heap cadena 1" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap1 + "" + tipo + "0 goto " + etq2 + ";" + "\r\n";
+                            codigo += "\t" + tempSumaCad1 + "=" + tempSumaCad1 + "+" + tempHeap1 + ";" + "\r\n";
+                            codigo += "\t" + tempCad1 + "=" + tempCad1 + "+1;" + "\r\n";
+                            codigo += "\t" + "goto " + etq1 + ";" + "\r\n\n";
+
+                            codigo += etq2 + ":" + "\r\n";
+                            codigo += "\t" + "if " + tempEntero + "" + tipo + "" + tempSumaCad1 + " goto " + etq3 + ";" + "\r\n";
+                            codigo += "\t" + "goto " + etq4 + ";" + "\r\n";
+                            codigo += "//Fin relacional de caracter " + tipo + " cadena" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq3;
+                            temp.etqFalsa = etq4;
+                            temp.codigo += codigo;
+                        }
                         break;
                     case "CARACTER":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER.ToString().Equals(expDer.CADENA));
+                        {
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+
+                            codigo += "//Inicio relacional caracter " + tipo + " caracter" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += "if " + c3DIzq.temporal + "" + tipo + "" + c3DDer.temporal + " goto " + etq1 + ";" + "\r\n";
+                            codigo += "goto " + etq2 + ";" + "\r\n";
+                            codigo += "//Fin relacional caracter " + tipo + " caracter" + "\r\n\n";
+
+                            temp.tipo = "BOOLEANO";
+                            temp.etqVerdadera = etq1;
+                            temp.etqFalsa = etq2;
+                            temp.codigo += codigo;
+                        }
                         break;
                     default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " == " + expDer.tipo, fila, columna);
+                        memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " " + tipo + " " + c3DDer.tipo, fila, columna);
                         break;
                 }
             }
             return temp;
         }
 
-        public expresion resDiferente(expresion expIzq, expresion expDer)
+        public cadena3D resOr(expresion expIzq, expresion expDer)
         {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-            if (expIzq.tipo.Equals("ENTERO"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO != expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO != expDer.DECIMAL);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO != expDer.ENTERO);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO != expDer.CARACTER);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " != " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("DECIMAL"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL != expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL != expDer.DECIMAL);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL != expDer.ENTERO);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.DECIMAL != expDer.CARACTER);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " != " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("CADENA"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "CADENA":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, !expIzq.CADENA.Equals(expDer.CADENA));
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, !expIzq.CADENA.Equals(expDer.CARACTER.ToString()));
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " != " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("BOOLEANO"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO != expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.ENTERO != expDer.DECIMAL);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.BOOL != expDer.BOOL);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " != " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("CARACTER"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER != expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER != expDer.DECIMAL);
-                        break;
-                    case "CADENA":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.CARACTER != expDer.ENTERO);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, !expIzq.CARACTER.ToString().Equals(expDer.CADENA));
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " != " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            return temp;
-        }
+            String codigo = "";
+            cadena3D temp = new cadena3D();
+            cadena3D c3DIzq = resCondicion(expIzq);
+            cadena3D c3DDer = resCondicion(expDer);
 
-        public expresion resMayorIgual(expresion expIzq, expresion expDer)
-        {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-            expresion mayor = resMayor(expIzq, expDer);
-            expresion igual = resIgual(expIzq, expDer);
-            if (mayor.tipo.Equals("BOOLEANO"))
+            if (c3DIzq.tipo.Equals("BOOLEANO"))
             {
-                switch (igual.tipo)
+                switch (c3DDer.tipo)
                 {
                     case "BOOLEANO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, mayor.BOOL || igual.BOOL);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " >= " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            return temp;
-        }
 
-        public expresion resMenorIgual(expresion expIzq, expresion expDer)
-        {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-            expresion menor = resMenor(expIzq, expDer);
-            expresion igual = resIgual(expIzq, expDer);
-            if (menor.tipo.Equals("BOOLEANO"))
-            {
-                switch (igual.tipo)
-                {
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, menor.BOOL || igual.BOOL);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " <= " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            return temp;
-        }
+                        codigo += "//Inicio logica de OR " +  "\r\n";
+                        if (c3DIzq.etqVerdadera == "" && c3DIzq.etqFalsa == "")
+                        {
+                            String etqVerdadera = memoria.getEtq();
+                            String etqFalsa = memoria.getEtq();
 
-        public expresion resOr(expresion expIzq, expresion expDer)
-        {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-            if (expIzq.tipo.Equals("BOOLEANO"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.BOOL || expDer.BOOL);
+                            codigo += c3DIzq.codigo;
+                            codigo += "if " + c3DIzq.temporal + "==1 goto " + etqVerdadera + ";" + "\r\n";
+                            codigo += "goto " + etqFalsa + ";" + "\r\n";
+
+                            c3DIzq.etqVerdadera = etqVerdadera;
+                            c3DIzq.etqFalsa = etqFalsa;
+                        }
+                        else {
+                            codigo += c3DIzq.codigo;
+                        }
+
+                        codigo += c3DIzq.etqFalsa + ":" + "\r\n";
+
+                        if (c3DDer.etqVerdadera == "" && c3DDer.etqFalsa == "")
+                        {
+                            String etqVerdadera = memoria.getEtq();
+                            String etqFalsa = memoria.getEtq();
+
+                            codigo += c3DDer.codigo;
+                            codigo += "if " + c3DDer.temporal + "==1 goto " + etqVerdadera + ";" + "\r\n";
+                            codigo += "goto " + etqFalsa + ";" + "\r\n";
+
+                            c3DDer.etqVerdadera = etqVerdadera;
+                            c3DDer.etqFalsa = etqFalsa;
+                        }
+                        else
+                        {
+                            codigo += c3DDer.codigo;
+                        }
+                        codigo += "//Fin logica de OR " + "\r\n\n";
+
+                        temp.etqVerdadera = c3DIzq.etqVerdadera + ":\n" + c3DDer.etqVerdadera;
+                        temp.etqFalsa = c3DDer.etqFalsa;
+                        temp.codigo = codigo;
+                        temp.tipo = "BOOLEANO";
                         break;
                     default:
                         memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " || " + expDer.tipo, fila, columna);
@@ -764,15 +886,61 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             return temp;
         }
 
-        public expresion resAnd(expresion expIzq, expresion expDer)
+        public cadena3D resAnd(expresion expIzq, expresion expDer)
         {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-            if (expIzq.tipo.Equals("BOOLEANO"))
+            String codigo = "";
+            cadena3D temp = new cadena3D();
+            cadena3D c3DIzq = resCondicion(expIzq);
+            cadena3D c3DDer = resCondicion(expDer);
+
+            if (c3DIzq.tipo.Equals("BOOLEANO"))
             {
-                switch (expDer.tipo)
+                switch (c3DDer.tipo)
                 {
                     case "BOOLEANO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, expIzq.BOOL && expDer.BOOL);
+
+                        codigo += "//Inicio logica de AND " + "\r\n";
+                        if (c3DIzq.etqVerdadera == "" && c3DIzq.etqFalsa == "")
+                        {
+                            String etqVerdadera = memoria.getEtq();
+                            String etqFalsa = memoria.getEtq();
+
+                            codigo += c3DIzq.codigo;
+                            codigo += "if " + c3DIzq.temporal + "==1 goto " + etqVerdadera + ";" + "\r\n";
+                            codigo += "goto " + etqFalsa + ";" + "\r\n";
+
+                            c3DIzq.etqVerdadera = etqVerdadera;
+                            c3DIzq.etqFalsa = etqFalsa;
+                        }
+                        else
+                        {
+                            codigo += c3DIzq.codigo;
+                        }
+
+                        codigo += c3DIzq.etqFalsa + ":" + "\r\n";
+
+                        if (c3DDer.etqVerdadera == "" && c3DDer.etqFalsa == "")
+                        {
+                            String etqVerdadera = memoria.getEtq();
+                            String etqFalsa = memoria.getEtq();
+
+                            codigo += c3DDer.codigo;
+                            codigo += "if " + c3DDer.temporal + "==1 goto " + etqVerdadera + ";" + "\r\n";
+                            codigo += "goto " + etqFalsa + ";" + "\r\n";
+
+                            c3DDer.etqVerdadera = etqVerdadera;
+                            c3DDer.etqFalsa = etqFalsa;
+                        }
+                        else
+                        {
+                            codigo += c3DDer.codigo;
+                        }
+                        codigo += "//Fin logica de AND " + "\r\n\n";
+
+                        temp.etqVerdadera = c3DDer.etqVerdadera;
+                        temp.etqFalsa = c3DIzq.etqFalsa + ":\n" + c3DDer.etqFalsa;
+                        temp.codigo = codigo;
+                        temp.tipo = "BOOLEANO";
                         break;
                     default:
                         memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " && " + expDer.tipo, fila, columna);
@@ -782,564 +950,1685 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             return temp;
         }
 
-        public expresion resXor(expresion expIzq, expresion expDer)
+        public cadena3D resXor(expresion expIzq, expresion expDer)
         {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-            if (expIzq.tipo.Equals("BOOLEANO"))
+            String codigo = "";
+            cadena3D temp = new cadena3D();
+            cadena3D c3DIzq = resCondicion(expIzq);
+            cadena3D c3DDer = resCondicion(expDer);
+
+            if (c3DIzq.tipo.Equals("BOOLEANO"))
             {
-                switch (expDer.tipo)
+                switch (c3DDer.tipo)
                 {
                     case "BOOLEANO":
-                        temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, (!expIzq.BOOL && expDer.BOOL) || (expIzq.BOOL && !expDer.BOOL));
+
+                        String etq1v = memoria.getEtq();
+                        String etq1f = memoria.getEtq();
+                        temp.etqVerdadera = memoria.getEtq();
+                        temp.etqFalsa = memoria.getEtq();
+                        String etq2f = memoria.getEtq();
+                        String temp1 = memoria.getTemp();
+                        String temp2 = memoria.getTemp();
+
+
+
+                        codigo += "//Inicio logica de XOR " + "\r\n";
+                        if (c3DIzq.etqVerdadera == "" && c3DIzq.etqFalsa == "")
+                        {
+                            String etqVerdadera = memoria.getEtq();
+                            String etqFalsa = memoria.getEtq();
+
+                            codigo += c3DIzq.codigo;
+                            codigo += "if " + c3DIzq.temporal + "==1 goto " + etqVerdadera + ";" + "\r\n";
+                            codigo += "goto " + etqFalsa + ";" + "\r\n";
+
+                            c3DIzq.etqVerdadera = etqVerdadera;
+                            c3DIzq.etqFalsa = etqFalsa;
+                        }
+                        else
+                        {
+                            codigo += c3DIzq.codigo;
+                        }
+
+                        codigo += c3DIzq.etqVerdadera + ":\r\n";
+                        codigo += "\t" + temp1 + "=1;\r\n";
+                        codigo += "\t" + "goto " + etq1v + ";\n";
+                        codigo += c3DIzq.etqFalsa + ":\r\n";
+                        codigo += "\t" + temp1 + "=0;\r\n";
+                        codigo += etq1v + ":\r\n";
+
+
+                        if (c3DDer.etqVerdadera == "" && c3DDer.etqFalsa == "")
+                        {
+                            String etqVerdadera = memoria.getEtq();
+                            String etqFalsa = memoria.getEtq();
+
+                            codigo += "\t" + c3DDer.codigo;
+                            codigo += "\t" + "if " + c3DDer.temporal + "==1 goto " + etqVerdadera + ";" + "\r\n";
+                            codigo += "\t" + "goto " + etqFalsa + ";" + "\r\n";
+
+                            c3DDer.etqVerdadera = etqVerdadera;
+                            c3DDer.etqFalsa = etqFalsa;
+                        }
+                        else
+                        {
+                            codigo += c3DDer.codigo;
+                        }
+
+                        codigo += c3DDer.etqVerdadera + ":\r\n";
+                        codigo += "\t" + temp2 + "=1;\r\n";
+                        codigo += "\t" + "goto " + etq1f + ";\r\n";
+                        codigo += c3DDer.etqFalsa + ":\r\n";
+                        codigo += "\t" + temp2 + "=0;\r\n";
+                        codigo += etq1f + ":\r\n";
+                        codigo += "\t" + "if " + temp1 + "!=" + temp2 + " goto " + temp.etqVerdadera + ";\r\n";
+                        codigo += "\t" + "goto " + temp.etqFalsa + ";\r\n";
+                        codigo += "//Fin logica de XOR " + "\r\n\n";
+
+                        temp.etqVerdadera = c3DDer.etqVerdadera;
+                        temp.etqFalsa = c3DIzq.etqFalsa + ":\n" + c3DDer.etqFalsa;
+                        temp.codigo = codigo;
+                        temp.tipo = "BOOLEANO";
                         break;
                     default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " && " + expDer.tipo, fila, columna);
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ?? " + expDer.tipo, fila, columna);
                         break;
                 }
             }
             return temp;
         }
 
-        public expresion resNot(expresion expDer)
+        public cadena3D resNot(expresion expDer)
         {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-            if (expDer.tipo.Equals("BOOLEANO"))
-            {
-                temp = new expresion(null, null, "BOOLEANO", "BOOLEANO", fila, columna, !expDer.BOOL);
-            }
-            else
-            {
-                memoria.addError("ERROR SEMANTICO ", "!" + expDer.tipo, fila, columna);
-            }
+            String codigo = "";
+            cadena3D temp = new cadena3D();
+            cadena3D c3DDer = resCondicion(expDer);
+
+                switch (c3DDer.tipo)
+                {
+                    case "BOOLEANO":
+
+                        codigo += "//Inicio logica de NOT " + "\r\n";
+                        if (c3DDer.etqVerdadera == "" && c3DDer.etqFalsa == "")
+                        {
+                            String etqVerdadera = memoria.getEtq();
+                            String etqFalsa = memoria.getEtq();
+
+                            codigo += c3DDer.codigo;
+                            codigo += "if " + c3DDer.temporal + "== 1 goto " + etqVerdadera + ";" + "\r\n";
+                            codigo += "goto " + etqFalsa + ";" + "\r\n";
+
+                            c3DDer.etqVerdadera = etqVerdadera;
+                            c3DDer.etqFalsa = etqFalsa;
+                        }
+                        else
+                        {
+                            codigo += c3DDer.codigo;
+                        }
+                        codigo += "//Fin logica de NOT " + "\r\n\n";
+
+                        temp.etqVerdadera = c3DDer.etqFalsa;
+                        temp.etqFalsa = c3DDer.etqVerdadera;
+                        temp.codigo = codigo;
+                        temp.tipo = "BOOLEANO";
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ! " + expDer.tipo, fila, columna);
+                        break;
+                }
             return temp;
         }
 
         public cadena3D resSuma(expresion expIzq, expresion expDer)
         {
-            //expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
+            String codigo = "";
             cadena3D temp = new cadena3D();
             cadena3D c3DIzq = resCondicion(expIzq);
             cadena3D c3DDer = resCondicion(expDer);
 
 
-            if (expIzq.tipo.Equals("ENTERO"))
+            if (c3DIzq.tipo.Equals("ENTERO"))
             {
-                switch (expDer.tipo)
+                switch (c3DDer.tipo)
+                {
+                    case "ENTERO":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "ENTERO";              
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "+" + c3DDer.temporal + "; //Suma entero entero" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "DECIMAL":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";                       
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "+" + c3DDer.temporal + "; //Suma  entero decimal" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "CADENA":
+                        {
+                            cadena3D codigo_intToStr = intToSTR(c3DIzq.temporal);
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "CADENA";
+
+                            String tempCad1 = memoria.getTemp();
+                            String tempCad2 = memoria.getTemp();
+                            String tempHeap1 = memoria.getTemp();
+                            String tempHeap2 = memoria.getTemp();
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+                            String etq3 = memoria.getEtq();
+
+
+                            codigo += "//Inicio concatenacion de entero cadena" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo + codigo_intToStr.codigo + "\r\n\n";
+
+                            codigo += temp.temporal + "=H; //Inicio de la nueva cadena" + "\r\n";
+                            codigo += tempCad1 + "=" + codigo_intToStr.temporal + "; //Posicion Heap cadena 1" + "\r\n";
+                            codigo += tempCad2 + "=" + c3DDer.temporal + "; //Posicion Heap cadena 2" + "\r\n\n";
+
+                            codigo += etq1 + ": //Cadena 1" + "\r\n";
+                            codigo += "\t" + tempHeap1 + "=" + "Heap[" + tempCad1 + "]; //Asignar ascii" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap1 + "==" + (int)memoria.finCadena + " goto " + etq2 + ";" + "\r\n";
+                            codigo += "\t" + "Heap[H]=" + tempHeap1 + "; //Asignar en Heap ascii" + "\r\n";
+                            codigo += "\t" + "H=H+1;" + "\r\n";
+                            codigo += "\t" + tempCad1 + "=" + tempCad1 + "+1;" + "\r\n";
+                            codigo += "\t" + "goto " + etq1 + ";" + "\r\n\n";
+
+
+                            codigo += etq2 + ": //Cadena 2" + "\r\n";
+                            codigo += "\t" + tempHeap2 + "=" + "Heap[" + tempCad2 + "]; //Asignar ascii" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap2 + "==" + (int)memoria.finCadena + " goto " + etq3 + ";" + "\r\n";
+                            codigo += "\t" + "Heap[H]=" + tempHeap2 + "; //Asignar en Heap ascii" + "\r\n";
+                            codigo += "\t" + "H=H+1;" + "\r\n";
+                            codigo += "\t" + tempCad2 + "=" + tempCad2 + "+1;" + "\r\n";
+                            codigo += "\t" + "goto " + etq2 + ";" + "\r\n\n";
+
+                            codigo += etq3 + ":" + " \r\n";
+                            codigo += "\t" + "Heap[H]=" + (int)memoria.finCadena + ";\r\n";
+                            codigo += "\t" + "H=H+1;" + "\r\n";
+                            codigo += "//Fin concatenacion de entero cadena" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                        }
+                        break;
+                    case "BOOLEANO":
+                        if (c3DDer.etqVerdadera == "" && c3DDer.etqFalsa == "")
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "ENTERO";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += temp.temporal + "=" + c3DIzq.temporal + "+" + c3DDer.temporal + "; //Suma entero booleano" + "\r\n\n";
+                            temp.codigo += codigo;
+                        }
+                        else {
+                       
+                            String tempo = memoria.getTemp();
+                            String etq = memoria.getEtq();
+                            temp.temporal = memoria.getTemp();
+
+                            codigo += "//Inicio Suma entero booleano" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += c3DDer.etqVerdadera + ": \r\n";
+                            codigo += "\t"+ tempo + "=1; \r\n";
+                            codigo += "\t" + "goto " + etq + "; \r\n";
+                            codigo +=  c3DDer.etqFalsa + ": \r\n";
+                            codigo += "\t" + tempo + " = 0; \r\n";
+                            codigo +=  etq + ": \r\n";       
+                            codigo += "\t" + temp.temporal + " = " + c3DIzq.temporal + " + " + tempo + "; \r\n";
+                            codigo += "//Fin Suma entero booleano" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                            temp.tipo = "ENTERO";
+                        }
+                        break;
+                    case "CARACTER":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "ENTERO";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "+" + c3DDer.temporal + "; //Suma entero caracter" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", c3DIzq.tipo + " + " + c3DDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (c3DIzq.tipo.Equals("DECIMAL"))
+            {
+                switch (c3DDer.tipo)
+                {
+                    case "ENTERO":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "+" + c3DDer.temporal + "; //Suma entero decimal" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "DECIMAL":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "+" + c3DDer.temporal + "; //Suma decimal decimal" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "CADENA":
+                        {
+                        /*PENDIENTE*/
+                        }
+                        break;
+                    case "BOOLEANO":
+                        if (c3DDer.etqVerdadera == "" && c3DDer.etqFalsa == "")
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "DECIMAL";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += temp.temporal + "=" + c3DIzq.temporal + "+" + c3DDer.temporal + "; //Suma decimal booleano" + "\r\n\n";
+                            temp.codigo += codigo;
+                        }
+                        else
+                        {
+
+                            String tempo = memoria.getTemp();
+                            String etq = memoria.getEtq();
+                            temp.temporal = memoria.getTemp();
+
+                            codigo += "//Inicio Suma decimal booleano" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += c3DDer.etqVerdadera + ": \r\n";
+                            codigo += "\t" + tempo + "=1; \r\n";
+                            codigo += "\t" + "goto " + etq + "; \r\n";
+                            codigo += c3DDer.etqFalsa + ": \r\n";
+                            codigo += "\t" + tempo + " = 0; \r\n";
+                            codigo += etq + ": \r\n";
+                            codigo += "\t" + temp.temporal + " = " + c3DIzq.temporal + " + " + tempo + "; \r\n";
+                            codigo += "//Fin Suma decimal booleano" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                            temp.tipo = "DECIMAL";
+                        }
+                        break;
+                    case "CARACTER":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "+" + c3DDer.temporal + "; //Suma decimal caracter" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", c3DIzq.tipo + " + " + c3DDer.tipo, fila, columna);
+                        break;
+                }
+            }
+
+            else if (c3DIzq.tipo.Equals("CADENA"))
+            {
+                switch (c3DDer.tipo)
+                {
+                    case "ENTERO":
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "CADENA";
+
+                            String tempCad1 = memoria.getTemp();
+                            String tempCad2 = memoria.getTemp();
+                            String tempHeap1 = memoria.getTemp();
+                            String tempHeap2 = memoria.getTemp();
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+                            String etq3 = memoria.getEtq();
+
+
+                            codigo += "//Inicio concatenacion de cadena entero" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo + "\r\n\n";
+
+                            codigo += temp.temporal + "=H; //Inicio de la nueva cadena" + "\r\n";
+                            codigo += tempCad1 + "=" + c3DIzq.temporal + "; //Posicion Heap cadena 1" + "\r\n";
+                            codigo += tempCad2 + "=" + c3DDer.temporal + "; //Posicion Heap cadena 2" + "\r\n\n";
+
+                            codigo += etq1 + ": //Cadena 1" + "\r\n";
+                            codigo += "\t" + tempHeap1 + "=" + "Heap[" + tempCad1 + "]; //Asignar ascii" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap1 + "==" + (int)memoria.finCadena + " goto " + etq2 + ";" + "\r\n";
+                            codigo += "\t" + "Heap[H]=" + tempHeap1 + "; //Asignar en Heap ascii" + "\r\n";
+                            codigo += "\t" + "H=H+1;" + "\r\n";
+                            codigo += "\t" + tempCad1 + "=" + tempCad1 + "+1;" + "\r\n";
+                            codigo += "\t" + "goto " + etq1 + ";" + "\r\n\n";
+
+
+                            codigo += etq2 + ": //Cadena 2" + "\r\n";
+                            codigo += "\t" + tempHeap2 + "=" + "Heap[" + tempCad2 + "]; //Asignar ascii" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap2 + "==" + (int)memoria.finCadena + " goto " + etq3 + ";" + "\r\n";
+                            codigo += "\t" + "Heap[H]=" + tempHeap2 + "; //Asignar en Heap ascii" + "\r\n";
+                            codigo += "\t" + "H=H+1;" + "\r\n";
+                            codigo += "\t" + tempCad2 + "=" + tempCad2 + "+1;" + "\r\n";
+                            codigo += "\t" + "goto " + etq2 + ";" + "\r\n\n";
+
+                            codigo += etq3 + ":" + " \r\n";
+                            codigo += "\t" + "Heap[H]=" + (int)memoria.finCadena + ";\r\n";
+                            codigo += "\t" + "H=H+1;" + "\r\n";
+                            codigo += "//Fin concatenacion de cadena entero" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                        }
+                        break;
+                    case "DECIMAL":
+                        /*PENDIENTE*/
+                        break;
+                    case "CADENA":
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "CADENA";
+
+                            String tempCad1 = memoria.getTemp();
+                            String tempCad2 = memoria.getTemp();
+                            String tempHeap1 = memoria.getTemp();
+                            String tempHeap2 = memoria.getTemp();
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+                            String etq3 = memoria.getEtq();
+
+
+                            codigo += "//Inicio concatenacion de cadena" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo + "\r\n\n";
+
+                            codigo += temp.temporal + "=H; //Inicio de la nueva cadena" + "\r\n";
+                            codigo += tempCad1 + "=" + c3DIzq.temporal + "; //Posicion Heap cadena 1" + "\r\n";
+                            codigo += tempCad2 + "=" + c3DDer.temporal + "; //Posicion Heap cadena 2" + "\r\n\n";
+
+                            codigo += etq1 + ": //Cadena 1" + "\r\n";
+                            codigo += "\t" + tempHeap1 + "=" + "Heap[" +tempCad1+ "]; //Asignar ascii" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap1 + "==" + (int)memoria.finCadena + " goto " + etq2 + ";" + "\r\n";
+                            codigo += "\t" + "Heap[H]=" + tempHeap1 + "; //Asignar en Heap ascii" + "\r\n";
+                            codigo += "\t" + "H=H+1;" + "\r\n";
+                            codigo += "\t" + tempCad1 + "=" + tempCad1 + "+1;" + "\r\n";
+                            codigo += "\t" + "goto " + etq1 + ";" + "\r\n\n";
+
+
+                            codigo += etq2 + ": //Cadena 2" + "\r\n";
+                            codigo += "\t" + tempHeap2 + "=" + "Heap[" + tempCad2 + "]; //Asignar ascii" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap2 + "==" + (int)memoria.finCadena + " goto " + etq3 + ";" + "\r\n";
+                            codigo += "\t" + "Heap[H]=" + tempHeap2 + "; //Asignar en Heap ascii" + "\r\n";
+                            codigo += "\t" + "H=H+1;" + "\r\n";
+                            codigo += "\t" + tempCad2 + "=" + tempCad2 + "+1;" + "\r\n";
+                            codigo += "\t" + "goto " + etq2 + ";" + "\r\n\n";
+
+                            codigo += etq3 + ":" + " \r\n";
+                            codigo += "\t" + "Heap[H]=" + (int)memoria.finCadena + ";\r\n";
+                            codigo += "\t" + "H=H+1;" + "\r\n";
+                            codigo += "//Fin concatenacion de cadena" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                        }
+                        break;
+                    case "CARACTER":
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "CADENA";
+
+                            String tempCad1 = memoria.getTemp();
+                            String tempCad2 = memoria.getTemp();
+                            String tempHeap1 = memoria.getTemp();
+                            String tempHeap2 = memoria.getTemp();
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+
+                            codigo += "//Inicio concatenacion de cadena caracter" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo + "\r\n\n";
+
+                            codigo += temp.temporal + "=H; //Inicio de la nueva cadena" + "\r\n";
+                            codigo += tempCad1 + "=" + c3DIzq.temporal + "; //Posicion Heap cadena 1" + "\r\n";
+                            codigo += tempCad2 + "=" + c3DDer.temporal + "; //Entero" + "\r\n\n";
+
+                            codigo += etq1 + ": //Cadena 1" + "\r\n";
+                            codigo += "\t" + tempHeap1 + "=" + "Heap[" + tempCad1 + "]; //Asignar ascii" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap1 + "==" + (int)memoria.finCadena + " goto " + etq2 + ";" + "\r\n";
+                            codigo += "\t" + "Heap[H]=" + tempHeap1 + "; //Asignar en Heap ascii" + "\r\n";
+                            codigo += "\t" + "H=H+1;" + "\r\n";
+                            codigo += "\t" + tempCad1 + "=" + tempCad1 + "+1;" + "\r\n";
+                            codigo += "\t" + "goto " + etq1 + ";" + "\r\n\n";
+
+
+                            codigo += etq2 + ": //Concatenar entero" + "\r\n";
+                            codigo += "\t" + "Heap[H]=" + tempCad2 + "; //Asignar en Heap ascii" + "\r\n";
+                            codigo += "\t" + "H=H+1;" + "\r\n";
+                            codigo += "\t" + "Heap[H]=" + (int)memoria.finCadena + ";\r\n";
+                            codigo += "\t" + "H=H+1;" + "\r\n";
+                            codigo += "//Fin concatenacion de cadena caracter" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                        }
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", c3DIzq.tipo + " + " + c3DDer.tipo, fila, columna);
+                        break;
+                }
+            }
+
+            else if (c3DIzq.tipo.Equals("BOOLEANO"))
+            {
+                switch (c3DDer.tipo)
+                {
+                    case "ENTERO":
+
+                        if (c3DIzq.etqVerdadera == "" && c3DIzq.etqFalsa == "")
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "ENTERO";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += temp.temporal + "=" + c3DIzq.temporal + "+" + c3DDer.temporal + "; //Suma booleano entero" + "\r\n\n";
+                            temp.codigo += codigo;
+                        }
+                        else
+                        {
+
+                            String tempo = memoria.getTemp();
+                            String etq = memoria.getEtq();
+                            temp.temporal = memoria.getTemp();
+
+                           
+                            codigo += "//Inicio Suma booleano entero" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += c3DIzq.etqVerdadera + ": \r\n";
+                            codigo += "\t" + tempo + "=1; \r\n";
+                            codigo += "\t" + "goto " + etq + "; \r\n";
+                            codigo += c3DIzq.etqFalsa + ": \r\n";
+                            codigo += "\t" + tempo + " = 0; \r\n";
+                            codigo += etq + ": \r\n";
+                            codigo += "\t" + temp.temporal + " = " + tempo + " + " + c3DDer.temporal + "; \r\n";
+                            codigo += "//Fin Suma booleano entero" + "\r\n\n";
+
+                            temp.codigo =  codigo;
+                            temp.tipo = "ENTERO";
+                        }
+
+                        break;
+                    case "DECIMAL":
+                        if (c3DIzq.etqVerdadera == "" && c3DIzq.etqFalsa == "")
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "DECIMAL";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += temp.temporal + "=" + c3DIzq.temporal + "+" + c3DDer.temporal + "; //Suma booleano decimal" + "\r\n\n";
+                            temp.codigo += codigo;
+                        }
+                        else
+                        {
+
+                            String tempo = memoria.getTemp();
+                            String etq = memoria.getEtq();
+                            temp.temporal = memoria.getTemp();
+
+
+                            codigo += "//Inicio Suma booleano decimal" + "\r\n";
+                            codigo +=  c3DIzq.codigo + c3DDer.codigo;
+                            codigo += c3DIzq.etqVerdadera + ": \r\n";
+                            codigo += "\t" + tempo + "=1; \r\n";
+                            codigo += "\t" + "goto " + etq + "; \r\n";
+                            codigo += c3DIzq.etqFalsa + ": \r\n";
+                            codigo += "\t" + tempo + " = 0; \r\n";
+                            codigo += etq + ": \r\n";
+                            codigo += "\t" + temp.temporal + " = " + tempo + " + " + c3DDer.temporal + "; \r\n";
+                            codigo += "//Fin Suma booleano decimal" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                            temp.tipo = "DECIMAL";
+                        }
+
+                        break;
+                    case "BOOLEANO":
+                        if (c3DIzq.etqVerdadera == "" && c3DIzq.etqFalsa == "")
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "ENTERO";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += temp.temporal + "=" + c3DIzq.temporal + "+" + c3DDer.temporal + "; //Suma booleano entero" + "\r\n\n";
+                            temp.codigo += codigo;
+                        }
+                        else
+                        {
+
+                            String tempo = memoria.getTemp();
+                            String etq = memoria.getEtq();
+                            temp.temporal = memoria.getTemp();
+
+
+                            codigo += "//Inicio Suma booleano booleano" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += c3DIzq.etqVerdadera + ": \r\n";
+                            codigo += "\t" + tempo + "=1; \r\n";
+                            codigo += "\t" + "goto " + etq + "; \r\n";
+                            codigo += c3DIzq.etqFalsa + ": \r\n";
+                            codigo += "\t" + tempo + " = 0; \r\n";
+                            codigo += etq + ": \r\n";
+                            codigo += "\t" + temp.temporal + " = " + tempo + " + " + c3DDer.temporal + "; \r\n";
+                            codigo += "//Fin Suma booleano booleano" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                            temp.tipo = "ENTERO";
+                        }
+
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", c3DIzq.tipo + " + " + c3DDer.tipo, fila, columna);
+                        break;
+                }
+            }
+
+
+            else if (c3DIzq.tipo.Equals("CARACTER"))
+            {
+                switch (c3DDer.tipo)
                 {
                     case "ENTERO":
                         temp.temporal = memoria.getTemp();
                         temp.tipo = "ENTERO";
-
-                        String codigo = "";
                         codigo += c3DIzq.codigo + c3DDer.codigo;
-                        codigo += "\t\n\n" + temp.temporal + "=" + c3DIzq.temporal + "+" + c3DDer.temporal + "; //SUMA RETORNA ENTERO";
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "+" + c3DDer.temporal + "; //Suma caracter entero" + "\r\n\n";
                         temp.codigo += codigo;
-
-                        //temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.ENTERO);
                         break;
                     case "DECIMAL":
-                        //temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO + expDer.DECIMAL);
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "+" + c3DDer.temporal + "; //Suma caracter decimal" + "\r\n\n";
+                        temp.codigo += codigo;
                         break;
                     case "CADENA":
-                        //temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.ENTERO.ToString() + expDer.CADENA);
-                        break;
-                    case "BOOLEANO":
-                        //temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.ENTERO);
-                        break;
-                    case "CARACTER":
-                        //temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.CARACTER);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            //else if (expIzq.tipo.Equals("DECIMAL"))
-            //{
-            //    switch (expDer.tipo)
-            //    {
-            //        case "ENTERO":
-            //            temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + expDer.ENTERO);
-            //            break;
-            //        case "DECIMAL":
-            //            temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + expDer.DECIMAL);
-            //            break;
-            //        case "CADENA":
-            //            temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.DECIMAL.ToString() + expDer.CADENA);
-            //            break;
-            //        case "BOOLEANO":
-            //            temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + expDer.ENTERO);
-            //            break;
-            //        case "CARACTER":
-            //            temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + expDer.CARACTER);
-            //            break;
-            //        default:
-            //            memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
-            //            break;
-            //    }
-            //}
-            //else if (expIzq.tipo.Equals("CADENA"))
-            //{
-            //    switch (expDer.tipo)
-            //    {
-            //        case "ENTERO":
-            //            temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.ENTERO.ToString());
-            //            break;
-            //        case "DECIMAL":
-            //            temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.DECIMAL.ToString());
-            //            break;
-            //        case "CADENA":
-            //            temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.CADENA);
-            //            break;
-            //        case "CARACTER":
-            //            temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.CADENA);
-            //            break;
-            //        default:
-            //            memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
-            //            break;
-            //    }
-            //}
-            //else if (expIzq.tipo.Equals("BOOLEANO"))
-            //{
-            //    switch (expDer.tipo)
-            //    {
-            //        case "ENTERO":
-            //            temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + expDer.ENTERO);
-            //            break;
-            //        case "DECIMAL":
-            //            temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO + expDer.DECIMAL);
-            //            break;
-            //        case "BOOLEANO":
-            //            temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.BOOL || expDer.BOOL);
-            //            break;
-            //        case "CADENA":
-            //            temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.CADENA + expDer.CADENA);
-            //            break;
-            //        default:
-            //            memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
-            //            break;
-            //    }
-            //}
-            //else if (expIzq.tipo.Equals("CARACTER"))
-            //{
-            //    switch (expDer.tipo)
-            //    {
-            //        case "ENTERO":
-            //            temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.CARACTER + expDer.ENTERO);
-            //            break;
-            //        case "DECIMAL":
-            //            temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.CARACTER + expDer.DECIMAL);
-            //            break;
-            //        case "CADENA":
-            //            temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.CADENA);
-            //            break;
-            //        case "CARACTER":
-            //            temp = new expresion(null, null, "CADENA", "CADENA", fila, columna, expIzq.CADENA + expDer.CADENA);
-            //            break;
-            //        default:
-            //            memoria.addError("ERROR SEMANTICO", expIzq.tipo + " + " + expDer.tipo, fila, columna);
-            //            break;
-            //    }
-            //}
-            return temp;
-        }
-
-        public expresion resResta(expresion expDer)
-        {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-            if (expDer.tipo.Equals("ENTERO"))
-            {
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, -expDer.ENTERO);
-            }
-            else if (expDer.tipo.Equals("DECIMAL"))
-            {
-                temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, -expDer.DECIMAL);
-            }
-            else if (expDer.tipo.Equals("BOOLEANO"))
-            {
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, -expDer.ENTERO);
-            }
-            else if (expDer.tipo.Equals("CARACTER"))
-            {
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, -expDer.CARACTER);
-            }
-            else
-            {
-                memoria.addError("ERROR SEMANTICO", expDer.tipo + " - " + expDer.tipo, fila, columna);
-            }
-            return temp;
-        }
-
-        public expresion resResta(expresion expIzq, expresion expDer)
-        {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-            if (expIzq.tipo.Equals("ENTERO"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - expDer.DECIMAL);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - expDer.ENTERO);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - expDer.CARACTER);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " - " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("DECIMAL"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL - expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL - expDer.DECIMAL);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL - expDer.ENTERO);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL - expDer.CARACTER);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " - " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("BOOLEANO"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO - expDer.DECIMAL);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " - " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("CARACTER"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.CARACTER - expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.CARACTER - expDer.DECIMAL);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " - " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            return temp;
-        }
-
-        public expresion resMultiplicacion(expresion expIzq, expresion expDer)
-        {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-            if (expIzq.tipo.Equals("ENTERO"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO * expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO * expDer.DECIMAL);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO * expDer.ENTERO);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO * expDer.CARACTER);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " * " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("DECIMAL"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL * expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL * expDer.DECIMAL);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL * expDer.ENTERO);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL * expDer.CARACTER);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " * " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("BOOLEANO"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO * expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO * expDer.DECIMAL);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.BOOL && expDer.BOOL);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " * " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("CARACTER"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.CARACTER * expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.CARACTER * expDer.DECIMAL);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " - " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            return temp;
-        }
-
-        public expresion resDivision(expresion expIzq, expresion expDer)
-        {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-            if (expIzq.tipo.Equals("ENTERO"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO / expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO / expDer.DECIMAL);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO / expDer.ENTERO);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO / expDer.CARACTER);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " / " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("DECIMAL"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL / expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL / expDer.DECIMAL);
-                        break;
-                    case "BOOLEANO":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL / expDer.ENTERO);
-                        break;
-                    case "CARACTER":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO / expDer.CARACTER);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " / " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("BOOLEANO"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO / expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.ENTERO / expDer.DECIMAL);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " / " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            else if (expIzq.tipo.Equals("CARACTER"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.CARACTER / expDer.ENTERO);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.CARACTER / expDer.DECIMAL);
-                        break;
-                    default:
-                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " - " + expDer.tipo, fila, columna);
-                        break;
-                }
-            }
-            return temp;
-        }
-
-        public expresion resPotencia(expresion expIzq, expresion expDer)
-        {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-            if (expIzq.tipo.Equals("ENTERO"))
-            {
-                switch (expDer.tipo)
-                {
-                    case "ENTERO":
-                        double p = Math.Pow(expIzq.ENTERO, expDer.ENTERO);
-                        int v = (int)p;
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, v);
-                        break;
-                    case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.Pow(expIzq.ENTERO, expDer.DECIMAL));
-                        break;
-                    case "BOOLEANO":
                         {
-                            double pb = Math.Pow(expIzq.ENTERO, expDer.ENTERO);
-                            int vb = (int)pb;
-                            temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, vb);
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "CADENA";
+
+                            String tempCad2 = memoria.getTemp();
+                            String tempCad1 = memoria.getTemp();                    
+                            String tempHeap1 = memoria.getTemp();
+                            String etq1 = memoria.getEtq();
+                            String etq2 = memoria.getEtq();
+
+                            codigo += "//Inicio concatenacion de caracter cadena" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo + "\r\n\n";
+
+                            codigo += temp.temporal + "=H; //Inicio de la nueva cadena" + "\r\n";
+                            codigo += tempCad2 + "=" + c3DIzq.temporal + "; //Entero" + "\r\n";
+                            codigo += tempCad1 + "=" + c3DDer.temporal + "; //Posicion Heap cadena 1" + "\r\n\n";
+
+                            codigo += "Heap[H]=" + tempCad2 + "; //Asignar en Heap ascii" + "\r\n";
+                            codigo += "H=H+1;" + "\r\n\n";
+
+                            codigo += etq1 + ": //Cadena 1" + "\r\n";
+                            codigo += "\t" + tempHeap1 + "=" + "Heap[" + tempCad1 + "]; //Asignar ascii" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap1 + "==" + (int)memoria.finCadena + " goto " + etq2 + ";" + "\r\n";
+                            codigo += "\t" + "Heap[H]=" + tempHeap1 + "; //Asignar en Heap ascii" + "\r\n";
+                            codigo += "\t" + "H=H+1;" + "\r\n";
+                            codigo += "\t" + tempCad1 + "=" + tempCad1 + "+1;" + "\r\n";
+                            codigo += "\t" + "goto " + etq1 + ";" + "\r\n\n";
+
+                            codigo += etq2 + ": //Concatenar entero" + "\r\n";
+                            codigo += "\t" + "Heap[H]=" + (int)memoria.finCadena + ";\r\n";
+                            codigo += "\t" + "H=H+1;" + "\r\n";
+                            codigo += "//Fin concatenacion de caracter cadena" + "\r\n\n";
+                            temp.codigo = codigo;
                         }
                         break;
                     case "CARACTER":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "ENTERO";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "+" + c3DDer.temporal + "; //Suma caracter caracter" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", c3DIzq.tipo + " + " + c3DDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            return temp;
+        }
+
+        public cadena3D resResta(expresion expDer)
+        {
+            String codigo = "";
+            cadena3D temp = new cadena3D();
+            cadena3D c3DDer = resCondicion(expDer);
+            
+            if (c3DDer.tipo.Equals("ENTERO"))
+            {
+                temp.temporal = memoria.getTemp();
+                String tempMult = memoria.getTemp();
+                temp.tipo = "ENTERO";
+                codigo += c3DDer.codigo + "\r\n";
+                codigo += tempMult + "=-1;" + "\r\n";
+                codigo += temp.temporal + "=" + c3DDer.temporal + "*" +  tempMult + "; //Cambio de signo entero" + "\r\n\n";
+                temp.codigo += codigo;
+            }
+            else if (c3DDer.tipo.Equals("DECIMAL"))
+            {
+                temp.temporal = memoria.getTemp();
+                String tempMult = memoria.getTemp();
+                temp.tipo = "DECIMAL";
+                codigo += c3DDer.codigo + "\r\n";
+                codigo += tempMult + "=-1;" + "\r\n";
+                codigo += temp.temporal + "=" + c3DDer.temporal + "*" + tempMult + "; //Cambio de signo decimal" + "\r\n\n";
+                temp.codigo += codigo;
+            }
+            else if (c3DDer.tipo.Equals("BOOLEANO"))
+            {
+                temp.temporal = memoria.getTemp();
+                String tempMult = memoria.getTemp();
+                temp.tipo = "ENTERO";
+                codigo += c3DDer.codigo + "\r\n";
+                codigo += tempMult + "=-1;" + "\r\n";
+                codigo += temp.temporal + "=" + c3DDer.temporal + "*" + tempMult + "; //Cambio de signo booleano" + "\r\n\n";
+                temp.codigo += codigo;
+            }
+            else if (c3DDer.tipo.Equals("CARACTER"))
+            { 
+                temp.temporal = memoria.getTemp();
+                String tempMult = memoria.getTemp();
+                temp.tipo = "ENTERO";
+                codigo += c3DDer.codigo + "\r\n";
+                codigo += tempMult + "=-1;" + "\r\n";
+                codigo += temp.temporal + "=" + c3DDer.temporal + "*" + tempMult + "; //Cambio de signo caracter" + "\r\n\n";
+                temp.codigo += codigo;
+            }
+            else
+            {
+                memoria.addError("ERROR SEMANTICO", " - " + c3DDer.tipo, fila, columna);
+            }
+            return temp;
+        }
+
+        public cadena3D resResta(expresion expIzq, expresion expDer)
+        {
+            String codigo = "";
+            cadena3D temp = new cadena3D();
+            cadena3D c3DIzq = resCondicion(expIzq);
+            cadena3D c3DDer = resCondicion(expDer);
+
+            if (c3DIzq.tipo.Equals("ENTERO"))
+            {
+                switch (c3DDer.tipo)
+                {
+                    case "ENTERO":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "ENTERO";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "-" + c3DDer.temporal + "; //Resta entero entero" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "DECIMAL":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "-" + c3DDer.temporal + "; //Resta entero decimal" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "BOOLEANO":
+                        if (c3DDer.etqVerdadera == "" && c3DDer.etqFalsa == "")
                         {
-                            double pb = Math.Pow(expIzq.ENTERO, expDer.ENTERO);
-                            int vb = (int)pb;
-                            temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, vb);
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "ENTERO";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += temp.temporal + "=" + c3DIzq.temporal + "-" + c3DDer.temporal + "; //Resta entero booleano" + "\r\n\n";
+                            temp.codigo += codigo;
+                        }
+                        else
+                        {
+
+                            String tempo = memoria.getTemp();
+                            String etq = memoria.getEtq();
+                            temp.temporal = memoria.getTemp();
+
+                            codigo += "//Inicio Resta entero booleano" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += c3DDer.etqVerdadera + ": \r\n";
+                            codigo += "\t" + tempo + "=1; \r\n";
+                            codigo += "\t" + "goto " + etq + "; \r\n";
+                            codigo += c3DDer.etqFalsa + ": \r\n";
+                            codigo += "\t" + tempo + " = 0; \r\n";
+                            codigo += etq + ": \r\n";
+                            codigo += "\t" + temp.temporal + " = " + c3DIzq.temporal + " - " + tempo + "; \r\n";
+                            codigo += "//Fin Resta entero booleano" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                            temp.tipo = "ENTERO";
+                        }
+                        break;
+                    case "CARACTER":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "ENTERO";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "-" + c3DDer.temporal + "; //Resta entero caracter" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " - " + c3DDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (c3DIzq.tipo.Equals("DECIMAL"))
+            {
+                switch (c3DDer.tipo)
+                {
+                    case "ENTERO":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "-" + c3DDer.temporal + "; //Resta decimal entero" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "DECIMAL":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "-" + c3DDer.temporal + "; //Resta decimal decimal" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "BOOLEANO":
+                        if (c3DDer.etqVerdadera == "" && c3DDer.etqFalsa == "")
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "DECIMAL";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += temp.temporal + "=" + c3DIzq.temporal + "-" + c3DDer.temporal + "; //Resta decimal booleano" + "\r\n\n";
+                            temp.codigo += codigo;
+                        }
+                        else
+                        {
+
+                            String tempo = memoria.getTemp();
+                            String etq = memoria.getEtq();
+                            temp.temporal = memoria.getTemp();
+
+                            codigo += "//Inicio Resta decimal booleano" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += c3DDer.etqVerdadera + ": \r\n";
+                            codigo += "\t" + tempo + "=1; \r\n";
+                            codigo += "\t" + "goto " + etq + "; \r\n";
+                            codigo += c3DDer.etqFalsa + ": \r\n";
+                            codigo += "\t" + tempo + " = 0; \r\n";
+                            codigo += etq + ": \r\n";
+                            codigo += "\t" + temp.temporal + " = " + c3DIzq.temporal + " - " + tempo + "; \r\n";
+                            codigo += "//Fin Resta decimal booleano" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                            temp.tipo = "DECIMAL";
+                        }
+                        break;
+                    case "CARACTER":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "-" + c3DDer.temporal + "; //Resta decimal caracter" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " - " + c3DDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (c3DIzq.tipo.Equals("BOOLEANO"))
+            {
+                switch (c3DDer.tipo)
+                {
+                    case "ENTERO":
+
+                        if (c3DIzq.etqVerdadera == "" && c3DIzq.etqFalsa == "")
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "ENTERO";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += temp.temporal + "=" + c3DIzq.temporal + "-" + c3DDer.temporal + "; //Resta booleano entero" + "\r\n\n";
+                            temp.codigo += codigo;
+                        }
+                        else
+                        {
+
+                            String tempo = memoria.getTemp();
+                            String etq = memoria.getEtq();
+                            temp.temporal = memoria.getTemp();
+
+
+                            codigo += "//Inicio Resta booleano entero" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += c3DIzq.etqVerdadera + ": \r\n";
+                            codigo += "\t" + tempo + "=1; \r\n";
+                            codigo += "\t" + "goto " + etq + "; \r\n";
+                            codigo += c3DIzq.etqFalsa + ": \r\n";
+                            codigo += "\t" + tempo + " = 0; \r\n";
+                            codigo += etq + ": \r\n";
+                            codigo += "\t" + temp.temporal + " = " + tempo + " - " + c3DDer.temporal + "; \r\n";
+                            codigo += "//Fin Resta booleano entero" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                            temp.tipo = "ENTERO";
+                        }
+                        break;
+                    case "DECIMAL":
+                        if (c3DIzq.etqVerdadera == "" && c3DIzq.etqFalsa == "")
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "DECIMAL";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += temp.temporal + "=" + c3DIzq.temporal + "-" + c3DDer.temporal + "; //Resta booleano decimal" + "\r\n\n";
+                            temp.codigo += codigo;
+                        }
+                        else
+                        {
+
+                            String tempo = memoria.getTemp();
+                            String etq = memoria.getEtq();
+                            temp.temporal = memoria.getTemp();
+
+
+                            codigo += "//Inicio Resta booleano decimal" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += c3DIzq.etqVerdadera + ": \r\n";
+                            codigo += "\t" + tempo + "=1; \r\n";
+                            codigo += "\t" + "goto " + etq + "; \r\n";
+                            codigo += c3DIzq.etqFalsa + ": \r\n";
+                            codigo += "\t" + tempo + " = 0; \r\n";
+                            codigo += etq + ": \r\n";
+                            codigo += "\t" + temp.temporal + " = " + tempo + " - " + c3DDer.temporal + "; \r\n";
+                            codigo += "//Fin Resta booleano decimal" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                            temp.tipo = "DECIMAL";
                         }
                         break;
                     default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ^ " + expDer.tipo, fila, columna);
+                        memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " - " + c3DDer.tipo, fila, columna);
                         break;
                 }
             }
-            else if (expIzq.tipo.Equals("DECIMAL"))
+            else if (c3DIzq.tipo.Equals("CARACTER"))
             {
-                switch (expDer.tipo)
+                switch (c3DDer.tipo)
                 {
                     case "ENTERO":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.Pow(expIzq.DECIMAL, expDer.ENTERO));
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "ENTERO";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "-" + c3DDer.temporal + "; //Resta caracter entero" + "\r\n\n";
+                        temp.codigo += codigo;
                         break;
                     case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.Pow(expIzq.DECIMAL, expDer.DECIMAL));
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "-" + c3DDer.temporal + "; //Resta caracter decimal" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", c3DIzq.tipo + " - " + c3DDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            return temp;
+        }
+
+        public cadena3D resMultiplicacion(expresion expIzq, expresion expDer)
+        {
+            String codigo = "";
+            cadena3D temp = new cadena3D();
+            cadena3D c3DIzq = resCondicion(expIzq);
+            cadena3D c3DDer = resCondicion(expDer);
+
+            if (c3DIzq.tipo.Equals("ENTERO"))
+            {
+                switch (c3DDer.tipo)
+                {
+                    case "ENTERO":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "ENTERO";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "*" + c3DDer.temporal + "; //Multiplicacion entero entero" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "DECIMAL":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "*" + c3DDer.temporal + "; //Multiplicacion entero decimal" + "\r\n\n";
+                        temp.codigo += codigo;
                         break;
                     case "BOOLEANO":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.Pow(expIzq.DECIMAL, expDer.ENTERO));
+                        if (c3DDer.etqVerdadera == "" && c3DDer.etqFalsa == "")
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "ENTERO";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += temp.temporal + "=" + c3DIzq.temporal + "*" + c3DDer.temporal + "; //Multiplicacion entero booleano" + "\r\n\n";
+                            temp.codigo += codigo;
+                        }
+                        else
+                        {
+
+                            String tempo = memoria.getTemp();
+                            String etq = memoria.getEtq();
+                            temp.temporal = memoria.getTemp();
+
+                            codigo += "//Inicio Multiplicacion entero booleano" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += c3DDer.etqVerdadera + ": \r\n";
+                            codigo += "\t" + tempo + "=1; \r\n";
+                            codigo += "\t" + "goto " + etq + "; \r\n";
+                            codigo += c3DDer.etqFalsa + ": \r\n";
+                            codigo += "\t" + tempo + " = 0; \r\n";
+                            codigo += etq + ": \r\n";
+                            codigo += "\t" + temp.temporal + " = " + c3DIzq.temporal + " * " + tempo + "; \r\n";
+                            codigo += "//Fin Multiplicacion entero booleano" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                            temp.tipo = "ENTERO";
+                        }
                         break;
                     case "CARACTER":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.Pow(expIzq.DECIMAL, expDer.ENTERO));
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "ENTERO";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "*" + c3DDer.temporal + "; //Multiplicacion entero caracter" + "\r\n\n";
+                        temp.codigo += codigo;
                         break;
                     default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ^ " + expDer.tipo, fila, columna);
+                        memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " * " + c3DDer.tipo, fila, columna);
                         break;
                 }
             }
-            else if (expIzq.tipo.Equals("BOOLEANO"))
+            else if (c3DIzq.tipo.Equals("DECIMAL"))
             {
-                switch (expDer.tipo)
+                switch (c3DDer.tipo)
                 {
                     case "ENTERO":
-                        double p = Math.Pow(expIzq.ENTERO, expDer.ENTERO);
-                        int v = (int)p;
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, v);
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "*" + c3DDer.temporal + "; //Multiplicacion decimal entero" + "\r\n\n";
+                        temp.codigo += codigo;
                         break;
                     case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.Pow(expIzq.ENTERO, expDer.DECIMAL));
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "*" + c3DDer.temporal + "; //Multiplicacion decimal decimal" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "BOOLEANO":
+                        if (c3DDer.etqVerdadera == "" && c3DDer.etqFalsa == "")
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "DECIMAL";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += temp.temporal + "=" + c3DIzq.temporal + "*" + c3DDer.temporal + "; //Multiplicacion decimal booleano" + "\r\n\n";
+                            temp.codigo += codigo;
+                        }
+                        else
+                        {
+
+                            String tempo = memoria.getTemp();
+                            String etq = memoria.getEtq();
+                            temp.temporal = memoria.getTemp();
+
+                            codigo += "//Inicio Multiplicacion decimal booleano" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += c3DDer.etqVerdadera + ": \r\n";
+                            codigo += "\t" + tempo + "=1; \r\n";
+                            codigo += "\t" + "goto " + etq + "; \r\n";
+                            codigo += c3DDer.etqFalsa + ": \r\n";
+                            codigo += "\t" + tempo + " = 0; \r\n";
+                            codigo += etq + ": \r\n";
+                            codigo += "\t" + temp.temporal + " = " + c3DIzq.temporal + " * " + tempo + "; \r\n";
+                            codigo += "//Fin Multiplicacion booleano" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                            temp.tipo = "DECIMAL";
+                        }
+                        break;
+                    case "CARACTER":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "*" + c3DDer.temporal + "; //Multiplicacion decimal caracter" + "\r\n\n";
+                        temp.codigo += codigo;
                         break;
                     default:
-                        memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ^ " + expDer.tipo, fila, columna);
+                        memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " * " + c3DDer.tipo, fila, columna);
                         break;
                 }
             }
-            else if (expIzq.tipo.Equals("CARACTER"))
+            else if (c3DIzq.tipo.Equals("BOOLEANO"))
             {
-                switch (expDer.tipo)
+                switch (c3DDer.tipo)
                 {
                     case "ENTERO":
-                        double pb = Math.Pow(expIzq.ENTERO, expDer.ENTERO);
-                        int vb = (int)pb;
-                        temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, vb);
+
+                        if (c3DIzq.etqVerdadera == "" && c3DIzq.etqFalsa == "")
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "ENTERO";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += temp.temporal + "=" + c3DIzq.temporal + "*" + c3DDer.temporal + "; //Multiplicacion booleano entero" + "\r\n\n";
+                            temp.codigo += codigo;
+                        }
+                        else
+                        {
+
+                            String tempo = memoria.getTemp();
+                            String etq = memoria.getEtq();
+                            temp.temporal = memoria.getTemp();
+
+
+                            codigo += "//Inicio Multiplicacion booleano entero" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += c3DIzq.etqVerdadera + ": \r\n";
+                            codigo += "\t" + tempo + "=1; \r\n";
+                            codigo += "\t" + "goto " + etq + "; \r\n";
+                            codigo += c3DIzq.etqFalsa + ": \r\n";
+                            codigo += "\t" + tempo + " = 0; \r\n";
+                            codigo += etq + ": \r\n";
+                            codigo += "\t" + temp.temporal + " = " + tempo + " * " + c3DDer.temporal + "; \r\n";
+                            codigo += "//Fin Multiplicacion booleano entero" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                            temp.tipo = "ENTERO";
+                        }
+
                         break;
                     case "DECIMAL":
-                        temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, Math.Pow(expIzq.ENTERO, expDer.DECIMAL));
+                        if (c3DIzq.etqVerdadera == "" && c3DIzq.etqFalsa == "")
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "DECIMAL";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += temp.temporal + "=" + c3DIzq.temporal + "*" + c3DDer.temporal + "; //Multiplicacion booleano decimal" + "\r\n\n";
+                            temp.codigo += codigo;
+                        }
+                        else
+                        {
+
+                            String tempo = memoria.getTemp();
+                            String etq = memoria.getEtq();
+                            temp.temporal = memoria.getTemp();
+
+
+                            codigo += "//Inicio Multiplicacion booleano decimal" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += c3DIzq.etqVerdadera + ": \r\n";
+                            codigo += "\t" + tempo + "=1; \r\n";
+                            codigo += "\t" + "goto " + etq + "; \r\n";
+                            codigo += c3DIzq.etqFalsa + ": \r\n";
+                            codigo += "\t" + tempo + " = 0; \r\n";
+                            codigo += etq + ": \r\n";
+                            codigo += "\t" + temp.temporal + " = " + tempo + " * " + c3DDer.temporal + "; \r\n";
+                            codigo += "//Fin Multiplicacion booleano decimal" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                            temp.tipo = "DECIMAL";
+                        }
                         break;
                     default:
-                        memoria.addError("ERROR SEMANTICO", expIzq.tipo + " - " + expDer.tipo, fila, columna);
+                        memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " * " + c3DDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (c3DIzq.tipo.Equals("CARACTER"))
+            {
+                switch (c3DDer.tipo)
+                {
+                    case "ENTERO":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "ENTERO";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "*" + c3DDer.temporal + "; //Multiplicacion caracter entero" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "DECIMAL":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "*" + c3DDer.temporal + "; //Multiplicacion caracter decimal" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", c3DIzq.tipo + " * " + c3DDer.tipo, fila, columna);
                         break;
                 }
             }
             return temp;
         }
 
-        public expresion resAumento(expresion expIzq)
+        public cadena3D resDivision(expresion expIzq, expresion expDer)
         {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-            if (expIzq.tipo.Equals("ENTERO"))
+            String codigo = "";
+            cadena3D temp = new cadena3D();
+            cadena3D c3DIzq = resCondicion(expIzq);
+            cadena3D c3DDer = resCondicion(expDer);
+            if (c3DIzq.tipo.Equals("ENTERO"))
             {
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + 1);
+                switch (c3DDer.tipo)
+                {
+                    case "ENTERO":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "/" + c3DDer.temporal + "; //Division entero entero" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "DECIMAL":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "/" + c3DDer.temporal + "; //Division entero decimal" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "BOOLEANO":
+                        if (c3DDer.etqVerdadera == "" && c3DDer.etqFalsa == "")
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "DECIMAL";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += temp.temporal + "=" + c3DIzq.temporal + "/" + c3DDer.temporal + "; //Division entero booleano" + "\r\n\n";
+                            temp.codigo += codigo;
+                        }
+                        else
+                        {
+
+                            String tempo = memoria.getTemp();
+                            String etq = memoria.getEtq();
+                            temp.temporal = memoria.getTemp();
+
+                            codigo += "//Inicio Division entero booleano" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += c3DDer.etqVerdadera + ": \r\n";
+                            codigo += "\t" + tempo + "=1; \r\n";
+                            codigo += "\t" + "goto " + etq + "; \r\n";
+                            codigo += c3DDer.etqFalsa + ": \r\n";
+                            codigo += "\t" + tempo + " = 0; \r\n";
+                            codigo += etq + ": \r\n";
+                            codigo += "\t" + temp.temporal + " = " + c3DIzq.temporal + " / " + tempo + "; \r\n";
+                            codigo += "//Fin Division entero booleano" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                            temp.tipo = "DECIMAL";
+                        }
+                        break;
+                    case "CARACTER":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "/" + c3DDer.temporal + "; //Division entero caracter" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " / " + c3DDer.tipo, fila, columna);
+                        break;
+                }
             }
-            else if (expIzq.tipo.Equals("DECIMAL"))
+            else if (c3DIzq.tipo.Equals("DECIMAL"))
             {
-                temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL + 1);
+                switch (c3DDer.tipo)
+                {
+                    case "ENTERO":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "/" + c3DDer.temporal + "; //Division decimal entero" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "DECIMAL":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "/" + c3DDer.temporal + "; //Division decimal decimal" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "BOOLEANO":
+                        if (c3DDer.etqVerdadera == "" && c3DDer.etqFalsa == "")
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "DECIMAL";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += temp.temporal + "=" + c3DIzq.temporal + "/" + c3DDer.temporal + "; //Division decimal booleano" + "\r\n\n";
+                            temp.codigo += codigo;
+                        }
+                        else
+                        {
+
+                            String tempo = memoria.getTemp();
+                            String etq = memoria.getEtq();
+                            temp.temporal = memoria.getTemp();
+
+                            codigo += "//Inicio Division decimal booleano" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += c3DDer.etqVerdadera + ": \r\n";
+                            codigo += "\t" + tempo + "=1; \r\n";
+                            codigo += "\t" + "goto " + etq + "; \r\n";
+                            codigo += c3DDer.etqFalsa + ": \r\n";
+                            codigo += "\t" + tempo + " = 0; \r\n";
+                            codigo += etq + ": \r\n";
+                            codigo += "\t" + temp.temporal + " = " + c3DIzq.temporal + " / " + tempo + "; \r\n";
+                            codigo += "//Fin Division decimal booleano" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                            temp.tipo = "DECIMAL";
+                        }
+                        break;
+                    case "CARACTER":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "/" + c3DDer.temporal + "; //Division decimal caracter" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " / " + c3DDer.tipo, fila, columna);
+                        break;
+                }
             }
-            else if (expIzq.tipo.Equals("CARACTER"))
+            else if (c3DIzq.tipo.Equals("BOOLEANO"))
             {
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO + 1);
+                switch (c3DDer.tipo)
+                {
+                    case "ENTERO":
+
+                        if (c3DIzq.etqVerdadera == "" && c3DIzq.etqFalsa == "")
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "DECIMAL";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += temp.temporal + "=" + c3DIzq.temporal + "/" + c3DDer.temporal + "; //Division booleano entero" + "\r\n\n";
+                            temp.codigo += codigo;
+                        }
+                        else
+                        {
+
+                            String tempo = memoria.getTemp();
+                            String etq = memoria.getEtq();
+                            temp.temporal = memoria.getTemp();
+
+
+                            codigo += "//Inicio Division booleano entero" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += c3DIzq.etqVerdadera + ": \r\n";
+                            codigo += "\t" + tempo + "=1; \r\n";
+                            codigo += "\t" + "goto " + etq + "; \r\n";
+                            codigo += c3DIzq.etqFalsa + ": \r\n";
+                            codigo += "\t" + tempo + " = 0; \r\n";
+                            codigo += etq + ": \r\n";
+                            codigo += "\t" + temp.temporal + " = " + tempo + " / " + c3DDer.temporal + "; \r\n";
+                            codigo += "//Fin Division booleano entero" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                            temp.tipo = "DECIMAL";
+                        }
+
+                        break;
+                    case "DECIMAL":
+                        if (c3DIzq.etqVerdadera == "" && c3DIzq.etqFalsa == "")
+                        {
+                            temp.temporal = memoria.getTemp();
+                            temp.tipo = "DECIMAL";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += temp.temporal + "=" + c3DIzq.temporal + "/" + c3DDer.temporal + "; //Division booleano decimal" + "\r\n\n";
+                            temp.codigo += codigo;
+                        }
+                        else
+                        {
+
+                            String tempo = memoria.getTemp();
+                            String etq = memoria.getEtq();
+                            temp.temporal = memoria.getTemp();
+
+
+                            codigo += "//Inicio Division booleano decimal" + "\r\n";
+                            codigo += c3DIzq.codigo + c3DDer.codigo;
+                            codigo += c3DIzq.etqVerdadera + ": \r\n";
+                            codigo += "\t" + tempo + "=1; \r\n";
+                            codigo += "\t" + "goto " + etq + "; \r\n";
+                            codigo += c3DIzq.etqFalsa + ": \r\n";
+                            codigo += "\t" + tempo + " = 0; \r\n";
+                            codigo += etq + ": \r\n";
+                            codigo += "\t" + temp.temporal + " = " + tempo + " / " + c3DDer.temporal + "; \r\n";
+                            codigo += "//Fin Division booleano decimal" + "\r\n\n";
+
+                            temp.codigo = codigo;
+                            temp.tipo = "DECIMAL";
+                        }
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " / " + c3DDer.tipo, fila, columna);
+                        break;
+                }
             }
-            else
+            else if (c3DIzq.tipo.Equals("CARACTER"))
             {
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " ++ ", fila, columna);
+                switch (c3DDer.tipo)
+                {
+                    case "ENTERO":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "/" + c3DDer.temporal + "; //Division caracter entero" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "DECIMAL":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "/" + c3DDer.temporal + "; //Division caracter decimal" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", c3DIzq.tipo + " - " + c3DDer.tipo, fila, columna);
+                        break;
+                }
             }
             return temp;
         }
 
-        public expresion resDecremento(expresion expIzq)
+        public cadena3D resPotencia(expresion expIzq, expresion expDer)
         {
-            expresion temp = new expresion(null, null, "ERROR", "ERROR", fila, columna, null);
-            if (expIzq.tipo.Equals("ENTERO"))
+            String codigo = "";
+            cadena3D temp = new cadena3D();
+            cadena3D c3DIzq = resCondicion(expIzq);
+            cadena3D c3DDer = resCondicion(expDer);
+            if (c3DIzq.tipo.Equals("ENTERO"))
             {
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - 1);
+                switch (c3DDer.tipo)
+                {
+                    case "ENTERO":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "ENTERO";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "^" + c3DDer.temporal + "; //Potencia entero entero" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "DECIMAL":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "^" + c3DDer.temporal + "; //Potencia entero decimal" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "BOOLEANO":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "ENTERO";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "^" + c3DDer.temporal + "; //Potencia entero booleano" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "CARACTER":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "ENTERO";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "^" + c3DDer.temporal + "; //Potencia entero caracter" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " ^ " + c3DDer.tipo, fila, columna);
+                        break;
+                }
             }
-            else if (expIzq.tipo.Equals("DECIMAL"))
+            else if (c3DIzq.tipo.Equals("DECIMAL"))
             {
-                temp = new expresion(null, null, "DECIMAL", "DECIMAL", fila, columna, expIzq.DECIMAL - 1);
+                switch (c3DDer.tipo)
+                {
+                    case "ENTERO":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "^" + c3DDer.temporal + "; //Potencia decimal entero" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "DECIMAL":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "^" + c3DDer.temporal + "; //Potencia decimal decimal" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "BOOLEANO":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "^" + c3DDer.temporal + "; //Potencia decimal booleano" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "CARACTER":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "^" + c3DDer.temporal + "; //Potencia decimal caracter" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " ^ " + c3DDer.tipo, fila, columna);
+                        break;
+                }
             }
-            else if (expIzq.tipo.Equals("CARACTER"))
+            else if (c3DIzq.tipo.Equals("BOOLEANO"))
             {
-                temp = new expresion(null, null, "ENTERO", "ENTERO", fila, columna, expIzq.ENTERO - 1);
+                switch (c3DDer.tipo)
+                {
+                    case "ENTERO":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "ENTERO";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "^" + c3DDer.temporal + "; //Potencia booleano entero" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "DECIMAL":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "^" + c3DDer.temporal + "; //Potencia booleano decimal" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " ^ " + c3DDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            else if (c3DIzq.tipo.Equals("CARACTER"))
+            {
+                switch (c3DDer.tipo)
+                {
+                    case "ENTERO":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "ENTERO";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "^" + c3DDer.temporal + "; //Potencia caracter entero" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    case "DECIMAL":
+                        temp.temporal = memoria.getTemp();
+                        temp.tipo = "DECIMAL";
+                        codigo += c3DIzq.codigo + c3DDer.codigo;
+                        codigo += temp.temporal + "=" + c3DIzq.temporal + "^" + c3DDer.temporal + "; //Potencia caracter decimal" + "\r\n\n";
+                        temp.codigo += codigo;
+                        break;
+                    default:
+                        memoria.addError("ERROR SEMANTICO", c3DIzq.tipo + " - " + c3DDer.tipo, fila, columna);
+                        break;
+                }
+            }
+            return temp;
+        }
+
+        public cadena3D resAumento(expresion expIzq)
+        {
+            String codigo = "";
+            cadena3D temp = new cadena3D();
+            cadena3D c3DIzq = resCondicion(expIzq);
+            if (c3DIzq.tipo.Equals("ENTERO"))
+            {
+                temp.temporal = memoria.getTemp();
+                String tempMult = memoria.getTemp();
+                temp.tipo = "ENTERO";
+                codigo += c3DIzq.codigo + "\r\n";
+                codigo += tempMult + "=1;" + "\r\n";
+                codigo += temp.temporal + "=" + c3DIzq.temporal + "-" + tempMult + "; //Decremento entero" + "\r\n\n";
+                temp.codigo += codigo;
+            }
+            else if (c3DIzq.tipo.Equals("DECIMAL"))
+            {
+                temp.temporal = memoria.getTemp();
+                String tempMult = memoria.getTemp();
+                temp.tipo = "DECIMAL";
+                codigo += c3DIzq.codigo + "\r\n";
+                codigo += tempMult + "=1;" + "\r\n";
+                codigo += temp.temporal + "=" + c3DIzq.temporal + "-" + tempMult + "; //Decremento decimal" + "\r\n\n";
+                temp.codigo += codigo;
+            }
+            else if (c3DIzq.tipo.Equals("CARACTER"))
+            {
+                temp.temporal = memoria.getTemp();
+                String tempMult = memoria.getTemp();
+                temp.tipo = "ENTERO";
+                codigo += c3DIzq.codigo + "\r\n";
+                codigo += tempMult + "=1;" + "\r\n";
+                codigo += temp.temporal + "=" + c3DIzq.temporal + "-" + tempMult + "; //Decremento caracter" + "\r\n\n";
+                temp.codigo += codigo;
             }
             else
             {
-                memoria.addError("ERROR SEMANTICO ", expIzq.tipo + " -- ", fila, columna);
+                memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " ++ ", fila, columna);
             }
+            return temp;
+        }
+
+        public cadena3D resDecremento(expresion expIzq)
+        {
+            String codigo = "";
+            cadena3D temp = new cadena3D();
+            cadena3D c3DIzq = resCondicion(expIzq);
+            if (c3DIzq.tipo.Equals("ENTERO"))
+            {
+                temp.temporal = memoria.getTemp();
+                String tempMult = memoria.getTemp();
+                temp.tipo = "ENTERO";
+                codigo += c3DIzq.codigo + "\r\n";
+                codigo += tempMult + "=1;" + "\r\n";
+                codigo += temp.temporal + "=" + c3DIzq.temporal + "+" + tempMult + "; //Aumento entero" + "\r\n\n";
+                temp.codigo += codigo;
+            }
+            else if (c3DIzq.tipo.Equals("DECIMAL"))
+            {
+                temp.temporal = memoria.getTemp();
+                String tempMult = memoria.getTemp();
+                temp.tipo = "DECIMAL";
+                codigo += c3DIzq.codigo + "\r\n";
+                codigo += tempMult + "=1;" + "\r\n";
+                codigo += temp.temporal + "=" + c3DIzq.temporal + "+" + tempMult + "; //Aumento decimal" + "\r\n\n";
+                temp.codigo += codigo;
+            }
+            else if (c3DIzq.tipo.Equals("CARACTER"))
+            {
+                temp.temporal = memoria.getTemp();
+                String tempMult = memoria.getTemp();
+                temp.tipo = "ENTERO";
+                codigo += c3DIzq.codigo + "\r\n";
+                codigo += tempMult + "=1;" + "\r\n";
+                codigo += temp.temporal + "=" + c3DIzq.temporal + "+" + tempMult + "; //Aumento caracter" + "\r\n\n";
+                temp.codigo += codigo;
+            }
+            else
+            {
+                memoria.addError("ERROR SEMANTICO ", c3DIzq.tipo + " -- ", fila, columna);
+            }
+            return temp;
+        }
+
+        private cadena3D intToSTR(String entero)
+        {
+            String codigo = "";
+            cadena3D temp = new cadena3D();
+            String temp0 = memoria.getTemp();
+            String temp1 = memoria.getTemp();
+            String temp2 = memoria.getTemp();
+            String temp3 = memoria.getTemp();
+            String temp4 = memoria.getTemp();
+            String temp5 = memoria.getTemp();
+            String temp6 = memoria.getTemp();
+            String temp7 = memoria.getTemp();
+            String etq1 = memoria.getEtq();
+            String etq2 = memoria.getEtq();
+            String etq3 = memoria.getEtq();
+            String etq4 = memoria.getEtq();
+            String etq5 = memoria.getEtq();
+            String etq6 = memoria.getEtq();
+            String etq7 = memoria.getEtq();
+            String etq8 = memoria.getEtq();
+            String etq9 = memoria.getEtq();
+            String etq10 = memoria.getEtq();
+            String etq11 = memoria.getEtq();
+            String etq12 = memoria.getEtq();
+            /***************************************/
+            codigo += "\n//Inicio intToStr " + "\r\n";
+            codigo += "//Inicio intToStr " + "\r\n";
+            codigo += temp0 + "=" + entero + ";//Entero a cadena" +"\r\n";
+            codigo += temp1 + " = " + "1;" + "\r\n";
+            codigo += "if " + temp0 + " >= 0 goto " + etq1 + ";" + "\r\n";
+            codigo += temp1 + " = -1;" + "\r\n";
+            codigo += temp0 + " = " + temp0 + " * -1;" + "\r\n";
+            codigo += etq1 + ":" + "\r\n";
+            codigo += "\t" + temp2 + " = 1; //Tamanio del numero" + "\r\n"; 
+            codigo += etq3 + ":" + "\r\n";
+            codigo += "\t" + temp3 + " = 1;" + "\r\n"; 
+            codigo += etq4 + ":" + "\r\n";
+            codigo += "\t" + temp4 + " = " + temp2 + " * " + temp3 + ";" + "\r\n";
+            codigo += "\t" + "if " + temp3 + " > 10 goto " + etq5 + ";" + "\r\n";
+            codigo += "\t" + "if " + temp0 + " < " + temp4 + " goto " + etq2 + ";" + "\r\n";
+            codigo += "\t" + temp3 + " = " + temp3 + " + 1;" + "\r\n";
+            codigo += "\t" + "goto " + etq4 + ";" + "\r\n";
+            codigo += etq5 + ":" + "\r\n";
+            codigo += "\t" + temp2 + " = " + temp2 + " * 10;" + "\r\n";
+            codigo += "\t" + "goto " + etq3 + ";" + "\r\n\n";
+            /***************************************/
+            codigo += etq2 + ":" + "\r\n";
+            codigo += "\t" + temp5 + " = H; //Posicion del Heap de intToStr" + "\r\n";
+            codigo += "\t" + "if " + temp1 + " == 1 goto " + etq6 + ";" + "\r\n";
+            codigo += "\t" + "Heap[H] = 45;" + "\r\n";
+            codigo += "\t" + "H = H + 1;" + "\r\n";
+            codigo += etq6 + ":" + "\r\n";
+            codigo += "\t" + temp3 + " = " + temp3 + " - 1;" + "\r\n";
+            codigo += "\t" + temp6 + " = 0;" + "\r\n";
+            codigo += "\t" + temp7 + "= 48;" + "\r\n";
+            codigo += etq7 + ":" + "\r\n";
+            codigo += "\t" + "if " + temp6 + " == " + temp3 + " goto " + etq8 + ";" + "\r\n";
+            codigo += "\t" + temp6 + " = " + temp6 + " + 1;" + "\r\n";
+            codigo += "\t" + temp7 + " = " + temp7 + " + 1;" + "\r\n";
+            codigo += "\t" + "goto " + etq7 + ";" + "\r\n\n";
+            /***************************************/
+            codigo += etq8 + ":" + "\r\n";
+            codigo += "\t" + "Heap[H] = " + temp7 + ";" + "\r\n";
+            codigo += "\t" + "H = H + 1;" + "\r\n\n";
+            /***************************************/
+            codigo += "\t" + "if " + temp2 + " == 1 goto " + etq9 + ";" + "\r\n";
+            codigo += "\t" + temp4 + " = " + temp2 + " * " + temp3 + ";" + "\r\n";
+            codigo += "\t" + temp0 + " = " + temp0 + " - " + temp4 + ";" + "\r\n";
+            codigo += "\t" + temp2 + " = " + temp2 + " / 10;" + "\r\n\n";
+            /***************************************/
+            codigo += etq10 + ":" + "\r\n";
+            codigo += "\t" + temp3 + " = 1;" + "\r\n"; 
+            codigo += etq11 + ":" + "\r\n";
+            codigo += "\t" + temp4 + " = " + temp2 + " * " + temp3 + ";" + "\r\n";
+            codigo += "\t" + "if " + temp3 + " > 10 goto " + etq12 + ";" + "\r\n";
+            codigo += "\t" + "if " + temp0 + " < " + temp4 + " goto " + etq6 + ";" + "\r\n";
+            codigo += "\t" + temp3 + " = " + temp3 + " + 1;" + "\r\n";
+            codigo += "\t" + "goto " + etq11 + ";" + "\r\n";
+            codigo += etq12 + ":" + "\r\n";
+            codigo += "\t" + temp2 + " = " + temp2 + " * 10;" + "\r\n";
+            codigo += "\t" + "goto " + etq10 + ";" + "\r\n\n";
+            /***************************************/
+            codigo += etq9 + ":" + "\r\n";
+            codigo += "\t" + "Heap[H] = 0;" + "\r\n";
+            codigo += "//Fin intToStr " + "\r\n";
+            codigo += "//Fin intToStr " + "\r\n\n";
+            /***************************************/
+            temp.codigo = codigo;
+            temp.tipo = "CADENA";
+            temp.temporal = temp5;
             return temp;
         }
     }

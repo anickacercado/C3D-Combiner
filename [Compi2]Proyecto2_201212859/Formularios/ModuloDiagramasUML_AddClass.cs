@@ -37,8 +37,10 @@ namespace _Compi2_Proyecto2_201212859.Formularios
 
             this.AccesoM.Items.AddRange(proyecto.accesos.ToArray());
             this.TipoM.Items.AddRange(proyecto.getAllTipos());
+            this.TipoM.Items.Add("void");
 
-            this.Relacion.Items.AddRange("Herencia", "Agregacion", "Asociacion", "Dependencia");
+            this.Relacion.Items.AddRange("Herencia", "Agregacion", "Composicion" , "Asociacion", "Dependencia");
+
             this.Clase.Items.AddRange(proyecto.getClases());
             if (this.Clase.Items.Count <= 0) this.dataGridView3.Enabled = false;
             else this.dataGridView3.Enabled = true;
@@ -95,10 +97,10 @@ namespace _Compi2_Proyecto2_201212859.Formularios
             foreach (DataGridViewRow row in dataGridView3.Rows)
             {
                 
-                if (row.Cells.Count<3 || row.Cells[0].Value == null || row.Cells[1].Value == null || row.Cells[2].Value == null) continue;
+                if (row.Cells.Count<2 || row.Cells[0].Value == null || row.Cells[1].Value == null) continue;
                 ModuloDiagramasUML.Relacion rel = new ModuloDiagramasUML.Relacion();
-                rel.clase = row.Cells[0].Value.ToString();
-                rel.tipo = row.Cells[1].Value.ToString();
+                rel.clase = row.Cells[1].Value.ToString();
+                rel.tipo = row.Cells[0].Value.ToString();
                 clase.relaciones.Add(rel);
             }
 

@@ -1,4 +1,6 @@
-﻿using _Compi2_Proyecto2_201212859.Formularios;
+﻿using _Compi2_Proyecto2_201212859.codigo3D;
+using _Compi2_Proyecto2_201212859.Formularios;
+using _Compi2_Proyecto2_201212859.ejecucion_alto_nivel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -146,10 +148,19 @@ namespace _Compi2_Proyecto2_201212859
 
         private void compilarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            memoria.temporal = 0;
+            //Limpia Reportes
             limpiarGrid();
+
+            //Genera codigo 3D
             ControlEditor.analizar();
+            generar3D generar3D = new generar3D();
             txt3D.Text = memoria.cadena3D;
+
+            //Limpiar Estaticas 3D
+            memoria.temporal = 0;
+            memoria.etiqueta = 0;
+            memoria.cadena3D = "";
+            memoria.lista_estructura_clase = new List<estructura_clase>();
         }
 
      
