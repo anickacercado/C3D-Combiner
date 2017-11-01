@@ -150,9 +150,25 @@ namespace _Compi2_Proyecto2_201212859
             componentes.tablaErrores.Rows.Add(linea, columna, tipo, descripcion, ruta);
         }
 
-        public static void insertarTablaSimbolo(string nombre, string tipo, string rol, string visibilidad, string ambito, int tamanio, int posicion)
+        public static void insertarTablaSimbolo(String nombre, String tipo, String rol, String visibilidad, String ambito, int tamanio, int posicion)
         {
+            int contador = componentes.tablaSimbolos.Rows.Count;
             componentes.tablaSimbolos.Rows.Add(nombre, tipo, rol, visibilidad, ambito, tamanio, posicion);
+            if (rol.Equals("DECLARACION") || rol.Equals("PARAMETRO"))
+            {
+                componentes.tablaSimbolos.Rows[contador].DefaultCellStyle.BackColor = Color.DarkBlue;
+                componentes.tablaSimbolos.Rows[contador].DefaultCellStyle.ForeColor = Color.White;
+            }
+            else if (rol.Equals("CLASE"))
+            {
+                componentes.tablaSimbolos.Rows[contador].DefaultCellStyle.BackColor = Color.DarkRed;
+                componentes.tablaSimbolos.Rows[contador].DefaultCellStyle.ForeColor = Color.White;
+            }
+            else if (rol.Equals("METODO") || rol.Equals("CONSTRUCTOR"))
+            {
+                componentes.tablaSimbolos.Rows[contador].DefaultCellStyle.BackColor = Color.DarkGreen;
+                componentes.tablaSimbolos.Rows[contador].DefaultCellStyle.ForeColor = Color.White;
+            }
         }
 
 

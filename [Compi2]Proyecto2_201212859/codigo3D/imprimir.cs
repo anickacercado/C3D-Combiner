@@ -21,29 +21,29 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             cadena3D expresion3D = expresion.resCondicion();
             if (expresion3D.temporal != "") {
                 if (expresion3D.tipo == "ENTERO") {
-                    codigo += "//Inicia Impresion de entero" + "\r\n";
-                    codigo += expresion3D.codigo + "\r\n";
+                    codigo += "/*Inicio impresion de entero*/" + "\r\n";
+                    codigo += expresion3D.codigo;
                     codigo += "print(\"%d\"," + expresion3D.temporal + ");" + "\r\n";
-                    codigo += "//Finaliza Impresion de entero" + "\r\n\n";
+                    codigo += "/*Fin impresion de entero*/" + "\r\n\n";
                 }
                 else if (expresion3D.tipo == "DECIMAL") {
-                    codigo += "//Inicia Impresion de decimal" + "\r\n";
-                    codigo += expresion3D.codigo + "\r\n";
+                    codigo += "/*Inicio impresion de decimal*/" + "\r\n";
+                    codigo += expresion3D.codigo;
                     codigo += "print(\"%f\"," + expresion3D.temporal + ");" + "\r\n";
-                    codigo += "//Finaliza Impresion de decimal" + "\r\n\n";
+                    codigo += "/*Fin impresion de decimal*/" + "\r\n\n";
 
                 }
                 else if (expresion3D.tipo == "BOOLEANO") {
-                    codigo += "//Inicia Impresion de booleano" + "\r\n";
-                    codigo += expresion3D.codigo + "\r\n";
+                    codigo += "/*Inicio impresion de booleano*/" + "\r\n";
+                    codigo += expresion3D.codigo;
                     codigo += "print(\"%d\"," + expresion3D.temporal + ");" + "\r\n";
-                    codigo += "//Finaliza Impresion de booleano" + "\r\n\n";
+                    codigo += "/*Fin impresion de booleano*/" + "\r\n\n";
                 }
                 else if (expresion3D.tipo == "CARACTER") {
-                    codigo += "//Inicia Impresion de caracter" + "\r\n";
-                    codigo += expresion3D.codigo + "\r\n";
+                    codigo += "/*Inicio impresion de caracter*/" + "\r\n";
+                    codigo += expresion3D.codigo;
                     codigo += "print(\"%c\"," + expresion3D.temporal + ");" + "\r\n";
-                    codigo += "//Finaliza Impresion de caracter" + "\r\n\n";
+                    codigo += "/*Fin impresion de caracter*/" + "\r\n\n";
                 }
                 else if (expresion3D.tipo == "CADENA") {
                     String temp1 = memoria.getTemp();
@@ -51,7 +51,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
                     String etq1 = memoria.getEtq();
                     String etq2 = memoria.getEtq();
 
-                    codigo += "//Inicia Impresion de cadena" + "\r\n";
+                    codigo += "/*Inicio impresion de cadena*/" + "\r\n";
                     codigo += expresion3D.codigo + "\r\n";
                     codigo += temp1 + "=" + expresion3D.temporal + "; //Posicion Heap cadena" + "\r\n";
                     codigo += etq1 + ":" + "\r\n";
@@ -61,7 +61,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
                     codigo += temp1 + "=" + temp1 + "+1" + ";" + "\r\n";
                     codigo += "goto " + etq1 + ";" + "\r\n";
                     codigo += etq2 + ":" + "\r\n";
-                    codigo += "//Finaliza Impresion de cadena" + "\r\n\n";
+                    codigo += "/*Fin impresion de cadena*/" + "\r\n\n";
                 }
             }
             else {

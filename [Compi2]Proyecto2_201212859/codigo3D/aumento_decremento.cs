@@ -23,5 +23,14 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             this.fila = fila;
             this.columna = columna;
         }
+
+        public String generar3D()
+        {
+            String codigo = "";
+            expresion expresion_llamada_objeto = new expresion(null, null, "LLAMADA_OBJETO", "LLAMADA_OBJETO", fila, fila, llamadaObjeto);
+            expresion expresion_tipo = new expresion(expresion_llamada_objeto, null, tipo, tipo, fila, fila, null);
+            codigo += expresion_tipo.resCondicion().codigo;
+            return codigo;
+        }
     }
 }

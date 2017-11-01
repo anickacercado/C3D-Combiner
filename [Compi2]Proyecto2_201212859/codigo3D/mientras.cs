@@ -26,7 +26,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
 
             if (expresion3D.tipo.Equals("BOOLEANO"))
             {
-                codigo += "//Inicio del ciclo Mientras" + "\r\n";
+                codigo += "/*Inicio del ciclo Mientras*/" + "\r\n";
                 codigo += etqRetorno + ":" + "\r\n";
                 codigo += expresion3D.codigo;
 
@@ -35,23 +35,27 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
                     expresion3D.etqVerdadera = memoria.getEtq();
                     expresion3D.etqFalsa = memoria.getEtq();
 
-                    codigo += "\t" + "if " + expresion3D.temporal + "==1 goto " + expresion3D.etqVerdadera + ";\n";
-                    codigo += "\t" + "goto " + expresion3D.etqFalsa + ";\n";
+                    codigo += "\t" + "if " + expresion3D.temporal + "==1 goto " + expresion3D.etqVerdadera + ";\r\n";
+                    codigo += "\t" + "goto " + expresion3D.etqFalsa + ";\r\n";
                 }
                 codigo += expresion3D.etqVerdadera + ":" + "\r\n";
 
                 /*Se concatena las sentencias dentro del mientras*/
                 pasadas pasadas = new pasadas(ambito.tablaSimbolo);
-                codigo += pasadas.ejecutar();
+                codigo += memoria.identar(pasadas.ejecutar());
                 /*Se concatena las sentencias dentro del mientras*/
 
-                codigo += "goto " + etqRetorno + ";\n";
+                codigo += "goto " + etqRetorno + ";\r\n";
                 codigo += expresion3D.etqFalsa + ":" + "\r\n";
-                codigo += "//Fin del ciclo Mientras" + "\r\n\n";
+                codigo += "/*Fin del ciclo Mientras*/" + "\r\n\n";
             }
             else {
                 //Por si hubiera error
             }
+
+            //Goto etiqueta de retorno y salida
+            codigo = memoria.reemplazar(codigo, "goto " + expresion3D.etqFalsa + ";", "goto " + etqRetorno + ";");
+            //Goto etiqueta de retorno y salida
             return codigo;
         }
     }

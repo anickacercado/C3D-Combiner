@@ -24,17 +24,12 @@ namespace _Compi2_Proyecto2_201212859.ejecucion_alto_nivel
             String codigo = "";
             for (int i =0; i<tablaSimbolo.Count(); i++)
             {
-                if (tablaSimbolo[i].rol.Equals("ESTRUCTURA_CLASE"))
-                {
-                    estructura_clase estructura_clase = (estructura_clase)tablaSimbolo[i].valor;
-                    codigo += estructura_clase.generar3D();
-                }
-                else if (tablaSimbolo[i].rol.Equals("CLASE"))
+                if (tablaSimbolo[i].rol.Equals("CLASE"))
                 {
                     clase clase = (clase)tablaSimbolo[i].valor;
                     codigo += clase.generar3D();
                 }
-            
+
                 else if (tablaSimbolo[i].rol.Equals("DECLARACION"))
                 {
                     declaracion declaracion = (declaracion)tablaSimbolo[i].valor;
@@ -53,7 +48,7 @@ namespace _Compi2_Proyecto2_201212859.ejecucion_alto_nivel
                 else if (tablaSimbolo[i].rol.Equals("MIENTRAS"))
                 {
                     mientras metodo = (mientras)tablaSimbolo[i].valor;
-                    codigo +=metodo.generar3D();
+                    codigo += metodo.generar3D();
                 }
                 else if (tablaSimbolo[i].rol.Equals("ASIGNACION"))
                 {
@@ -79,6 +74,47 @@ namespace _Compi2_Proyecto2_201212859.ejecucion_alto_nivel
                 {
                     imprimir imprimir = (imprimir)tablaSimbolo[i].valor;
                     codigo += imprimir.generar3D();
+                }
+                else if (tablaSimbolo[i].rol.Equals("IMPRIMIR"))
+                {
+                    imprimir imprimir = (imprimir)tablaSimbolo[i].valor;
+                    codigo += imprimir.generar3D();
+                }
+                else if (tablaSimbolo[i].rol.Equals("PARA"))
+                {
+                    para para = (para)tablaSimbolo[i].valor;
+                    codigo += para.generar3D();
+                }
+                else if (tablaSimbolo[i].rol.Equals("ELEGIR"))
+                {
+                    elegir elegir = (elegir)tablaSimbolo[i].valor;
+                    codigo += elegir.generar3D();
+                }
+                else if (tablaSimbolo[i].rol.Equals("SI"))
+                {
+                    si elegir = (si)tablaSimbolo[i].valor;
+                    codigo += elegir.generar3D();
+                }
+                else if (tablaSimbolo[i].rol.Equals("CONTINUAR"))
+                {
+                    codigo += "~CONTINUAR~" + "//Continuar \r\n\n";
+                }
+                else if (tablaSimbolo[i].rol.Equals("SALIR"))
+                {
+                    codigo += "~SALIR~" + "//Salir \r\n\n";
+                }
+                else if (tablaSimbolo[i].rol.Equals("RETORNAR"))
+                {
+                    expresion expresion = (expresion)tablaSimbolo[i].valor;
+                    cadena3D expresion3D = expresion.resCondicion();
+
+                    codigo += "/*Inicio de retorno*/" + "\r\n";
+                    codigo += expresion3D.codigo + "\r\n";
+                    String temp = memoria.getTemp();
+                    codigo += temp + "=P+1" + ";" + "\r\n";
+                    codigo += "Stack[" + temp + "]=" + expresion3D.temporal + ";" + "\r\n";
+                    codigo += "~RETORNAR~" + "//Retornar \r\n";
+                    codigo += "/*Fin de retorno*/" + "\r\n\n";           
                 }
             }
             return codigo;

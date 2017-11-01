@@ -33,8 +33,11 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
         public String generar3D()
         {
           String codigo = "";
+
           cadena3D expresion3D = expresion.resCondicion();
           codigo += expresion3D.codigo;
+
+
           return codigo;
         }
     }

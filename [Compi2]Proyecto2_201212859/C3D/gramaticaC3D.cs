@@ -16,7 +16,9 @@ namespace _Compi2_Proyecto2_201212859.C3D
         {
 
             CommentTerminal SingleLineComment = new CommentTerminal("SingleLineComment", "//", "\r", "\n", "\u2085", "\u2028", "\u2029");
+            CommentTerminal DelimitedComment = new CommentTerminal("DelimitedComment", "/*", "*/");
             NonGrammarTerminals.Add(SingleLineComment);
+            NonGrammarTerminals.Add(DelimitedComment);
 
 
             RegexBasedTerminal er_temp = new RegexBasedTerminal("er_temp", "[t][0-9]+");
@@ -35,6 +37,7 @@ namespace _Compi2_Proyecto2_201212859.C3D
             var t_if = ToTerm("if");
             var t_main = ToTerm("main");
             var t_print = ToTerm("print");
+            var t_ifFalse = ToTerm("ifFalse");
 
             MarkReservedWords("goto");
             MarkReservedWords("stack");
@@ -44,6 +47,7 @@ namespace _Compi2_Proyecto2_201212859.C3D
             MarkReservedWords("if");
             MarkReservedWords("main");
             MarkReservedWords("print");
+            MarkReservedWords("ifFalse");
 
             //Operadores Aritmeticos
             var t_mas = ToTerm("+");
@@ -135,7 +139,9 @@ namespace _Compi2_Proyecto2_201212859.C3D
                 ;
 
             CONDICION.Rule = t_if + R + t_goto + er_etiq + t_punto_coma
+                | t_ifFalse + R + t_goto + er_etiq + t_punto_coma
                 ;
+
 
             SALTO.Rule = t_goto + er_etiq + t_punto_coma
                 ;

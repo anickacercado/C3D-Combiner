@@ -64,6 +64,7 @@
     <Compile Include="codigo3D\cadena3D.cs" />
     <Compile Include="codigo3D\ambito.cs" />
     <Compile Include="codigo3D\caso.cs" />
+    <Compile Include="codigo3D\ciclo_x.cs" />
     <Compile Include="codigo3D\clase.cs" />
     <Compile Include="codigo3D\declaracion.cs" />
     <Compile Include="ejecucion_alto_nivel\generar3D.cs" />

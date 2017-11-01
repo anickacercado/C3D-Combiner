@@ -20,17 +20,24 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
         {
             String codigo = "";
             String etqRetorno = memoria.getEtq();
+            String etqSalida = memoria.getEtq();
 
-            codigo += "//Inicio del LOOP" + "\r\n";
+            codigo += "/*Inicio del LOOP*/" + "\r\n";
             codigo += etqRetorno + ":" + "\r\n";
 
             /*Se concatena las sentencias dentro del mientras*/
             pasadas pasadas = new pasadas(ambito.tablaSimbolo);
-            codigo += pasadas.ejecutar();
+            codigo += memoria.identar(pasadas.ejecutar());
             /*Se concatena las sentencias dentro del mientras*/
 
             codigo += "goto " + etqRetorno + ";\n";
-            codigo += "//Fin del LOOP" + "\r\n\n";
+            codigo += etqSalida + ":" + "\r\n";
+
+            //Goto etiqueta de retorno y salida
+            codigo = memoria.reemplazar(codigo, "goto " +  etqSalida + ";", "goto " + etqRetorno + ";");
+            //Goto etiqueta de retorno y salida
+
+            codigo += "/*Fin del LOOP*/" + "\r\n\n";
             return codigo;
         }
     }

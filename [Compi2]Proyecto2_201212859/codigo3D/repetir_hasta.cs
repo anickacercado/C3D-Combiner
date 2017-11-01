@@ -27,7 +27,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
 
             if (expresion3D.tipo.Equals("BOOLEANO"))
             {
-                codigo += "//Inicio del ciclo REPETIR-HASTA" + "\r\n";
+                codigo += "/*Inicio del ciclo REPETIR-HASTA*/" + "\r\n";
 
                 //Para el caso de HACER-MIENTRAS(True)
                 if (expresion3D.etqVerdadera == "" && expresion3D.etqFalsa == "")
@@ -38,7 +38,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
                     codigo += expresion3D.etqFalsa + ":" + "\r\n";
 
                     /*Se concatena las sentencias dentro del repetir_hasta*/
-                    codigo += pasadas.ejecutar();
+                    codigo += memoria.identar(pasadas.ejecutar());
                     /*Se concatena las sentencias dentro del repetir_hasta*/
 
                     codigo += expresion3D.codigo;
@@ -52,19 +52,23 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
                     codigo += expresion3D.etqFalsa + ":" + "\r\n";
 
                     /*Se concatena las sentencias dentro del repetir_hasta*/
-                    codigo += pasadas.ejecutar();
+                    codigo += memoria.identar(pasadas.ejecutar());
                     /*Se concatena las sentencias dentro del repetir_hasta*/
 
                     codigo += expresion3D.codigo;
                 }
 
                 codigo += expresion3D.etqVerdadera + ":" + "\r\n";
-                codigo += "//Fin del ciclo REPETIR-HASTA" + "\r\n\n";
+                codigo += "/*Fin del ciclo REPETIR-HASTA*/" + "\r\n\n";
             }
             else
             {
                 //Por si hubiera error
             }
+
+            //Goto etiqueta de retorno y salida
+            codigo = memoria.reemplazar(codigo, "goto " + expresion3D.etqVerdadera + ";", "goto " + expresion3D.etqFalsa + ";");
+            //Goto etiqueta de retorno y salida
             return codigo;
         }
     }

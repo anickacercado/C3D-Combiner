@@ -67,7 +67,9 @@
             this.splitContainer3 = new System.Windows.Forms.SplitContainer();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.ControlEditor = new _Compi2_Proyecto2_201212859.Formularios.controlTabIDE();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.panel13 = new System.Windows.Forms.Panel();
             this.panel10 = new System.Windows.Forms.Panel();
             this.panel7 = new System.Windows.Forms.Panel();
             this.panel8 = new System.Windows.Forms.Panel();
@@ -104,8 +106,6 @@
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.crearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.crearCarpetaToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel13 = new System.Windows.Forms.Panel();
-            this.ControlEditor = new _Compi2_Proyecto2_201212859.Formularios.controlTabIDE();
             this.panel2.SuspendLayout();
             this.tab0.SuspendLayout();
             this.tab1.SuspendLayout();
@@ -510,6 +510,17 @@
             this.splitContainer2.SplitterDistance = 872;
             this.splitContainer2.TabIndex = 0;
             // 
+            // ControlEditor
+            // 
+            this.ControlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ControlEditor.Location = new System.Drawing.Point(0, 0);
+            this.ControlEditor.Name = "ControlEditor";
+            this.ControlEditor.SelectedIndex = 0;
+            this.ControlEditor.Size = new System.Drawing.Size(872, 324);
+            this.ControlEditor.TabIndex = 0;
+            this.ControlEditor.SelectedIndexChanged += new System.EventHandler(this.ControlEditor_SelectedIndexChanged);
+            this.ControlEditor.TabIndexChanged += new System.EventHandler(this.ControlEditor_TabIndexChanged);
+            // 
             // panel6
             // 
             this.panel6.Controls.Add(this.panel13);
@@ -521,6 +532,14 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(37, 324);
             this.panel6.TabIndex = 5;
+            // 
+            // panel13
+            // 
+            this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel13.Location = new System.Drawing.Point(47, 22);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(0, 302);
+            this.panel13.TabIndex = 19;
             // 
             // panel10
             // 
@@ -833,25 +852,6 @@
             this.crearCarpetaToolStripMenuItem1.Size = new System.Drawing.Size(146, 22);
             this.crearCarpetaToolStripMenuItem1.Text = "Crear Carpeta";
             this.crearCarpetaToolStripMenuItem1.Click += new System.EventHandler(this.crearCarpetaToolStripMenuItem1_Click);
-            // 
-            // panel13
-            // 
-            this.panel13.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel13.Location = new System.Drawing.Point(47, 22);
-            this.panel13.Name = "panel13";
-            this.panel13.Size = new System.Drawing.Size(0, 302);
-            this.panel13.TabIndex = 19;
-            // 
-            // ControlEditor
-            // 
-            this.ControlEditor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.ControlEditor.Location = new System.Drawing.Point(0, 0);
-            this.ControlEditor.Name = "ControlEditor";
-            this.ControlEditor.SelectedIndex = 0;
-            this.ControlEditor.Size = new System.Drawing.Size(872, 324);
-            this.ControlEditor.TabIndex = 0;
-            this.ControlEditor.SelectedIndexChanged += new System.EventHandler(this.ControlEditor_SelectedIndexChanged);
-            this.ControlEditor.TabIndexChanged += new System.EventHandler(this.ControlEditor_TabIndexChanged);
             // 
             // principal
             // 
