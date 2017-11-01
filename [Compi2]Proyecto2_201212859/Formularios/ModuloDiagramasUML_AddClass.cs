@@ -14,14 +14,47 @@ namespace _Compi2_Proyecto2_201212859.Formularios
     {
         ModuloDiagramasUML.Proyecto proyecto;
 
-        public ModuloDiagramasUML_AddClass( ModuloDiagramasUML.Proyecto proyecto)
+        public ModuloDiagramasUML_AddClass(ModuloDiagramasUML.Proyecto proyecto)
         {
             InitializeComponent();
             this.proyecto = proyecto;
             AddComboBoxColumns();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        public ModuloDiagramasUML_AddClass(ModuloDiagramasUML.Proyecto proyecto,String claseAEditar)
+        {
+            InitializeComponent();
+            this.proyecto = proyecto;
+            AddComboBoxColumns();
+
+
+            foreach (ModuloDiagramasUML.Clase clase in proyecto.clases)
+                if (clase.nombre == claseAEditar)
+                {
+                    textBox1.Text = clase.nombre;
+                    foreach (ModuloDiagramasUML.Atributo atr in clase.atributos)
+                    {
+                        dataGridView1.Rows.Add(atr.acceso,atr.nombre,atr.tipo);
+                    }
+
+                    foreach (ModuloDiagramasUML.Funcion fun in clase.funciones)
+                    {
+                        dataGridView2.Rows.Add(fun.acceso, fun.nombre, fun.tipo);
+                    }
+
+                    foreach (ModuloDiagramasUML.Relacion rel in clase.relaciones)
+                    {
+                        dataGridView3.Rows.Add(rel.tipo, rel.clase);
+                    }
+                }
+
+
+            //foreach (ModuloDiagramasUML.Relacion rel in clase.relaciones)
+
+
+        }
+
+            private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
@@ -65,6 +98,14 @@ namespace _Compi2_Proyecto2_201212859.Formularios
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if(proyecto.clases.Count>0)
+            foreach (ModuloDiagramasUML.Clase clasei in proyecto.clases)
+                if (clasei.nombre == textBox1.Text) {
+                    proyecto.clases.Remove(clasei);
+                        break;
+                }
+
+
             ModuloDiagramasUML.Clase clase = new ModuloDiagramasUML.Clase();
             clase.nombre = textBox1.Text;
             clase.atributos = new List<ModuloDiagramasUML.Atributo>();

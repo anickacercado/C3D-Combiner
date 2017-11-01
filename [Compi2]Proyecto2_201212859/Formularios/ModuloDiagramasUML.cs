@@ -91,8 +91,24 @@ namespace _Compi2_Proyecto2_201212859.Formularios
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Console.Out.WriteLine("Nada");
-
+            if (listBox1.SelectedItem != null)
+                if (proyecto.clases.Count > 0)
+                {
+                    foreach (ModuloDiagramasUML.Clase clasei in proyecto.clases)
+                        foreach (ModuloDiagramasUML.Relacion rel in clasei.relaciones)
+                            if (rel.clase == listBox1.SelectedItem.ToString())
+                            {
+                                clasei.relaciones.Remove(rel);
+                                break;
+                            }
+                    foreach (ModuloDiagramasUML.Clase clasei in proyecto.clases)
+                        if (clasei.nombre == listBox1.SelectedItem.ToString())
+                        {
+                            proyecto.clases.Remove(clasei);
+                            actualizarPaneles();
+                            break;
+                        }
+                }
         }
 
         public void actualizarPaneles()
@@ -103,6 +119,62 @@ namespace _Compi2_Proyecto2_201212859.Formularios
                 listBox1.Items.Add(clase.nombre);
             }
             generarUML_IMG();
+            if (comboBox1.SelectedItem!=null && comboBox1.SelectedItem.ToString() == "OLC++")
+            {
+
+            }
+            if (comboBox1.SelectedItem != null && comboBox1.SelectedItem.ToString() == "Tree")
+            {
+                generarTree();
+            }
+        }
+
+        public void generarTree()
+        {
+            String cod = "";
+            String niv = "\n";
+
+            foreach (Clase clase in proyecto.clases)
+            {
+                cod += niv + "## Aqui empiezo la clase" + clase.nombre ;
+
+                foreach (Atributo atr in clase.atributos)
+                {
+                    niv = "\n\t";
+                    cod += niv + atr.acceso + " " + atr.tipo + " " + atr.nombre;
+                }
+
+                cod += "\n\n";
+
+                foreach (Funcion fun in clase.funciones)
+                {
+                    niv = "\n\t";
+                    if (fun.tipo == "void")
+                    {
+                        cod += niv + fun.acceso + " " + "metodo" + " " + fun.nombre + " []:";
+                        cod += niv + "\t## Instrucciones";
+
+                        //publicar metodo get
+                    }
+                    else
+                    {
+                        cod += niv + fun.acceso + " " + "funcion" + " " + fun.tipo + " " + fun.nombre + " []:";
+                        cod += niv + "\t## Instrucciones";
+                        cod += niv + "\tretornar ## variables";
+                    }
+                }
+
+                cod += "\n\n";
+
+                foreach (Atributo atr in clase.atributos)
+                {
+                    niv = "\n\t";
+                    //cod += niv + atr.acceso + " " + atr.tipo + " " + atr.nombre;
+                }
+            }
+
+
+            textBox1.Text = cod;
         }
 
 
@@ -175,8 +247,6 @@ digraph G{
                         grafo += clase.nombre + " -> " + rel.clase + " [dir=both arrowhead=vee arrowtail=none  label=\"1   ->   0...* \"]";
                     else if (rel.tipo == "Dependencia")
                         grafo += clase.nombre + " -> " + rel.clase + " [dir=both style=dotted arrowhead=vee arrowtail=none]";
-
-
             }
 
 
@@ -193,5 +263,14 @@ digraph G{
             img.Save(path);
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem != null)
+            {
+                ModuloDiagramasUML_AddClass addClass = new ModuloDiagramasUML_AddClass(proyecto, listBox1.SelectedItem.ToString());
+                addClass.ShowDialog();
+                actualizarPaneles();
+            }
+        }
     }
 }
