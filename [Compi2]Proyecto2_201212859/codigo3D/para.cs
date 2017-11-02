@@ -57,7 +57,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             }
             else
             {
-                //Por si hubiera error
+                memoria.addError("ERROR SEMANTICO ", "La condicion debe ser de tipo booleano", condicion.fila, condicion.columna);
             }
             codigo += "/*Fin del ciclo para*/" + "\r\n\n";
 

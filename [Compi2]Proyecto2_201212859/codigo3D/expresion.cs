@@ -301,7 +301,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
                     codigo += "H = H + 1;" + "\r\n";
                 }
 
-                codigo += "Heap[H] = " + (int)memoria.finCadena + "; //Fin de cadena" + "\r\n";
+                codigo += "Heap[H] = " + (int)memoria.fin_cadena + "; //Fin de cadena" + "\r\n";
                 codigo += "H = H + 1;" + "\r\n";
                 /*CODIGO CADENA*/
 
@@ -1129,7 +1129,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
 
                             codigo += etq1 + ": //Cadena 1" + "\r\n";
                             codigo += "\t" + tempHeap1 + "=" + "Heap[" + tempCad1 + "]; //Asignar ascii" + "\r\n";
-                            codigo += "\t" + "if " + tempHeap1 + "==" + (int)memoria.finCadena + " goto " + etq2 + ";" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap1 + "==" + (int)memoria.fin_cadena + " goto " + etq2 + ";" + "\r\n";
                             codigo += "\t" + "Heap[H]=" + tempHeap1 + "; //Asignar en Heap ascii" + "\r\n";
                             codigo += "\t" + "H=H+1;" + "\r\n";
                             codigo += "\t" + tempCad1 + "=" + tempCad1 + "+1;" + "\r\n";
@@ -1138,14 +1138,14 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
 
                             codigo += etq2 + ": //Cadena 2" + "\r\n";
                             codigo += "\t" + tempHeap2 + "=" + "Heap[" + tempCad2 + "]; //Asignar ascii" + "\r\n";
-                            codigo += "\t" + "if " + tempHeap2 + "==" + (int)memoria.finCadena + " goto " + etq3 + ";" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap2 + "==" + (int)memoria.fin_cadena + " goto " + etq3 + ";" + "\r\n";
                             codigo += "\t" + "Heap[H]=" + tempHeap2 + "; //Asignar en Heap ascii" + "\r\n";
                             codigo += "\t" + "H=H+1;" + "\r\n";
                             codigo += "\t" + tempCad2 + "=" + tempCad2 + "+1;" + "\r\n";
                             codigo += "\t" + "goto " + etq2 + ";" + "\r\n\n";
 
                             codigo += etq3 + ":" + " \r\n";
-                            codigo += "\t" + "Heap[H]=" + (int)memoria.finCadena + ";\r\n";
+                            codigo += "\t" + "Heap[H]=" + (int)memoria.fin_cadena + ";\r\n";
                             codigo += "\t" + "H=H+1;" + "\r\n";
                             codigo += "//Fin concatenacion de entero cadena" + "\r\n\n";
 
@@ -1288,7 +1288,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
 
                             codigo += etq1 + ": //Cadena 1" + "\r\n";
                             codigo += "\t" + tempHeap1 + "=" + "Heap[" + tempCad1 + "]; //Asignar ascii" + "\r\n";
-                            codigo += "\t" + "if " + tempHeap1 + "==" + (int)memoria.finCadena + " goto " + etq2 + ";" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap1 + "==" + (int)memoria.fin_cadena + " goto " + etq2 + ";" + "\r\n";
                             codigo += "\t" + "Heap[H]=" + tempHeap1 + "; //Asignar en Heap ascii" + "\r\n";
                             codigo += "\t" + "H=H+1;" + "\r\n";
                             codigo += "\t" + tempCad1 + "=" + tempCad1 + "+1;" + "\r\n";
@@ -1297,14 +1297,14 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
 
                             codigo += etq2 + ": //Cadena 2" + "\r\n";
                             codigo += "\t" + tempHeap2 + "=" + "Heap[" + tempCad2 + "]; //Asignar ascii" + "\r\n";
-                            codigo += "\t" + "if " + tempHeap2 + "==" + (int)memoria.finCadena + " goto " + etq3 + ";" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap2 + "==" + (int)memoria.fin_cadena + " goto " + etq3 + ";" + "\r\n";
                             codigo += "\t" + "Heap[H]=" + tempHeap2 + "; //Asignar en Heap ascii" + "\r\n";
                             codigo += "\t" + "H=H+1;" + "\r\n";
                             codigo += "\t" + tempCad2 + "=" + tempCad2 + "+1;" + "\r\n";
                             codigo += "\t" + "goto " + etq2 + ";" + "\r\n\n";
 
                             codigo += etq3 + ":" + " \r\n";
-                            codigo += "\t" + "Heap[H]=" + (int)memoria.finCadena + ";\r\n";
+                            codigo += "\t" + "Heap[H]=" + (int)memoria.fin_cadena + ";\r\n";
                             codigo += "\t" + "H=H+1;" + "\r\n";
                             codigo += "//Fin concatenacion de cadena entero" + "\r\n\n";
 
@@ -1337,7 +1337,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
 
                             codigo += etq1 + ": //Cadena 1" + "\r\n";
                             codigo += "\t" + tempHeap1 + "=" + "Heap[" +tempCad1+ "]; //Asignar ascii" + "\r\n";
-                            codigo += "\t" + "if " + tempHeap1 + "==" + (int)memoria.finCadena + " goto " + etq2 + ";" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap1 + "==" + (int)memoria.fin_cadena + " goto " + etq2 + ";" + "\r\n";
                             codigo += "\t" + "Heap[H]=" + tempHeap1 + "; //Asignar en Heap ascii" + "\r\n";
                             codigo += "\t" + "H=H+1;" + "\r\n";
                             codigo += "\t" + tempCad1 + "=" + tempCad1 + "+1;" + "\r\n";
@@ -1346,14 +1346,14 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
 
                             codigo += etq2 + ": //Cadena 2" + "\r\n";
                             codigo += "\t" + tempHeap2 + "=" + "Heap[" + tempCad2 + "]; //Asignar ascii" + "\r\n";
-                            codigo += "\t" + "if " + tempHeap2 + "==" + (int)memoria.finCadena + " goto " + etq3 + ";" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap2 + "==" + (int)memoria.fin_cadena + " goto " + etq3 + ";" + "\r\n";
                             codigo += "\t" + "Heap[H]=" + tempHeap2 + "; //Asignar en Heap ascii" + "\r\n";
                             codigo += "\t" + "H=H+1;" + "\r\n";
                             codigo += "\t" + tempCad2 + "=" + tempCad2 + "+1;" + "\r\n";
                             codigo += "\t" + "goto " + etq2 + ";" + "\r\n\n";
 
                             codigo += etq3 + ":" + " \r\n";
-                            codigo += "\t" + "Heap[H]=" + (int)memoria.finCadena + ";\r\n";
+                            codigo += "\t" + "Heap[H]=" + (int)memoria.fin_cadena + ";\r\n";
                             codigo += "\t" + "H=H+1;" + "\r\n";
                             codigo += "//Fin concatenacion de cadena" + "\r\n\n";
 
@@ -1381,7 +1381,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
 
                             codigo += etq1 + ": //Cadena 1" + "\r\n";
                             codigo += "\t" + tempHeap1 + "=" + "Heap[" + tempCad1 + "]; //Asignar ascii" + "\r\n";
-                            codigo += "\t" + "if " + tempHeap1 + "==" + (int)memoria.finCadena + " goto " + etq2 + ";" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap1 + "==" + (int)memoria.fin_cadena + " goto " + etq2 + ";" + "\r\n";
                             codigo += "\t" + "Heap[H]=" + tempHeap1 + "; //Asignar en Heap ascii" + "\r\n";
                             codigo += "\t" + "H=H+1;" + "\r\n";
                             codigo += "\t" + tempCad1 + "=" + tempCad1 + "+1;" + "\r\n";
@@ -1391,7 +1391,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
                             codigo += etq2 + ": //Concatenar entero" + "\r\n";
                             codigo += "\t" + "Heap[H]=" + tempCad2 + "; //Asignar en Heap ascii" + "\r\n";
                             codigo += "\t" + "H=H+1;" + "\r\n";
-                            codigo += "\t" + "Heap[H]=" + (int)memoria.finCadena + ";\r\n";
+                            codigo += "\t" + "Heap[H]=" + (int)memoria.fin_cadena + ";\r\n";
                             codigo += "\t" + "H=H+1;" + "\r\n";
                             codigo += "//Fin concatenacion de cadena caracter" + "\r\n\n";
 
@@ -1556,14 +1556,14 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
 
                             codigo += etq1 + ": //Cadena 1" + "\r\n";
                             codigo += "\t" + tempHeap1 + "=" + "Heap[" + tempCad1 + "]; //Asignar ascii" + "\r\n";
-                            codigo += "\t" + "if " + tempHeap1 + "==" + (int)memoria.finCadena + " goto " + etq2 + ";" + "\r\n";
+                            codigo += "\t" + "if " + tempHeap1 + "==" + (int)memoria.fin_cadena + " goto " + etq2 + ";" + "\r\n";
                             codigo += "\t" + "Heap[H]=" + tempHeap1 + "; //Asignar en Heap ascii" + "\r\n";
                             codigo += "\t" + "H=H+1;" + "\r\n";
                             codigo += "\t" + tempCad1 + "=" + tempCad1 + "+1;" + "\r\n";
                             codigo += "\t" + "goto " + etq1 + ";" + "\r\n\n";
 
                             codigo += etq2 + ": //Concatenar entero" + "\r\n";
-                            codigo += "\t" + "Heap[H]=" + (int)memoria.finCadena + ";\r\n";
+                            codigo += "\t" + "Heap[H]=" + (int)memoria.fin_cadena + ";\r\n";
                             codigo += "\t" + "H=H+1;" + "\r\n";
                             codigo += "//Fin concatenacion de caracter cadena" + "\r\n\n";
                             temp.codigo = codigo;

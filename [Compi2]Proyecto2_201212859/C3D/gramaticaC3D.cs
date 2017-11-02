@@ -112,6 +112,7 @@ namespace _Compi2_Proyecto2_201212859.C3D
                | A + t_por + A
                | A + t_div + A
                | A + t_potencia + A
+               | t_menos + A
                | er_decimal
                | er_entero
                | er_temp

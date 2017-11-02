@@ -62,7 +62,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             }
             else
             {
-                //Por si hubiera error
+                memoria.addError("ERROR SEMANTICO ", "La condicion debe ser de tipo booleano", expresion.fila, expresion.columna);
             }
 
             //Goto etiqueta de retorno y salida

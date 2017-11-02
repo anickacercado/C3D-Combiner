@@ -44,7 +44,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
                     foreach (sino_si sino_si in lista_sino_si)
                     {
                         cadena3D expresion3D_sino_si = sino_si.expresion.resCondicion();
-                        
+
                         if (expresion3D.tipo == "BOOLEANO")
                         {
                             codigo += "//Inicio de sino_si" + "\r\n";
@@ -56,8 +56,9 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
                             codigo += expresion3D_sino_si.etqFalsa + ":" + "\r\n";
                             codigo += "//Fin de sino_si" + "\r\n\n";
                         }
-                        else {
-                            //Por si hubiera error
+                        else
+                        {
+                            memoria.addError("ERROR SEMANTICO ", "La condicion SI_NO_SI debe ser de tipo booleano", sino_si.expresion.fila, sino_si.expresion.columna);
                         }
                     }
                 }
@@ -73,7 +74,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
                 codigo += "/*Fin de SI*/" + "\r\n\n";
             }
             else {
-                //Por si hubiera error
+                memoria.addError("ERROR SEMANTICO ", "La condicion SI debe ser de tipo booleano", expresion.fila, expresion.columna);
             }
             return codigo;
         }

@@ -65,7 +65,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
                 }
             }
             else {
-                //ERROR SEMANTICO
+                memoria.addError("ERROR SEMANTICO ", "La expresion debe retonar un temporal", expresion.fila, expresion.columna);
             }
             return codigo;
         }

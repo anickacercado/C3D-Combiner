@@ -50,7 +50,7 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
                 codigo += "/*Fin del ciclo Mientras*/" + "\r\n\n";
             }
             else {
-                //Por si hubiera error
+                memoria.addError("ERROR SEMANTICO ", "La condicion debe ser de tipo booleano", expresion.fila, expresion.columna);
             }
 
             //Goto etiqueta de retorno y salida

@@ -18,7 +18,8 @@ namespace _Compi2_Proyecto2_201212859
         public static int temporal = 0;
         public static int etiqueta = 0;
         public static String cadena3D = "";
-        public static Char finCadena = '\0';
+        public static Char fin_cadena = '\0';
+        public static String inicia_variable = "-143638293";
 
         public static String getTemp() {    
             String temp = "t" + memoria.temporal.ToString();
@@ -42,8 +43,6 @@ namespace _Compi2_Proyecto2_201212859
         public static String identar(String codigo){
             String cadena_retorno = "";
             String[] arregloString = codigo.Split('\n');
-            // En este caso el salto de linea("\n") queda eliminado. 
-
             for (int x = 0; x < arregloString.Count(); x++){
                 cadena_retorno += "\t" + arregloString[x] + "\n";
             }

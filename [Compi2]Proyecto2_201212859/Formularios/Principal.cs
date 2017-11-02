@@ -74,7 +74,6 @@ namespace _Compi2_Proyecto2_201212859
             return directoryNode;
         }
 
-
         private void treeView1_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Button == MouseButtons.Right)
