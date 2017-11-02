@@ -55,7 +55,6 @@ namespace _Compi2_Proyecto2_201212859.codigo3D
             this.CADENA = CADENA;
         }
 
-
         public bool getBOOL()
         {
             return BOOL;

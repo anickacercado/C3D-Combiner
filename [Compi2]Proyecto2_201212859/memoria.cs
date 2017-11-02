@@ -32,6 +32,23 @@ namespace _Compi2_Proyecto2_201212859
             memoria.etiqueta++;
             return temp;
         }
+        
+        public static String reemplazar(String codigo, String salir, String continuar) {
+            codigo = codigo.Replace("~SALIR~", salir);
+            codigo = codigo.Replace("~CONTINUAR~", continuar);
+            return codigo;
+        }
+
+        public static String identar(String codigo){
+            String cadena_retorno = "";
+            String[] arregloString = codigo.Split('\n');
+            // En este caso el salto de linea("\n") queda eliminado. 
+
+            for (int x = 0; x < arregloString.Count(); x++){
+                cadena_retorno += "\t" + arregloString[x] + "\n";
+            }
+            return cadena_retorno;
+        }
 
 
         public static List<estructura_clase> lista_estructura_clase = new List<estructura_clase>();

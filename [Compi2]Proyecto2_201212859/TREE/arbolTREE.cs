@@ -25,7 +25,7 @@ namespace _Compi2_Proyecto2_201212859.TREE
                         foreach (simbolo simbolo in lista_clase)
                         {
                             /*Dar posición a los simbolos*/
-                            posicion_simbolo(simbolo, 0);
+                            posicion_simbolo(simbolo, 1);
                         }
 
                         estructura_clase estructura_clase = new estructura_clase(lista_importar, ambito, "");
@@ -137,6 +137,7 @@ namespace _Compi2_Proyecto2_201212859.TREE
                                 List<simbolo> lista_sentencias = (List<simbolo>)recorrerArbol(raiz.ChildNodes[4]);
                                 metodo metodo = new metodo(visibilidad, "VOID", 0, nombre, lista_parametro, new ambito(nombre, lista_sentencias), raiz.ChildNodes[1].Token.Location.Line + 1, raiz.ChildNodes[1].Token.Location.Column + 1);
                                 simbolo = new simbolo(metodo.visibilidad, metodo.tipo, metodo.nombre, "METODO", metodo.fila, metodo.columna, metodo.ambito, metodo);
+                                simbolo.tamanio = 2;
 
                                 metodo.padre = simbolo;
                                 if (lista_parametro.Count > 0)
@@ -164,8 +165,9 @@ namespace _Compi2_Proyecto2_201212859.TREE
                                 List<simbolo> lista_sentencias = (List<simbolo>)recorrerArbol(raiz.ChildNodes[5]);
                                 metodo metodo = new metodo(visibilidad, "VOID", 0, nombre, lista_parametro, new ambito(nombre, lista_sentencias), raiz.ChildNodes[2].Token.Location.Line + 1, raiz.ChildNodes[2].Token.Location.Column + 1);
                                 simbolo = new simbolo(metodo.visibilidad, metodo.tipo, metodo.nombre, "METODO", metodo.fila, metodo.columna, metodo.ambito, metodo);
-                                metodo.padre = simbolo;
+                                simbolo.tamanio = 2;
 
+                                metodo.padre = simbolo;
                                 if (lista_parametro.Count > 0)
                                 {
                                     simbolo hermano = null;
@@ -194,8 +196,9 @@ namespace _Compi2_Proyecto2_201212859.TREE
                                 List<simbolo> lista_sentencias = (List<simbolo>)recorrerArbol(raiz.ChildNodes[6]);
                                 metodo metodo = new metodo(visibilidad, tipo, dimensiones, nombre, lista_parametro, new ambito(nombre, lista_sentencias), raiz.ChildNodes[1].Token.Location.Line + 1, raiz.ChildNodes[1].Token.Location.Column + 1);
                                 simbolo = new simbolo(metodo.visibilidad, metodo.tipo, metodo.nombre, "METODO", metodo.fila, metodo.columna, metodo.ambito, metodo);
-                                metodo.padre = simbolo;
+                                simbolo.tamanio = 2;
 
+                                metodo.padre = simbolo;
                                 if (lista_parametro.Count > 0)
                                 {
                                     simbolo hermano = null;
@@ -222,8 +225,9 @@ namespace _Compi2_Proyecto2_201212859.TREE
                                 List<simbolo> lista_sentencias = (List<simbolo>)recorrerArbol(raiz.ChildNodes[7]);
                                 metodo metodo = new metodo(visibilidad, tipo, dimensiones, nombre, lista_parametro, new ambito(nombre, lista_sentencias), raiz.ChildNodes[2].Token.Location.Line + 1, raiz.ChildNodes[2].Token.Location.Column + 1);
                                 simbolo = new simbolo(metodo.visibilidad, metodo.tipo, metodo.nombre, "METODO", metodo.fila, metodo.columna, metodo.ambito, metodo);
-                                metodo.padre = simbolo;
+                                simbolo.tamanio = 2;
 
+                                metodo.padre = simbolo;
                                 if (lista_parametro.Count > 0)
                                 {
                                     simbolo hermano = null;
@@ -247,8 +251,9 @@ namespace _Compi2_Proyecto2_201212859.TREE
                             List<simbolo> lista_sentencias = (List<simbolo>)recorrerArbol(raiz.ChildNodes[2]);
                             metodo metodo = new metodo("VOID", "VOID", 0, "CONSTRUCTOR", lista_parametro, new ambito("CONSTRUCTOR", lista_sentencias), raiz.ChildNodes[0].Token.Location.Line + 1, raiz.ChildNodes[0].Token.Location.Column + 1);
                             simbolo = new simbolo(metodo.visibilidad, metodo.tipo, metodo.nombre, "CONSTRUCTOR", metodo.fila, metodo.columna, metodo.ambito, metodo);
-                            metodo.padre = simbolo;
+                            simbolo.tamanio = 2;
 
+                            metodo.padre = simbolo;
                             if (lista_parametro.Count > 0)
                             {
                                 simbolo Hermano = null;
@@ -434,7 +439,8 @@ namespace _Compi2_Proyecto2_201212859.TREE
                 case "RETORNAR":
                     {
                         ambito ambito = new codigo3D.ambito("RETORNAR");
-                        simbolo simbolo = new simbolo("RETORNAR", "RETORNAR", "RETORNAR", "RETORNAR", raiz.ChildNodes[0].Token.Location.Line + 1, raiz.ChildNodes[0].Token.Location.Column + 1, ambito, null);
+                        expresion expresion = (expresion)recorrerArbol(raiz.ChildNodes[1]);
+                        simbolo simbolo = new simbolo("RETORNAR", "RETORNAR", "RETORNAR", "RETORNAR", raiz.ChildNodes[0].Token.Location.Line + 1, raiz.ChildNodes[0].Token.Location.Column + 1, ambito, expresion);
 
                         List<simbolo> retorna_tabla_simbolo = new List<simbolo>();
                         retorna_tabla_simbolo.Add(simbolo);
@@ -501,7 +507,7 @@ namespace _Compi2_Proyecto2_201212859.TREE
                         }
                         else if (raiz.ChildNodes.Count == 2)
                         {
-                            if (raiz.ChildNodes[0].Term.Name.Equals("SINO"))
+                            if (raiz.ChildNodes[1].Term.Name.Equals("SINO"))
                             {
                                 sino sino = (sino)recorrerArbol(raiz.ChildNodes[1]);
                                 //padre_simbolo(sino.ambito.tablaSimbolo, simbolo_si);
@@ -518,6 +524,7 @@ namespace _Compi2_Proyecto2_201212859.TREE
                             }
                             else
                             {
+
                                 List<sino_si> sino_si = (List<sino_si>)recorrerArbol(raiz.ChildNodes[1]);
                                 foreach (sino_si si_s in sino_si)
                                 {
@@ -795,7 +802,7 @@ namespace _Compi2_Proyecto2_201212859.TREE
                     }
                 case "ELEGIR":
                     {
-                        expresion expresion = (expresion)recorrerArbol(raiz.ChildNodes[1]);
+                        expresion expresion = (expresion)recorrerArbol(raiz.ChildNodes[2]);
                         List<caso> lista_caso = (List<caso>)recorrerArbol(raiz.ChildNodes[3]);
                         caso defecto = (caso)recorrerArbol(raiz.ChildNodes[4]);
 
@@ -1070,7 +1077,7 @@ namespace _Compi2_Proyecto2_201212859.TREE
                     }
                 case "self":
                     {
-                        return new expresion(null, null, "SELF", "SELF", raiz.Token.Location.Line + 1, raiz.Token.Location.Column + 1, "");
+                        return new expresion(null, null, "SELF", "SELF", raiz.Token.Location.Line + 1, raiz.Token.Location.Column + 1, null);
                     }
                 case "super":
                     {
@@ -1258,7 +1265,6 @@ namespace _Compi2_Proyecto2_201212859.TREE
             return null;
         }
 
-
         private static void padre_simbolo(List<simbolo> tablaSimbolo, simbolo simbolo) {
             foreach (simbolo simbolo_sentencia in tablaSimbolo)
             {
@@ -1274,7 +1280,6 @@ namespace _Compi2_Proyecto2_201212859.TREE
             }
         }
 
-
         public static int posicion_simbolo(simbolo simbolo, int posicion)
         {
             switch (simbolo.rol)
@@ -1289,10 +1294,7 @@ namespace _Compi2_Proyecto2_201212859.TREE
                         }
                         else
                         {
-                            if (simbolo.tamanio > 0)
-                            {
-                                posicion_simbolo(simb, 0);
-                            }
+                             posicion_simbolo(simb, 2);
                         }
                     }
                     simbolo.tamanio = posicion;
@@ -1315,12 +1317,14 @@ namespace _Compi2_Proyecto2_201212859.TREE
                     {
                         posicion = posicion_simbolo(simb, posicion);
                     }
+                    simbolo.tamanio = posicion;
+                    simbolo.ambito.tamanio = posicion;
                     break;
 
                 case "CONSTRUCTOR":
                     foreach (simbolo simb in ((metodo)simbolo.valor).parametros)
                     {
-                        simb.posicion = posicion++;
+                        simb.posicion = posicion;
                         posicion = posicion + 1; ;
                     }
 
@@ -1328,6 +1332,8 @@ namespace _Compi2_Proyecto2_201212859.TREE
                     {
                         posicion = posicion_simbolo(simb, posicion);
                     }
+                    simbolo.tamanio = posicion;
+                    simbolo.ambito.tamanio = posicion;
                     break;
 
                 case "SI":

@@ -20,12 +20,6 @@ namespace _Compi2_Proyecto2_201212859.ejecucion_alto_nivel
             this.ruta = ruta;
         }
 
-        public void generar3D()
-        {
-            pasadas pasadas = new pasadas(ambito.tablaSimbolo);
-            pasadas.ejecutar();
-        }
-
         public void generar_tabla_simbolo(simbolo simbolo, string nombre_ambito) {
             switch (simbolo.rol)
             {
