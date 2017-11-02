@@ -16,3 +16,21 @@ C:\Users\anick\Documents\Visual Studio 2015\Projects\[Compi2]Proyecto2_201212859
 C:\Users\anick\Documents\Visual Studio 2015\Projects\[Compi2]Proyecto2_201212859\C3D-Combiner\[Compi2]Proyecto2_201212859\bin\Debug\[Compi2]Proyecto2_201212859.exe.config
 C:\Users\anick\Documents\Visual Studio 2015\Projects\[Compi2]Proyecto2_201212859\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\[Compi2]Proyecto2_201212859.exe
 C:\Users\anick\Documents\Visual Studio 2015\Projects\[Compi2]Proyecto2_201212859\C3D-Combiner\[Compi2]Proyecto2_201212859\bin\Debug\[Compi2]Proyecto2_201212859.exe
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\[Compi2]Proyecto2_201212859.csprojResolveAssemblyReference.cache
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\[Compi2]Proyecto2_201212859.csproj.ResolveComReference.cache
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\_Compi2_Proyecto2_201212859.Formularios.compartirClase.resources
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\_Compi2_Proyecto2_201212859.Formularios.crearCarpeta.resources
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\_Compi2_Proyecto2_201212859.Formularios.login.resources
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\_Compi2_Proyecto2_201212859.principal.resources
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\_Compi2_Proyecto2_201212859.Formularios.reporteGramatica.resources
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\_Compi2_Proyecto2_201212859.Properties.Resources.resources
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\[Compi2]Proyecto2_201212859.csproj.GenerateResource.Cache
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\[Compi2]Proyecto2_201212859.exe
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\[Compi2]Proyecto2_201212859.pdb
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\bin\Debug\[Compi2]Proyecto2_201212859.exe.config
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\bin\Debug\[Compi2]Proyecto2_201212859.exe
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\bin\Debug\[Compi2]Proyecto2_201212859.pdb
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\bin\Debug\MySql.Data.xml
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\Interop.WINGRAPHVIZLib.dll
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\_Compi2_Proyecto2_201212859.Formularios.ModuloDiagramasUML.resources
+C:\Users\carpi\Documents\VSCode\C3D-Combiner\[Compi2]Proyecto2_201212859\obj\Debug\_Compi2_Proyecto2_201212859.Formularios.ModuloDiagramasUML_AddClass.resources

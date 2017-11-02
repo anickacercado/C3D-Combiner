@@ -273,5 +273,11 @@ namespace _Compi2_Proyecto2_201212859
             txt3D_debug.Dock = DockStyle.Fill;
             this.panel13.Controls.Add(txt3D_debug);
         }
+
+        private void móduloDeDiagramasUMLToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ModuloDiagramasUML mod = new ModuloDiagramasUML();
+            mod.Show();
+        }
     }
 }
